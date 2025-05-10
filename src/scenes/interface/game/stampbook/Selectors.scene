@@ -1,0 +1,94 @@
+{
+    "id": "4c9c204f-e25d-4632-8413-df4e0c0f105f",
+    "sceneType": "PREFAB",
+    "settings": {
+        "compilerInsertSpaces": true,
+        "exportClass": true,
+        "autoImport": true,
+        "superClassName": "BaseContainer",
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "014e29f6-7940-44a8-892b-8eff7e4e7b57",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "NineSlice",
+                    "id": "ecc9e973-574f-4b5e-a728-346a377c2066",
+                    "label": "selector_nineslice",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "selector-nineslice"
+                    },
+                    "originY": 0.5021097046413502,
+                    "width": 280,
+                    "height": 300,
+                    "leftWidth": 25,
+                    "rightWidth": 25,
+                    "topHeight": 25,
+                    "bottomHeight": 25
+                },
+                {
+                    "type": "NineSlice",
+                    "id": "6a14c50c-030d-412b-892c-b62e765f69f8",
+                    "label": "selected_nineslice",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "selected-nineslice"
+                    },
+                    "visible": false,
+                    "width": 280,
+                    "height": 300,
+                    "leftWidth": 25,
+                    "rightWidth": 25,
+                    "topHeight": 25,
+                    "bottomHeight": 25
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "ffd2dc6c-f440-4678-a509-3d6978e00474",
+                    "label": "zone",
+                    "scope": "CLASS",
+                    "components": [
+                        "Zone"
+                    ],
+                    "Zone.hoverCallback": "() => this.preventClose(this)",
+                    "Zone.hoverOutCallback": "() => this.unpreventClose(this)",
+                    "visible": false,
+                    "isFilled": true,
+                    "fillColor": "#12d7ee",
+                    "fillAlpha": 0.3,
+                    "width": 310,
+                    "height": 330
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    },
+    "prefabProperties": [
+        {
+            "name": "selectorType",
+            "label": "Type",
+            "tooltip": "",
+            "defValue": "Colors",
+            "customDefinition": false,
+            "type": {
+                "id": "string"
+            }
+        }
+    ]
+}

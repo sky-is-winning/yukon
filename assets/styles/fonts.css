@@ -69,3 +69,19 @@
     font-family: 'CPLCD';
     src: url('../fonts/CPLCD.woff2');
 }
+
+@font-face {
+    font-family: 'Burbank Big Wide';
+    src: url('../fonts/Burbank Big Wide.woff2');
+}
+
+@font-face {
+    font-family: 'Burbank Big Wide';
+    src: url('../fonts/Burbank Big Wide Bold.woff2');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Pumpkin';
+    src: url('../fonts/Pumpkin.woff2');
+}

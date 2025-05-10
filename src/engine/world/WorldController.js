@@ -20,6 +20,10 @@ export default class WorldController extends BaseScene {
         this.worldTimeZone = 'America/Los_Angeles'
     }
 
+    get totalStampsAvailable() {
+        return this.crumbs.stamps.reduce((acc, category) => acc + category.stamps.length, 0);
+    }
+
     create() {
         this.penguinFactory = new PenguinFactory(this)
         this.roomFactory = new RoomFactory(this)

@@ -36,7 +36,7 @@
                         "key": "main",
                         "frame": "blue-button-disabled"
                     },
-                    "x": 150
+                    "x": 180
                 },
                 {
                     "type": "Image",
@@ -54,7 +54,25 @@
                         "key": "main",
                         "frame": "blue-button-disabled"
                     },
-                    "x": 90
+                    "x": 120
+                },
+                {
+                    "type": "Image",
+                    "id": "b18b0098-e3eb-41dc-8e29-7abc19847f81",
+                    "label": "stampbook_button",
+                    "scope": "CLASS",
+                    "components": [
+                        "Button",
+                        "ShowHint"
+                    ],
+                    "Button.spriteName": "blue-button",
+                    "Button.callback": "() => this.onStampbookClick()",
+                    "ShowHint.text": "View Stampbook",
+                    "texture": {
+                        "key": "main",
+                        "frame": "blue-button-disabled"
+                    },
+                    "x": 60
                 },
                 {
                     "type": "Image",
@@ -71,8 +89,7 @@
                     "texture": {
                         "key": "main",
                         "frame": "blue-button-disabled"
-                    },
-                    "x": 30
+                    }
                 },
                 {
                     "type": "Image",
@@ -90,7 +107,7 @@
                         "key": "main",
                         "frame": "blue-button-disabled"
                     },
-                    "x": -30
+                    "x": -60
                 },
                 {
                     "type": "Image",
@@ -108,7 +125,7 @@
                         "key": "main",
                         "frame": "blue-button-disabled"
                     },
-                    "x": -90
+                    "x": -120
                 },
                 {
                     "type": "Image",
@@ -126,7 +143,7 @@
                         "key": "main",
                         "frame": "blue-button-disabled"
                     },
-                    "x": -150
+                    "x": -180
                 },
                 {
                     "type": "Image",
@@ -137,7 +154,7 @@
                         "key": "main",
                         "frame": "mod-icon-disabled"
                     },
-                    "x": 150,
+                    "x": 180,
                     "y": -1
                 },
                 {
@@ -149,8 +166,20 @@
                         "key": "main",
                         "frame": "ignore-icon-disabled"
                     },
-                    "x": 90,
+                    "x": 120,
                     "y": -2
+                },
+                {
+                    "type": "Image",
+                    "id": "b97c762d-30bf-4c02-ada4-be32e02118cc",
+                    "label": "stampbook_icon",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "main",
+                        "frame": "stamps-icon-disabled"
+                    },
+                    "x": 60,
+                    "y": -1
                 },
                 {
                     "type": "Image",
@@ -161,7 +190,6 @@
                         "key": "main",
                         "frame": "mail-icon-disabled"
                     },
-                    "x": 30,
                     "y": -2
                 },
                 {
@@ -173,7 +201,7 @@
                         "key": "main",
                         "frame": "igloo-icon-disabled"
                     },
-                    "x": -30,
+                    "x": -60,
                     "y": -2
                 },
                 {
@@ -185,7 +213,7 @@
                         "key": "main",
                         "frame": "help-icon-disabled"
                     },
-                    "x": -90,
+                    "x": -120,
                     "y": -2
                 },
                 {
@@ -197,7 +225,7 @@
                         "key": "main",
                         "frame": "buddies-icon-disabled"
                     },
-                    "x": -150,
+                    "x": -180,
                     "y": -2
                 }
             ]

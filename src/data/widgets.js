@@ -16,7 +16,8 @@ const widgets = {
     'NinjaProgress': require('@scenes/games/ninjaprogress/NinjaProgress'),
     'Sensei': require('@scenes/games/sensei/widget/SenseiWidget'),
     'TakeTour': require('@scenes/interface/game/take_tour/TakeTour'),
-    'TourQuiz': require('@scenes/interface/quiz/tour/TourQuiz')
+    'TourQuiz': require('@scenes/interface/quiz/tour/TourQuiz'),
+    'Stampbook': require('@scenes/interface/game/stampbook/Stampbook'),
 }
 
 export default widgets

@@ -26,7 +26,10 @@ const crumbFiles = [
     'strings',
     'tour_messages',
     'tour_quiz',
-    'worlds'
+    'worlds',
+    'cover',
+    'stamps',
+    'polaroids',
 ]
 
 const crumbs = {}

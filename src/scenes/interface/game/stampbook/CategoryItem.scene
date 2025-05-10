@@ -1,0 +1,94 @@
+{
+    "id": "8b8f4ba6-8104-4935-9d6d-a7f3ec08db5d",
+    "sceneType": "PREFAB",
+    "settings": {
+        "compilerInsertSpaces": true,
+        "exportClass": true,
+        "autoImport": true,
+        "superClassName": "BaseContainer",
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "aa196c29-72d8-4409-ba21-329d6b7037eb",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "41e2bd76-badb-4764-a700-ac1011ad69e7",
+                    "label": "shadow",
+                    "scope": "CLASS",
+                    "texture": {},
+                    "x": 32,
+                    "y": 2,
+                    "originX": 0.5135135135135135,
+                    "visible": false,
+                    "alpha": 0.3,
+                    "alphaTopLeft": 0.3,
+                    "alphaTopRight": 0.3,
+                    "alphaBottomLeft": 0.3,
+                    "alphaBottomRight": 0.3,
+                    "tintTopLeft": "#000000",
+                    "tintTopRight": "#000000",
+                    "tintBottomLeft": "#000000",
+                    "tintBottomRight": "#000000",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "1b27cb79-b4de-434a-b263-43500dcc1618",
+                    "label": "category_icon",
+                    "scope": "CLASS",
+                    "texture": {},
+                    "x": 30,
+                    "originX": 0.5135135135135135,
+                    "visible": false
+                },
+                {
+                    "type": "Text",
+                    "id": "b81ff08d-91c7-4dc7-a3be-450c3261c971",
+                    "label": "category_text",
+                    "scope": "CLASS",
+                    "originY": 0.5,
+                    "text": "Card-Jistu: Water",
+                    "paddingLeft": 75,
+                    "paddingRight": 10,
+                    "fontFamily": "Burbank Small",
+                    "fontSize": "24px",
+                    "fontStyle": "bold",
+                    "color": "#666666"
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "18e9190e-4846-4b31-85db-2070bd542743",
+                    "label": "zone",
+                    "scope": "CLASS",
+                    "components": [
+                        "Zone"
+                    ],
+                    "Zone.hoverCallback": "() => this.onOver()",
+                    "Zone.hoverOutCallback": "() => this.onOut()",
+                    "Zone.callback": "() => this.onDown()",
+                    "originX": 0,
+                    "isFilled": true,
+                    "fillColor": "#12d7ee",
+                    "fillAlpha": 0.3,
+                    "width": 324,
+                    "height": 80
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

@@ -1,0 +1,77 @@
+{
+    "id": "2dabc377-4f2e-4fcb-9bec-1444078eaa6a",
+    "sceneType": "PREFAB",
+    "settings": {
+        "compilerInsertSpaces": true,
+        "exportClass": true,
+        "autoImport": true,
+        "superClassName": "BaseContainer",
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "c0f58a70-2c6d-40ec-8015-1b97baa48cea",
+            "label": "highlight",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "82707b09-58f5-41bc-afb1-650283dd8fd1",
+                    "label": "background",
+                    "scope": "CLASS",
+                    "texture": {},
+                    "x": 10,
+                    "y": 8,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "c3d025b9-6a11-46da-83eb-781bb19b8e04",
+                    "label": "foreground",
+                    "scope": "CLASS",
+                    "texture": {},
+                    "visible": false
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "d0f41c58-f429-43b9-9470-24803de926a3",
+                    "label": "zone",
+                    "components": [
+                        "Zone"
+                    ],
+                    "Zone.hoverCallback": "() => this.parentContainer.onZoneOver(this.id, \"icon\")",
+                    "Zone.hoverOutCallback": "() => this.parentContainer.onZoneOut(this.id, \"icon\")",
+                    "Zone.callback": "() => { if (!this.rootModule) this.interface.stampbook.updateIcon(this.id) };",
+                    "isFilled": true,
+                    "fillColor": "#12d7ee",
+                    "fillAlpha": 0.3,
+                    "width": 115,
+                    "height": 80
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    },
+    "prefabProperties": [
+        {
+            "name": "rootModule",
+            "label": "Root Module",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        }
+    ]
+}

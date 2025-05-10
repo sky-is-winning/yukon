@@ -15,6 +15,8 @@ export default class Buttons extends BaseContainer {
         /** @type {Phaser.GameObjects.Image} */
         this.ignore_button;
         /** @type {Phaser.GameObjects.Image} */
+        this.stampbook_button;
+        /** @type {Phaser.GameObjects.Image} */
         this.mail_button;
         /** @type {Phaser.GameObjects.Image} */
         this.igloo_button;
@@ -27,6 +29,8 @@ export default class Buttons extends BaseContainer {
         /** @type {Phaser.GameObjects.Image} */
         this.ignore_icon;
         /** @type {Phaser.GameObjects.Image} */
+        this.stampbook_icon;
+        /** @type {Phaser.GameObjects.Image} */
         this.mail_icon;
         /** @type {Phaser.GameObjects.Image} */
         this.igloo_icon;
@@ -37,51 +41,59 @@ export default class Buttons extends BaseContainer {
 
 
         // report_button
-        const report_button = scene.add.image(150, 0, "main", "blue-button-disabled");
+        const report_button = scene.add.image(180, 0, "main", "blue-button-disabled");
         this.add(report_button);
 
         // ignore_button
-        const ignore_button = scene.add.image(90, 0, "main", "blue-button-disabled");
+        const ignore_button = scene.add.image(120, 0, "main", "blue-button-disabled");
         this.add(ignore_button);
 
+        // stampbook_button
+        const stampbook_button = scene.add.image(60, 0, "main", "blue-button-disabled");
+        this.add(stampbook_button);
+
         // mail_button
-        const mail_button = scene.add.image(30, 0, "main", "blue-button-disabled");
+        const mail_button = scene.add.image(0, 0, "main", "blue-button-disabled");
         this.add(mail_button);
 
         // igloo_button
-        const igloo_button = scene.add.image(-30, 0, "main", "blue-button-disabled");
+        const igloo_button = scene.add.image(-60, 0, "main", "blue-button-disabled");
         this.add(igloo_button);
 
         // profile_button
-        const profile_button = scene.add.image(-90, 0, "main", "blue-button-disabled");
+        const profile_button = scene.add.image(-120, 0, "main", "blue-button-disabled");
         this.add(profile_button);
 
         // buddy_button
-        const buddy_button = scene.add.image(-150, 0, "main", "blue-button-disabled");
+        const buddy_button = scene.add.image(-180, 0, "main", "blue-button-disabled");
         this.add(buddy_button);
 
         // report_icon
-        const report_icon = scene.add.image(150, -1, "main", "mod-icon-disabled");
+        const report_icon = scene.add.image(180, -1, "main", "mod-icon-disabled");
         this.add(report_icon);
 
         // ignore_icon
-        const ignore_icon = scene.add.image(90, -2, "main", "ignore-icon-disabled");
+        const ignore_icon = scene.add.image(120, -2, "main", "ignore-icon-disabled");
         this.add(ignore_icon);
 
+        // stampbook_icon
+        const stampbook_icon = scene.add.image(60, -1, "main", "stamps-icon-disabled");
+        this.add(stampbook_icon);
+
         // mail_icon
-        const mail_icon = scene.add.image(30, -2, "main", "mail-icon-disabled");
+        const mail_icon = scene.add.image(0, -2, "main", "mail-icon-disabled");
         this.add(mail_icon);
 
         // igloo_icon
-        const igloo_icon = scene.add.image(-30, -2, "main", "igloo-icon-disabled");
+        const igloo_icon = scene.add.image(-60, -2, "main", "igloo-icon-disabled");
         this.add(igloo_icon);
 
         // profile_icon
-        const profile_icon = scene.add.image(-90, -2, "main", "help-icon-disabled");
+        const profile_icon = scene.add.image(-120, -2, "main", "help-icon-disabled");
         this.add(profile_icon);
 
         // buddy_icon
-        const buddy_icon = scene.add.image(-150, -2, "main", "buddies-icon-disabled");
+        const buddy_icon = scene.add.image(-180, -2, "main", "buddies-icon-disabled");
         this.add(buddy_icon);
 
         // report_button (components)
@@ -97,6 +109,13 @@ export default class Buttons extends BaseContainer {
         ignore_buttonButton.callback = () => this.onIgnoreClick();
         const ignore_buttonShowHint = new ShowHint(ignore_button);
         ignore_buttonShowHint.text = "add_ignore_hint";
+
+        // stampbook_button (components)
+        const stampbook_buttonButton = new Button(stampbook_button);
+        stampbook_buttonButton.spriteName = "blue-button";
+        stampbook_buttonButton.callback = () => this.onStampbookClick();
+        const stampbook_buttonShowHint = new ShowHint(stampbook_button);
+        stampbook_buttonShowHint.text = "View Stampbook";
 
         // mail_button (components)
         const mail_buttonButton = new Button(mail_button);
@@ -128,12 +147,14 @@ export default class Buttons extends BaseContainer {
 
         this.report_button = report_button;
         this.ignore_button = ignore_button;
+        this.stampbook_button = stampbook_button;
         this.mail_button = mail_button;
         this.igloo_button = igloo_button;
         this.profile_button = profile_button;
         this.buddy_button = buddy_button;
         this.report_icon = report_icon;
         this.ignore_icon = ignore_icon;
+        this.stampbook_icon = stampbook_icon;
         this.mail_icon = mail_icon;
         this.igloo_icon = igloo_icon;
         this.profile_icon = profile_icon;
@@ -141,7 +162,7 @@ export default class Buttons extends BaseContainer {
 
         /* START-USER-CTR-CODE */
 
-        this.buttonNames = ['buddy', 'profile', 'igloo', 'mail', 'ignore', 'report']
+        this.buttonNames = ['buddy', 'profile', 'igloo', 'mail', 'ignore', 'report', 'stampbook']
         this.buttons = this.initButtons()
 
         /* END-USER-CTR-CODE */
@@ -175,12 +196,12 @@ export default class Buttons extends BaseContainer {
         switch (relationship) {
             case 'online':
                 this.enableButton('buddy', 'buddies-remove-icon', 'remove_buddy_hint')
-                this.enableButtons(['profile', 'igloo', 'mail', 'report'])
+                this.enableButtons(['profile', 'igloo', 'mail', 'report', 'stampbook'])
                 break
 
             case 'offline':
                 this.enableButton('buddy', 'buddies-remove-icon', 'remove_buddy_hint')
-                this.enableButtons(['igloo', 'mail', 'report'])
+                this.enableButtons(['igloo', 'mail', 'report', 'stampbook'])
                 break
 
             case 'ignore':
@@ -189,7 +210,7 @@ export default class Buttons extends BaseContainer {
                 break
 
             default:
-                this.enableButtons(['buddy', 'mail', 'ignore', 'report'])
+                this.enableButtons(['buddy', 'mail', 'ignore', 'report', 'stampbook'])
                 break
         }
 
@@ -251,6 +272,11 @@ export default class Buttons extends BaseContainer {
 
     onMailClick() {
         this.interface.main.mailbook.showPostcards(this.parentContainer.id, this.username)
+    }
+
+    onStampbookClick() {
+        this.interface.stampbookId = this.parentContainer.id
+        this.interface.loadWidget("Stampbook")
     }
 
     onIgnoreClick() {

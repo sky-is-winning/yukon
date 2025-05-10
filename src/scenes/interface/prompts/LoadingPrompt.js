@@ -130,6 +130,13 @@ export default class LoadingPrompt extends BaseContainer {
         this.packFileLoader.loadPack(key, url, callback)
     }
 
+    showWithoutProgress(text) {
+        this.text.text = text
+        this.bar.visible = false
+
+        super.show()
+    }
+
     /* END-USER-CODE */
 }
 

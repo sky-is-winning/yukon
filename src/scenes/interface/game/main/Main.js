@@ -82,6 +82,7 @@ export default class Main extends BaseScene {
 
 
         /* START-USER-CTR-CODE */
+        window.Main = this
         /* END-USER-CTR-CODE */
     }
 

@@ -21,20 +21,22 @@ export default class PlayerCard extends BaseContainer {
         this.paperDoll;
         /** @type {Buttons} */
         this.buttons;
-        /** @type {Phaser.GameObjects.Container} */
-        this.stats;
         /** @type {Phaser.GameObjects.Text} */
         this.coins;
+        /** @type {Phaser.GameObjects.Text} */
+        this.stamps;
+        /** @type {Phaser.GameObjects.Container} */
+        this.stats;
         /** @type {Phaser.GameObjects.Text} */
         this.username;
         /** @type {InventorySort} */
         this.inventorySort;
         /** @type {Inventory} */
         this.inventory;
-        /** @type {Phaser.GameObjects.Container} */
-        this.badge;
         /** @type {Phaser.GameObjects.Image} */
         this.stripes;
+        /** @type {Phaser.GameObjects.Container} */
+        this.badge;
 
 
         // card_photo
@@ -64,15 +66,30 @@ export default class PlayerCard extends BaseContainer {
         this.add(stats);
 
         // card_coin
-        const card_coin = scene.add.image(177, 0, "main", "card-coin");
+        const card_coin = scene.add.image(-160, -30, "main", "card-coin");
         stats.add(card_coin);
 
         // coins
-        const coins = scene.add.text(0, 0, "", {});
-        coins.setOrigin(0.5, 0.5);
+        const coins = scene.add.text(-126, -25, "", {});
+        coins.setOrigin(0, 0.5);
         coins.text = "Your Coins: 000000";
-        coins.setStyle({ "align": "right", "color": "#000000ff", "fixedWidth":300,"fontFamily": "Arial", "fontSize": "24px" });
+        coins.setStyle({ "color": "#000000ff", "fixedWidth":300,"fontFamily": "Arial", "fontSize": "24px" });
         stats.add(coins);
+
+        // stamps
+        const stamps = scene.add.text(-126, 23, "", {});
+        stamps.setOrigin(0, 0.5);
+        stamps.text = "Your Stamps: 88/888";
+        stamps.setStyle({ "color": "#000000ff", "fixedWidth":300,"fontFamily": "Arial", "fontSize": "24px" });
+        stats.add(stamps);
+
+        // stamp_button
+        const stamp_button = scene.add.image(-160, 22, "main", "blue-button");
+        stats.add(stamp_button);
+
+        // stamp_icon
+        const stamp_icon = scene.add.image(-160, 20, "main", "stamps-icon");
+        stats.add(stamp_icon);
 
         // username
         const username = scene.add.text(0, -238, "", {});
@@ -132,6 +149,11 @@ export default class PlayerCard extends BaseContainer {
         // card_photo (components)
         new Interactive(card_photo);
 
+        // stamp_button (components)
+        const stamp_buttonButton = new Button(stamp_button);
+        stamp_buttonButton.spriteName = "blue-button";
+        stamp_buttonButton.callback = () => this.loadStampbook(this.world.client.id);
+
         // x_button (components)
         const x_buttonButton = new Button(x_button);
         x_buttonButton.spriteName = "blue-button";
@@ -145,13 +167,14 @@ export default class PlayerCard extends BaseContainer {
         this.photo = photo;
         this.paperDoll = paperDoll;
         this.buttons = buttons;
-        this.stats = stats;
         this.coins = coins;
+        this.stamps = stamps;
+        this.stats = stats;
         this.username = username;
         this.inventorySort = inventorySort;
         this.inventory = inventory;
-        this.badge = badge;
         this.stripes = stripes;
+        this.badge = badge;
 
         /* START-USER-CTR-CODE */
 
@@ -206,6 +229,7 @@ export default class PlayerCard extends BaseContainer {
         // Visible elements
         if (penguin.isClient) {
             this.coins.text = `Your Coins: ${this.world.client.coins}`
+            this.stamps.text = `Your Stamps: ${this.world.client.stamps.length}/${this.world.totalStampsAvailable}`
             this.stats.visible = true
             this.buttons.visible = false
             this.inventory.visible = true
@@ -262,6 +286,11 @@ export default class PlayerCard extends BaseContainer {
         }
 
         this.stripes.setFrame(`badge/stripes/${frame}`)
+    }
+
+    loadStampbook(id) {
+        this.interface.stampbookId = id
+        this.interface.loadWidget("Stampbook")
     }
 
     /* END-USER-CODE */

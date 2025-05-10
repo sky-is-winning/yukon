@@ -1,0 +1,69 @@
+{
+    "id": "a1798d3c-b603-46a1-94da-1110b6f06b3a",
+    "sceneType": "PREFAB",
+    "settings": {
+        "compilerInsertSpaces": true,
+        "exportClass": true,
+        "autoImport": true,
+        "superClassName": "BaseContainer",
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "c9c443fe-2b8f-4e84-9369-1f9843c7a99d",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "818a3f86-6893-45f3-8935-47f718c1434a",
+                    "label": "background",
+                    "scope": "CLASS",
+                    "texture": {},
+                    "x": 10,
+                    "y": 8,
+                    "visible": false
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "956a22ec-1fdf-4ca4-a044-72eb9ee2be14",
+                    "label": "zone",
+                    "components": [
+                        "Zone"
+                    ],
+                    "Zone.hoverCallback": "() => this.parentContainer.onZoneOver(this.id, \"color\")",
+                    "Zone.hoverOutCallback": "() => this.parentContainer.onZoneOut(this.id, \"color\")",
+                    "Zone.callback": "() => { if (!this.rootModule) this.interface.stampbook.updateColor(this.id) };",
+                    "isFilled": true,
+                    "fillColor": "#12d7ee",
+                    "fillAlpha": 0.3,
+                    "width": 115,
+                    "height": 80
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    },
+    "prefabProperties": [
+        {
+            "name": "rootModule",
+            "label": "Root Module",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        }
+    ]
+}

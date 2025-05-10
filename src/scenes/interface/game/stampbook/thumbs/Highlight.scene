@@ -1,0 +1,75 @@
+{
+    "id": "b3848616-2240-46ac-9aca-4c0b3dc598f9",
+    "sceneType": "PREFAB",
+    "settings": {
+        "compilerInsertSpaces": true,
+        "exportClass": true,
+        "autoImport": true,
+        "superClassName": "BaseContainer",
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "a6331a80-bdc7-447e-b21c-241de835ce0e",
+            "label": "highlight",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "78f0fa0a-39ed-412d-97e6-fdcb200ba3e0",
+                    "label": "background",
+                    "scope": "CLASS",
+                    "texture": {},
+                    "x": 10,
+                    "y": 8
+                },
+                {
+                    "type": "Image",
+                    "id": "798525b7-7a84-4bd1-801f-0fe07d50048c",
+                    "label": "foreground",
+                    "scope": "CLASS",
+                    "texture": {}
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "2a947e1b-dd38-45b0-9ed1-a53884461807",
+                    "label": "zone",
+                    "components": [
+                        "Zone"
+                    ],
+                    "Zone.hoverCallback": "() => this.parentContainer.onZoneOver(this.id, \"highlight\")",
+                    "Zone.hoverOutCallback": "() => this.parentContainer.onZoneOut(this.id, \"highlight\")",
+                    "Zone.callback": "() => { if (!this.rootModule) this.interface.stampbook.updateHighlight(this.id) };",
+                    "isFilled": true,
+                    "fillColor": "#12d7ee",
+                    "fillAlpha": 0.3,
+                    "width": 115,
+                    "height": 80
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    },
+    "prefabProperties": [
+        {
+            "name": "rootModule",
+            "label": "Root Module",
+            "tooltip": "",
+            "defValue": false,
+            "customDefinition": false,
+            "type": {
+                "id": "boolean"
+            }
+        }
+    ]
+}

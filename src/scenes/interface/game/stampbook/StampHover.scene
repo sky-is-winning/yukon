@@ -1,0 +1,95 @@
+{
+    "id": "a68c0464-9480-4d01-9438-e9c423b3cfde",
+    "sceneType": "PREFAB",
+    "settings": {
+        "compilerInsertSpaces": true,
+        "exportClass": true,
+        "autoImport": true,
+        "superClassName": "BaseContainer",
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "ca4ddc65-987c-459f-ac2d-c85f254201e1",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "NineSlice",
+                    "id": "1f2d9459-3341-4ab6-aca7-9bd52b6de576",
+                    "label": "stamp_highlight_bottom",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "stamp-highlight-bottom"
+                    },
+                    "y": 120,
+                    "originX": 0,
+                    "originY": 0,
+                    "width": 250,
+                    "height": 33,
+                    "leftWidth": 120,
+                    "rightWidth": 30,
+                    "topHeight": 0,
+                    "bottomHeight": 0
+                },
+                {
+                    "type": "NineSlice",
+                    "id": "aebe3b77-68ee-4877-8cb5-6b3faed12e29",
+                    "label": "stamp_highlight_top",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "stamp-highlight-top"
+                    },
+                    "originX": 0,
+                    "originY": 0,
+                    "width": 250,
+                    "height": 120,
+                    "leftWidth": 20,
+                    "rightWidth": 20,
+                    "topHeight": 20,
+                    "bottomHeight": 20
+                },
+                {
+                    "type": "Text",
+                    "id": "d7719099-2a2e-4d80-b873-cb0f8e7ef5f8",
+                    "label": "title",
+                    "scope": "CLASS",
+                    "x": 16,
+                    "y": 30,
+                    "originY": 0.5,
+                    "text": "Rockhopper",
+                    "fontFamily": "Burbank Small",
+                    "fontSize": "22px",
+                    "fontStyle": "bold",
+                    "color": "#000000ff"
+                },
+                {
+                    "type": "Text",
+                    "id": "19b3edb6-fbfc-4a5d-a12e-3dd3079c7178",
+                    "label": "description",
+                    "scope": "CLASS",
+                    "x": 16,
+                    "y": 45,
+                    "text": "Be in the same room as Rockhopper",
+                    "fontFamily": "Burbank Small",
+                    "fontSize": "20px",
+                    "color": "#5f5f5fff",
+                    "wordWrapWidth": 215
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

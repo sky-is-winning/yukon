@@ -1,0 +1,117 @@
+{
+    "id": "e8dca8ee-4f29-4788-9882-e3aa6e879b7d",
+    "sceneType": "PREFAB",
+    "settings": {
+        "compilerInsertSpaces": true,
+        "exportClass": true,
+        "autoImport": true,
+        "superClassName": "BaseContainer",
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "0108b975-1abc-438d-87a0-390f2d05a55b",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "11f53242-2282-4309-8761-74131ec908f2",
+                    "label": "shadow",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "main",
+                        "frame": "stampprompt/5_1"
+                    },
+                    "x": -3,
+                    "y": 5,
+                    "visible": false,
+                    "alpha": 0.3,
+                    "alphaTopLeft": 0.3,
+                    "alphaTopRight": 0.3,
+                    "alphaBottomLeft": 0.3,
+                    "alphaBottomRight": 0.3,
+                    "tintTopLeft": "#000000",
+                    "tintTopRight": "#000000",
+                    "tintBottomLeft": "#000000",
+                    "tintBottomRight": "#000000",
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "7f2c7bc6-583f-4805-b524-ecf375acb25b",
+                    "label": "stamp",
+                    "scope": "CLASS",
+                    "components": [
+                        "SimpleButton"
+                    ],
+                    "SimpleButton.hoverCallback": "() => {this.stampHover.visible = true}",
+                    "SimpleButton.hoverOutCallback": "() => {this.stampHover.visible = false}",
+                    "texture": {
+                        "key": "main",
+                        "frame": "stampprompt/5_1"
+                    },
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "206b5160-4da1-4c4b-b8b7-938b3bac55b8",
+                    "label": "blocker",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "main",
+                        "frame": "stampprompt/5_1"
+                    },
+                    "visible": false,
+                    "alpha": 0.6,
+                    "alphaTopLeft": 0.6,
+                    "alphaTopRight": 0.6,
+                    "alphaBottomLeft": 0.6,
+                    "alphaBottomRight": 0.6,
+                    "tintFill": true
+                },
+                {
+                    "type": "Image",
+                    "id": "c2e65905-1526-4474-9a5c-b767b26d0163",
+                    "label": "spinner",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "main",
+                        "frame": "spinner"
+                    },
+                    "originX": 0.5151515151515151,
+                    "originY": 0.5172413793103449
+                },
+                {
+                    "prefabId": "a68c0464-9480-4d01-9438-e9c423b3cfde",
+                    "id": "09b5de09-f1a8-45b3-ac9f-e7154874b8f5",
+                    "unlock": [
+                        "x",
+                        "y",
+                        "scaleX",
+                        "scaleY",
+                        "visible"
+                    ],
+                    "label": "stampHover",
+                    "scope": "CLASS",
+                    "x": -140,
+                    "y": -175,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "visible": false
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
