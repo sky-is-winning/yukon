@@ -928,9 +928,8 @@ export default class Stampbook extends BaseContainer {
         for (let i = 0; i < 3; i++){
             const polaroid = polaroids[i];
             if (polaroid) {
-
                 if (stamps >= polaroid.stamp_count) {
-                    // Set polaroid.
+                    this[`polaroid_${i + 1}_sprite`].setPolaroid(polaroid.polaroid_id);
                 } else {
                     this[`polaroid_${i + 1}_stampcount`].text = polaroid.stamp_count;
                     this[`polaroid_${i + 1}_count_cntr`].visible = true;

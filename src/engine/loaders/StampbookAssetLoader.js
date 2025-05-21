@@ -194,4 +194,16 @@ export default class StampbookAssetLoader extends BaseLoader {
 
         this.start()
     }
+
+    loadPolaroid(id, callback) {
+        const key = this.getKey(`polaroids/${id}`)
+
+        if (this.checkComplete('multiatlas', key, () => {
+            callback()
+        })) return
+
+        this.multiatlas(key, `polaroids/${id}.json`, "polaroids")
+
+        this.start()
+    }
 }

@@ -28,16 +28,16 @@
                 },
                 {
                     "type": "Image",
-                    "id": "d5b723bd-b30d-461c-a87e-5cda86542c16",
-                    "label": "body",
+                    "id": "ee1104e2-4ae6-4356-9865-45bb571fbbe5",
+                    "label": "bodyBG",
                     "scope": "CLASS",
                     "texture": {},
                     "visible": false
                 },
                 {
                     "type": "Image",
-                    "id": "ee1104e2-4ae6-4356-9865-45bb571fbbe5",
-                    "label": "bodyBG",
+                    "id": "d5b723bd-b30d-461c-a87e-5cda86542c16",
+                    "label": "body",
                     "scope": "CLASS",
                     "texture": {},
                     "visible": false
@@ -57,6 +57,18 @@
                     "scope": "CLASS",
                     "texture": {},
                     "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "e4b6b9c6-ff0c-4a5d-9808-95f66d7b786d",
+                    "label": "spinner",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "main",
+                        "frame": "spinner"
+                    },
+                    "originX": 0.5151515151515151,
+                    "originY": 0.5172413793103449
                 }
             ]
         }
