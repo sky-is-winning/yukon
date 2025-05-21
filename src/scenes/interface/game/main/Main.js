@@ -77,6 +77,14 @@ export default class Main extends BaseScene {
         this.mail;
         /** @type {Mailbook} */
         this.mailbook;
+        /** @type {Phaser.GameObjects.Image} */
+        this.stamp_prompt_icon;
+        /** @type {Phaser.GameObjects.Text} */
+        this.stamp_prompt_header;
+        /** @type {Phaser.GameObjects.Text} */
+        this.stamp_prompt_name;
+        /** @type {Phaser.GameObjects.Container} */
+        this.stamp_prompt;
         /** @type {Array<Settings|Moderator|PlayerCard|PetCard|Buddy|Waddle|Phone>} */
         this.hideOnSleep;
 
@@ -258,6 +266,33 @@ export default class Main extends BaseScene {
         this.add.existing(mailbook);
         mailbook.visible = false;
 
+        // stamp_prompt
+        const stamp_prompt = this.add.container(1095, -150);
+
+        // stampprompt_bg
+        const stampprompt_bg = this.add.image(0, 0, "main", "stampprompt/bg");
+        stamp_prompt.add(stampprompt_bg);
+
+        // stamp_prompt_icon
+        const stamp_prompt_icon = this.add.image(-186, 57, "main", "stampprompt/5_1");
+        stamp_prompt.add(stamp_prompt_icon);
+
+        // stamp_prompt_header
+        const stamp_prompt_header = this.add.text(-108, 39, "", {});
+        stamp_prompt_header.setOrigin(0, 0.5);
+        stamp_prompt_header.text = "STAMP EARNED!";
+        stamp_prompt_header.setStyle({ "color": "#ffffffff", "fixedWidth":600,"fixedHeight":40,"fontFamily": "CCFaceFront", "fontSize": "28px", "fontStyle": "italic", "stroke": "#ffffffff", "shadow.offsetX":3,"shadow.offsetY":3,"shadow.color": "#000000cf", "shadow.fill":true});
+        stamp_prompt_header.setPadding({"left":10});
+        stamp_prompt.add(stamp_prompt_header);
+
+        // stamp_prompt_name
+        const stamp_prompt_name = this.add.text(-108, 81, "", {});
+        stamp_prompt_name.setOrigin(0, 0.5);
+        stamp_prompt_name.text = "Stamp Name";
+        stamp_prompt_name.setStyle({ "color": "#ffffffff", "fixedWidth":600,"fixedHeight":40,"fontFamily": "CCFaceFront", "fontSize": "28px", "fontStyle": "italic", "stroke": "#ffffffff", "shadow.offsetX":3,"shadow.offsetY":3,"shadow.color": "#000000cf", "shadow.fill":true});
+        stamp_prompt_name.setPadding({"left":10});
+        stamp_prompt.add(stamp_prompt_name);
+
         // lists
         const hideOnSleep = [settings, moderator, playerCard, petCard, buddy, waddle, phone];
 
@@ -385,6 +420,10 @@ export default class Main extends BaseScene {
         this.settings = settings;
         this.mail = mail;
         this.mailbook = mailbook;
+        this.stamp_prompt_icon = stamp_prompt_icon;
+        this.stamp_prompt_header = stamp_prompt_header;
+        this.stamp_prompt_name = stamp_prompt_name;
+        this.stamp_prompt = stamp_prompt;
         this.hideOnSleep = hideOnSleep;
 
         this.events.emit("scene-awake");
@@ -639,6 +678,33 @@ export default class Main extends BaseScene {
 
     onMapClick() {
         this.interface.loadWidget('Map')
+    }
+
+    stampEarned(id) {
+        let stampGroup = this.crumbs.stamps.find(group => group.stamps.some(stamp => stamp.stamp_id == id))
+        if (!stampGroup) return
+
+        let stamp = stampGroup.stamps.find(stamp => stamp.stamp_id == id)
+        let frame = `${stampGroup.parent_group_id}_${stamp.rank}`
+        this.stamp_prompt_icon.setFrame(`stampprompt/${frame}`)
+        this.stamp_prompt_name.text = stamp.name
+
+        this.tweens.add({
+            targets: this.stamp_prompt,
+            y: 20,
+            ease: 'Linear',
+            duration: 300
+        })
+
+        this.time.addEvent({
+            delay: 5000,
+            callback: () => this.tweens.add({
+                targets: this.stamp_prompt,
+                y: -150,
+                ease: 'Linear',
+                duration: 300
+            })
+        })
     }
 
     /* END-USER-CODE */

@@ -648,6 +648,81 @@
             "label": "mailbook",
             "scope": "CLASS",
             "visible": false
+        },
+        {
+            "type": "Container",
+            "id": "ea587585-7383-40cb-b563-c22d28066cc8",
+            "label": "stamp_prompt",
+            "scope": "CLASS",
+            "x": 1095,
+            "y": -150,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "3d4f0fef-5960-43a1-8136-66a879ead812",
+                    "label": "stampprompt_bg",
+                    "texture": {
+                        "key": "main",
+                        "frame": "stampprompt/bg"
+                    }
+                },
+                {
+                    "type": "Image",
+                    "id": "bfa7d0f1-b18b-4c8a-96de-b9bd699f67ea",
+                    "label": "stamp_prompt_icon",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "main",
+                        "frame": "stampprompt/5_1"
+                    },
+                    "x": -186,
+                    "y": 57
+                },
+                {
+                    "type": "Text",
+                    "id": "5137c80b-87c6-4331-81ae-45ea012ec67c",
+                    "label": "stamp_prompt_header",
+                    "scope": "CLASS",
+                    "x": -108,
+                    "y": 39,
+                    "originY": 0.5,
+                    "text": "STAMP EARNED!",
+                    "fixedWidth": 600,
+                    "fixedHeight": 40,
+                    "paddingLeft": 10,
+                    "fontFamily": "CCFaceFront",
+                    "fontSize": "28px",
+                    "fontStyle": "italic",
+                    "color": "#ffffffff",
+                    "stroke": "#ffffffff",
+                    "shadow.offsetX": 3,
+                    "shadow.offsetY": 3,
+                    "shadow.fill": true,
+                    "shadow.color": "#000000cf"
+                },
+                {
+                    "type": "Text",
+                    "id": "936cca7b-5524-4793-8735-be7af8edb697",
+                    "label": "stamp_prompt_name",
+                    "scope": "CLASS",
+                    "x": -108,
+                    "y": 81,
+                    "originY": 0.5,
+                    "text": "Stamp Name",
+                    "fixedWidth": 600,
+                    "fixedHeight": 40,
+                    "paddingLeft": 10,
+                    "fontFamily": "CCFaceFront",
+                    "fontSize": "28px",
+                    "fontStyle": "italic",
+                    "color": "#ffffffff",
+                    "stroke": "#ffffffff",
+                    "shadow.offsetX": 3,
+                    "shadow.offsetY": 3,
+                    "shadow.fill": true,
+                    "shadow.color": "#000000cf"
+                }
+            ]
         }
     ],
     "plainObjects": [],
