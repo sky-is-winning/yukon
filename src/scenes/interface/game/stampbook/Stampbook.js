@@ -876,7 +876,7 @@ export default class Stampbook extends BaseContainer {
         this.edit_btn.visible = false;
 
         const data = this.getPageData(page);
-            const stampsPage = data.stamps.length > 0;
+        const stampsPage = data.stamps.length > 0;
 
         this.category_headers_icon.visible = false;
 
@@ -894,7 +894,7 @@ export default class Stampbook extends BaseContainer {
             });
         }
 
-        this.totalstamps_txt.text = `${data.name}${!stampsPage ? ' Stamps' : ''}:`;
+        this.totalstamps_txt.text = `${data.name}${!stampsPage && data.group_id != 9001 /* Ensure not pins page */ ? ' Stamps' : ''}:`;
         this.header_txt.setFontSize(stampsPage ? 48 : 64);
         this.totalstamps_num.text = `${this.getOwnedStampsByGroupId(data.group_id).length}/${this.getStampsByGroupId(data.group_id).length}`;
         this.stampbook_page_background.visible = false;

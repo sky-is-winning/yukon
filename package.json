@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "webpack serve",
     "build": "webpack --mode production --env obfuscate=false",
-    "build-crumbs": "node ./utils/build-crumbs.js"
+    "build-crumbs": "node ./utils/build-crumbs.js",
+    "editor": "phasereditor2d-launcher -project ."
   },
   "repository": {
     "type": "git",
