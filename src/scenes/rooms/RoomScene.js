@@ -237,6 +237,7 @@ export default class RoomScene extends BaseScene {
         let room = this.crumbs.scenes.rooms[id]
 
         this.world.client.sendJoinRoom(id, room.key, x, y)
+        this.world.stampEvents.emit('user enterRoom', {room: id})
     }
 
     triggerGame(id) {

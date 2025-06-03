@@ -21,7 +21,7 @@ export default class Plaza extends RoomScene {
             'pet': () => this.triggerRoom(310, 818, 520),
             'cave': () => {
                 this.triggerRoom(806, 1180, 614)
-                this.world.events.emit('user hasAchievementEvent', { eventID: 'underground' });
+                this.world.stampEvents.emit('user hasAchievementEvent', { eventID: 'underground' });
             },
             'stage1': null,
             'stage2': null,

@@ -108,7 +108,7 @@ export default class SnowballFactory {
             ball.setTexture('main', 'snowball/ground')
             this.world.events.emit('snowballcomplete', ball.x, ball.y)
             if (ball.owner && ball.owner.isClient) {
-                this.world.events.emit('user snowballHit', { x: ball.x, y: ball.y })
+                this.world.stampEvents.emit('user snowballHit', { x: ball.x, y: ball.y })
             }
         }
     }

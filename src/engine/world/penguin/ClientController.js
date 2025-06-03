@@ -205,8 +205,8 @@ export default class ClientController {
         this.lockRotation = true
 
         this.penguin.playFrame(frame, set)
-        this.world.events.emit('user changesFrame', { x: this.penguin.x, y: this.penguin.y, frame: frame, set: set })
-        this.world.events.emit('user playerAction', { x: this.penguin.x, y: this.penguin.y, frame: frame, set: set })
+        this.world.stampEvents.emit('user changesFrame', { x: this.penguin.x, y: this.penguin.y, frame: frame, set: set })
+        this.world.stampEvents.emit('user playerAction', { x: this.penguin.x, y: this.penguin.y, frame: frame, set: set })
         this.network.send('send_frame', { set: set, frame: frame })
     }
 
@@ -238,6 +238,7 @@ export default class ClientController {
 
         this.interface.showEmoteBalloon(this.id, emote)
         this.network.send('send_emote', { emote: emote })
+        this.world.stampEvents.emit('user sendEmote', { emoteID: emote })
     }
 
     sendSafe(safe) {

@@ -24,6 +24,8 @@ export default class WorldStampListener {
     constructor(world, client) {
         this.world = world;
         this.client = client;
+        this.events = new Phaser.Events.EventEmitter()
+        this.world.stampEvents = this.events;
         const worldStamps = world.cache.xml.get('world_stamps')
 
         this.stamps = this.parseWorldStamps(worldStamps);
@@ -60,7 +62,7 @@ export default class WorldStampListener {
                 }
                 case eventType.startsWith('any penguin'):
                 case eventType.startsWith('user '): {
-                    this.world.events.on(eventType, (e) => this.checkConditions(stamp, e));
+                    this.events.on(eventType, (e) => this.checkConditions(stamp, e));
                     break;
                 }
                 default:
@@ -78,10 +80,12 @@ export default class WorldStampListener {
     checkConditions(stamp, properties) {
         console.info(`%c Checking conditions for stamp ${stamp.id} - ${stamp.name}`, 'color:rgb(236, 56, 236)');
         let iterations = 1;
+        let iterationsUnique = false;
     
         const conditionsMet = stamp.conditionList.every(condition => {
             if (condition.startsWith('event occurs')) {
-                iterations = condition.split(' ')[2];
+                iterations = condition.split(' ').pop()
+                iterationsUnique = condition.includes('occursUniquely') ? condition.split(' ')[2] : false;
                 return true;
             }
             const met = this.checkCondition(condition, properties);
@@ -98,9 +102,20 @@ export default class WorldStampListener {
     
         if (conditionsMet && optionalConditionsMet) {
             if (iterations > 1) {
-                stamp.iterations = (stamp.iterations || 0) + 1;
-                if (stamp.iterations < iterations) {
-                    console.info(`%c Not enough iterations for stamp ${stamp.name}. Required: ${iterations}, Current: ${stamp.iterations}`, 'color:rgb(255, 124, 84)');
+                if (stamp.iterations === undefined) {
+                    stamp.iterations = [properties[iterationsUnique]];
+                } else {
+                    if (iterationsUnique) {
+                        if (!stamp.iterations.includes(properties[iterationsUnique])) {
+                            console.info(`%c Adding unique iteration for stamp ${stamp.name}`, 'color:rgb(21, 143, 10)');
+                            stamp.iterations.push(properties[iterationsUnique]);
+                        }
+                    } else {
+                        stamp.iterations.push(properties[iterationsUnique]);
+                    }
+                }
+                if (stamp.iterations.length < iterations) {
+                    console.info(`%c Not enough iterations for stamp ${stamp.name}. Required: ${iterations}, Current: ${stamp.iterations.length}`, 'color:rgb(255, 124, 84)');
                     return;
                 }
             }
@@ -110,19 +125,24 @@ export default class WorldStampListener {
     }
 
     checkCondition(condition, properties) {
+        console.info(`%c Checking condition: ${condition}`, 'color:rgb(85, 216, 218)');
         switch (true) {
             case condition.startsWith('event hasProperty'):
                 return this.checkForPropertyCondition(condition, properties);
             case condition.startsWith('event isOnFrame'):
                 return properties.frame == condition.split(' ')[2];
             case condition.startsWith('user in'):
-                return this.world.room.id == condition.split(' ')[2];
+                let roomIds = condition.split(' ').slice(2)
+                if (roomIds[0] === 'myIgloo') return this.world.room.isClientIgloo
+                return roomIds.some(roomId => this.world.room.id == roomId);
             case condition.startsWith('user wearing'):
                 return this.checkForWearingCondition(condition);
             case condition.startsWith('user hasProperty'):
                 return this.checkForPropertyCondition(condition, { is_member: 1 });
             case condition.startsWith('event hasEventID'):
                 return properties.eventID == condition.split(' ')[2];
+            case condition.startsWith('event hasEmoteID '):
+                return properties.emoteID == condition.split(' ')[3];
             default:
                 console.warn(`Unknown condition: ${condition}`);
                 return false;
