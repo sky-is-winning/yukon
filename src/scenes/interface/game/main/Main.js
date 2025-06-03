@@ -683,9 +683,15 @@ export default class Main extends BaseScene {
     stampEarned(id) {
         let stampGroup = this.crumbs.stamps.find(group => group.stamps.some(stamp => stamp.stamp_id == id))
         if (!stampGroup) return
-
+        
         let stamp = stampGroup.stamps.find(stamp => stamp.stamp_id == id)
-        let frame = `${stampGroup.parent_group_id}_${stamp.rank}`
+        let frame;
+        if (stampGroup.parent_group_id == 0) {
+            frame = `${stampGroup.group_id}_${stamp.rank}`
+        } else {
+            frame = `${stampGroup.parent_group_id}_${stamp.rank}`
+        }
+
         this.stamp_prompt_icon.setFrame(`stampprompt/${frame}`)
         this.stamp_prompt_name.text = stamp.name
 

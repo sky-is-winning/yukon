@@ -1,5 +1,5 @@
 import PathEngine from './pathfinding/PathEngine'
-
+import WorldStampListener from './WorldStampListener'
 
 export default class ClientController {
 
@@ -62,6 +62,8 @@ export default class ClientController {
         this.input.on('pointermove', (pointer) => this.onPointerMove(pointer))
 
         this.input.keyboard.on('keydown', (event) => this.onKeyDown(event))
+
+        this.worldStampListener = new WorldStampListener(this.world, this)
     }
 
     get isTweening() {
@@ -203,6 +205,8 @@ export default class ClientController {
         this.lockRotation = true
 
         this.penguin.playFrame(frame, set)
+        this.world.events.emit('user changesFrame', { x: this.penguin.x, y: this.penguin.y, frame: frame, set: set })
+        this.world.events.emit('user playerAction', { x: this.penguin.x, y: this.penguin.y, frame: frame, set: set })
         this.network.send('send_frame', { set: set, frame: frame })
     }
 

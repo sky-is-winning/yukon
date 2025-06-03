@@ -47,6 +47,7 @@ export default class SnowballFactory {
 
         ball.visible = false
         ball.shadow.visible = false
+        ball.owner = penguin
 
         this.balls.push(ball)
         return ball
@@ -106,6 +107,9 @@ export default class SnowballFactory {
         if (ball.active) {
             ball.setTexture('main', 'snowball/ground')
             this.world.events.emit('snowballcomplete', ball.x, ball.y)
+            if (ball.owner && ball.owner.isClient) {
+                this.world.events.emit('user snowballHit', { x: ball.x, y: ball.y })
+            }
         }
     }
 
