@@ -95,7 +95,7 @@ export default class IglooScene extends RoomScene {
         this.loadAllFurniture()
 
         this.network.send('get_pets', { userId: this.id })
-        this.world.stampEvents.emit('user enterIgloo', {id: this.id})
+        this.events.on('created', () => this.world.stampEvents.emit('user enterIgloo', {id: this.id}))
     }
 
     addEditBg() {

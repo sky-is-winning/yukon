@@ -55,6 +55,7 @@ export default class WorldController extends BaseScene {
 
     addPenguins() {
         this.room.penguins = this.penguinFactory.createPenguins(this.room.waiting, this.room)
+        this.room.events.emit('created')
     }
 
     addPenguin(user) {

@@ -35,6 +35,13 @@ export default class WorldStampListener {
         });
     }
 
+    getUserProperties() {
+        return {
+            is_member: 1,
+            created_date: Math.floor((Date.now() - new Date(this.client.joinTime)) / (1000 * 60 * 60 * 24)),
+        }
+    }
+
     parseWorldStamps(xml) {
         const achievements = Array.from(xml.getElementsByTagName('achievement'));
         return achievements.map(achievement => {
@@ -78,6 +85,7 @@ export default class WorldStampListener {
     }
 
     checkConditions(stamp, properties) {
+        if (this.world.client.stamps.includes(stamp.id)) return false;
         console.info(`%c Checking conditions for stamp ${stamp.id} - ${stamp.name}`, 'color:rgb(236, 56, 236)');
         let iterations = 1;
         let iterationsUnique = false;
@@ -138,11 +146,13 @@ export default class WorldStampListener {
             case condition.startsWith('user wearing'):
                 return this.checkForWearingCondition(condition);
             case condition.startsWith('user hasProperty'):
-                return this.checkForPropertyCondition(condition, { is_member: 1 });
+                return this.checkForPropertyCondition(condition, this.getUserProperties());
             case condition.startsWith('event hasEventID'):
                 return properties.eventID == condition.split(' ')[2];
             case condition.startsWith('event hasEmoteID '):
                 return properties.emoteID == condition.split(' ')[3];
+            case /\bany\s+\d+\s+penguins\b/i.test(condition):
+                return this.checkForAnyPenguinsCondition(condition);
             default:
                 console.warn(`Unknown condition: ${condition}`);
                 return false;
@@ -204,6 +214,17 @@ export default class WorldStampListener {
             const hasItem = equippedItems.includes(items[0]);
             return only ? hasItem && equippedItems.length === 1 && equippedItems[0] === items[0] : hasItem;
         }
+    }
+
+    checkForAnyPenguinsCondition(condition) {
+        let roomIds = condition.split(' ').slice(4)
+        let roomMatches = roomIds.some(roomId => this.world.room.id == roomId);
+        if (roomIds[0] === 'myIgloo') roomMatches = this.world.room.isClientIgloo;
+
+        let neededCount = parseInt(condition.split(' ')[1]);
+        let penguinsInRoom = Object.keys(this.world.room.penguins).length;
+        
+        return roomMatches && penguinsInRoom >= neededCount;
     }
 
 }

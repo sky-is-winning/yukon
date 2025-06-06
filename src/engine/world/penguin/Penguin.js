@@ -104,7 +104,7 @@ export default class Penguin extends BaseContainer {
         this.clothingLoader.loadItems()
 
         this.room.add.existing(this)
-        this.world.stampEvents.emit('any penguin enterRoom', {room: this.room.id})
+        if (this.room.penguins) this.world.stampEvents.emit('any penguin enterRoom', { room: this.room.id })
     }
 
     update(item, slot) {
