@@ -656,6 +656,7 @@
             "scope": "CLASS",
             "x": 1095,
             "y": -150,
+            "visible": false,
             "list": [
                 {
                     "type": "Image",
@@ -744,6 +745,39 @@
                 "9acd4a58-cbf9-4751-b96a-2822f121af9c",
                 "0040eb03-91ac-4caf-8c26-67b736b50f60",
                 "5e592d35-f189-44bc-a565-6d8504e3f7bc"
+            ]
+        },
+        {
+            "id": "09969e9e-7ff2-4dba-b6a3-4f9b6cbe2a39",
+            "label": "defaultVisible",
+            "objectIds": [
+                "6dca3f2a-91a7-4ed4-8cf2-5a0ddf89d4c9",
+                "3d799d81-5005-4dfc-820b-ddeb0ea8307e",
+                "b8adf69c-a4a9-47ec-bbac-5e9b86643dec",
+                "dcc47812-1ddf-47f0-b684-8289700b6d8c",
+                "5e00e1c5-5fd7-4482-8275-9480faa930a1",
+                "00577d6e-77b3-4f4d-a972-c43494357612",
+                "4040e412-ba63-4812-bbe9-fc4ba0f76672",
+                "2dd95bb8-62eb-4d8a-916e-734bc44b3c9d",
+                "4036c6a3-dcd9-4553-9158-d84317ec0799",
+                "c3de3562-d313-43a0-b5c1-fa0cc197473a",
+                "3bfb98b3-d47a-4d4f-ac62-1c5a524510f8",
+                "9fe13e03-fd99-450c-81f6-cf6220c3c28c",
+                "23b638a0-11e0-47c1-a3f7-a1e9cbce660a",
+                "71da470c-c4ad-4f6e-9aa1-ddc2aed0743f",
+                "4600cc8c-67b7-47ed-a113-02ba822eee8a",
+                "9891188b-feea-49f2-8a70-4d5e85546a7c",
+                "bb79f35a-9956-4446-b8b8-027e4cc26b04",
+                "0b686bbe-3796-4b9d-b965-ee59d7380e1f",
+                "9c3e46c6-d221-4bae-9e1f-af84b746fc63",
+                "e48d913a-1f46-4bcc-ae4b-2bb6b5e7add7",
+                "50404a9c-520b-44d0-b6db-33695974eeee",
+                "b192506d-5e8d-4220-98d0-60ad0d1e2e65",
+                "aa5a43fd-2f35-4413-a4ff-5aed6de52e4a",
+                "aa9caccb-a731-4b3b-bfe5-984fe2f6d4ac",
+                "6791cf27-2369-4375-b006-df8d483ad73a",
+                "2351bf55-0c93-41dd-b444-f89ba39d6a6c",
+                "7d205242-0757-4e4c-9298-88832a914a09"
             ]
         }
     ]

@@ -14,7 +14,8 @@ const keys = [
     'isMyPlayerMember',
     'sendGameOver',
     'sendJoinLastRoom',
-    'buyInventory'
+    'buyInventory',
+    'stampEarned',
 ]
 
 export default class RuffleController extends BaseScene {
@@ -103,7 +104,7 @@ export default class RuffleController extends BaseScene {
 
             onLoadComplete: () => {
                 this.interface.hideLoading()
-                this.interface.hideInterface()
+                this.interface.showInterface()
 
                 this.stopMusic()
 
@@ -127,6 +128,10 @@ export default class RuffleController extends BaseScene {
                 this.load.once(`filecomplete-audio-${music}`, () => {
                     this.playMusic(music)
                 })
+            },
+
+            stampEarned: (id) => {
+                this.world.network.send('stamp_earned', { id });
             }
         }
     }
@@ -153,9 +158,13 @@ export default class RuffleController extends BaseScene {
     }
 
     update() {
-        if (this.isActive && this.interface.prompt.isPromptVisible) {
+        if (this.isActive) {
             // Lower DOM container depth so that prompt is above Ruffle content
-            this.sendToBack()
+            if (this.interface.prompt.isPromptVisible) {
+                this.sendToBack()
+            } else if (this.interface.main.stamp_prompt.visible) {
+                this.stampEarnedDepth()
+            }
         } else {
             this.resetDepth()
         }
@@ -210,10 +219,20 @@ export default class RuffleController extends BaseScene {
 
     resetDepth() {
         this.game.domContainer.style.zIndex = 'auto'
+        this.game.canvas.style.zIndex = 'auto'
+        this.game.canvas.style.position = 'absolute'
+        this.game.canvas.style.pointerEvents = 'auto'
     }
 
     sendToBack() {
         this.game.domContainer.style.zIndex = -10
+    }
+
+    stampEarnedDepth() {
+        this.interface.main.minigameMode()
+        this.game.canvas.style.zIndex = 10
+        this.game.canvas.style.position = 'relative'
+        this.game.canvas.style.pointerEvents = 'none'
     }
 
 }

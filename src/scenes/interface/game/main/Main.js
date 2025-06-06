@@ -87,6 +87,8 @@ export default class Main extends BaseScene {
         this.stamp_prompt;
         /** @type {Array<Settings|Moderator|PlayerCard|PetCard|Buddy|Waddle|Phone>} */
         this.hideOnSleep;
+        /** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Image|MailButton|ChatLog>} */
+        this.defaultVisible;
 
 
         /* START-USER-CTR-CODE */
@@ -107,55 +109,55 @@ export default class Main extends BaseScene {
         const chat_button = this.add.image(246, 923, "main", "blue-button");
 
         // chat_icon
-        this.add.image(246, 921, "main", "chat-icon");
+        const chat_icon = this.add.image(246, 921, "main", "chat-icon");
 
         // emote_button
         const emote_button = this.add.image(306, 923, "main", "blue-button");
 
         // emote_icon
-        this.add.image(306, 921, "main", "emote-icon");
+        const emote_icon = this.add.image(306, 921, "main", "emote-icon");
 
         // action_button
         const action_button = this.add.image(366, 923, "main", "blue-button");
 
         // action_icon
-        this.add.image(366, 919, "main", "action-icon");
+        const action_icon = this.add.image(366, 919, "main", "action-icon");
 
         // snowball_button
         const snowball_button = this.add.image(426, 923, "main", "blue-button");
 
         // snowball_icon
-        this.add.image(426, 922, "main", "snowball-icon");
+        const snowball_icon = this.add.image(426, 922, "main", "snowball-icon");
 
         // chat_send_button
         const chat_send_button = this.add.image(1026, 923, "main", "blue-button");
 
         // chat_send_icon
-        this.add.image(1026, 921, "main", "chat-icon");
+        const chat_send_icon = this.add.image(1026, 921, "main", "chat-icon");
 
         // player_button
         const player_button = this.add.image(1086, 923, "main", "blue-button");
 
         // badge_member
-        this.add.image(1086, 921, "main", "badge-member");
+        const badge_member = this.add.image(1086, 921, "main", "badge-member");
 
         // buddies_button
         const buddies_button = this.add.image(1146, 923, "main", "blue-button");
 
         // buddies_icon
-        this.add.image(1146, 921, "main", "buddies-icon");
+        const buddies_icon = this.add.image(1146, 921, "main", "buddies-icon");
 
         // igloo_button
         const igloo_button = this.add.image(1206, 923, "main", "blue-button");
 
         // igloo_icon
-        this.add.image(1206, 921, "main", "igloo-icon");
+        const igloo_icon = this.add.image(1206, 921, "main", "igloo-icon");
 
         // help_button
         const help_button = this.add.image(1266, 923, "main", "blue-button");
 
         // help_icon
-        this.add.image(1266, 921, "main", "help-icon");
+        const help_icon = this.add.image(1266, 921, "main", "help-icon");
 
         // onlinePopup
         const onlinePopup = this.add.container(1155, 849);
@@ -268,6 +270,7 @@ export default class Main extends BaseScene {
 
         // stamp_prompt
         const stamp_prompt = this.add.container(1095, -150);
+        stamp_prompt.visible = false;
 
         // stampprompt_bg
         const stampprompt_bg = this.add.image(0, 0, "main", "stampprompt/bg");
@@ -295,6 +298,7 @@ export default class Main extends BaseScene {
 
         // lists
         const hideOnSleep = [settings, moderator, playerCard, petCard, buddy, waddle, phone];
+        const defaultVisible = [mod_m, mod_button, news_button, mailButton, phone_button, map_button, chatLog, help_icon, help_button, igloo_icon, igloo_button, buddies_icon, buddies_button, badge_member, player_button, chat_send_icon, chat_send_button, snowball_icon, snowball_button, action_icon, action_button, emote_icon, emote_button, chat_icon, chat_button, chat_box, dock];
 
         // dock (components)
         new Interactive(dock);
@@ -425,6 +429,7 @@ export default class Main extends BaseScene {
         this.stamp_prompt_name = stamp_prompt_name;
         this.stamp_prompt = stamp_prompt;
         this.hideOnSleep = hideOnSleep;
+        this.defaultVisible = defaultVisible;
 
         this.events.emit("scene-awake");
     }
@@ -511,6 +516,9 @@ export default class Main extends BaseScene {
 
     onWake() {
         this.showPhone()
+        this.defaultVisible.forEach(item => {
+            item.visible = true
+        })
     }
 
     setupWidgets() {
@@ -683,7 +691,6 @@ export default class Main extends BaseScene {
     stampEarned(id) {
         let stampGroup = this.crumbs.stamps.find(group => group.stamps.some(stamp => stamp.stamp_id == id))
         if (!stampGroup) return
-        
         let stamp = stampGroup.stamps.find(stamp => stamp.stamp_id == id)
         let frame;
         if (stampGroup.parent_group_id == 0) {
@@ -694,6 +701,8 @@ export default class Main extends BaseScene {
 
         this.stamp_prompt_icon.setFrame(`stampprompt/${frame}`)
         this.stamp_prompt_name.text = stamp.name
+
+        this.stamp_prompt.visible = true
 
         this.tweens.add({
             targets: this.stamp_prompt,
@@ -708,8 +717,18 @@ export default class Main extends BaseScene {
                 targets: this.stamp_prompt,
                 y: -150,
                 ease: 'Linear',
-                duration: 300
+                duration: 300,
+                onComplete: () => {
+                    this.stamp_prompt.visible = false
+                }
             })
+        })
+    }
+
+    minigameMode() {
+        this.onSleep(null, { clearChat: false })
+        this.defaultVisible.forEach(item => {
+            item.visible = false
         })
     }
 
