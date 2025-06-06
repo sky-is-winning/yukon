@@ -48,9 +48,22 @@
 }
 
 @font-face {
-    font-family: 'CCComiccrazy Bold';
+    font-family: 'CCComiccrazy';
     font-weight: bold;
     src: url('../fonts/CCComicrazy_Bold.woff2');
+}
+
+@font-face {
+    font-family: 'CCComiccrazy';
+    font-weight: bold;
+    font-style: italic;
+    src: url('../fonts/CCComicrazy Bold Italic.woff2');
+}
+
+@font-face {
+    font-family: 'CCComiccrazy';
+    font-style: italic;
+    src: url('../fonts/CCComicrazy Italic.woff2');
 }
 
 @font-face {

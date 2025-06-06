@@ -269,30 +269,29 @@ export default class Main extends BaseScene {
         mailbook.visible = false;
 
         // stamp_prompt
-        const stamp_prompt = this.add.container(1095, -150);
-        stamp_prompt.visible = false;
+        const stamp_prompt = this.add.container(1095, -151);
 
         // stampprompt_bg
         const stampprompt_bg = this.add.image(0, 0, "main", "stampprompt/bg");
         stamp_prompt.add(stampprompt_bg);
 
         // stamp_prompt_icon
-        const stamp_prompt_icon = this.add.image(-186, 57, "main", "stampprompt/5_1");
+        const stamp_prompt_icon = this.add.image(-186, 63, "main", "stampprompt/8_3");
         stamp_prompt.add(stamp_prompt_icon);
 
         // stamp_prompt_header
-        const stamp_prompt_header = this.add.text(-108, 39, "", {});
+        const stamp_prompt_header = this.add.text(-113, 50, "", {});
         stamp_prompt_header.setOrigin(0, 0.5);
         stamp_prompt_header.text = "STAMP EARNED!";
-        stamp_prompt_header.setStyle({ "color": "#ffffffff", "fixedWidth":600,"fixedHeight":40,"fontFamily": "CCFaceFront", "fontSize": "28px", "fontStyle": "italic", "stroke": "#ffffffff", "shadow.offsetX":3,"shadow.offsetY":3,"shadow.color": "#000000cf", "shadow.fill":true});
+        stamp_prompt_header.setStyle({ "color": "#ffffffff", "fixedWidth":600,"fixedHeight":40,"fontFamily": "CCComiccrazy", "fontSize": "25px", "fontStyle": "italic", "stroke": "#ffffffff", "shadow.offsetX":2,"shadow.offsetY":2,"shadow.color": "#000000cf", "shadow.fill":true});
         stamp_prompt_header.setPadding({"left":10});
         stamp_prompt.add(stamp_prompt_header);
 
         // stamp_prompt_name
-        const stamp_prompt_name = this.add.text(-108, 81, "", {});
+        const stamp_prompt_name = this.add.text(-113, 88, "", {});
         stamp_prompt_name.setOrigin(0, 0.5);
         stamp_prompt_name.text = "Stamp Name";
-        stamp_prompt_name.setStyle({ "color": "#ffffffff", "fixedWidth":600,"fixedHeight":40,"fontFamily": "CCFaceFront", "fontSize": "28px", "fontStyle": "italic", "stroke": "#ffffffff", "shadow.offsetX":3,"shadow.offsetY":3,"shadow.color": "#000000cf", "shadow.fill":true});
+        stamp_prompt_name.setStyle({ "color": "#ffffffff", "fixedWidth":600,"fixedHeight":40,"fontFamily": "CCComiccrazy", "fontSize": "25px", "fontStyle": "italic", "stroke": "#ffffffff", "shadow.offsetX":2,"shadow.offsetY":2,"shadow.color": "#000000cf", "shadow.fill":true});
         stamp_prompt_name.setPadding({"left":10});
         stamp_prompt.add(stamp_prompt_name);
 
@@ -706,7 +705,7 @@ export default class Main extends BaseScene {
 
         this.tweens.add({
             targets: this.stamp_prompt,
-            y: 20,
+            y: 2,
             ease: 'Linear',
             duration: 300
         })
