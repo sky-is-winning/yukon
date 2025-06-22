@@ -1,0 +1,288 @@
+{
+    "id": "ceebc92d-3402-480d-9c7b-7eda7e4711f9",
+    "sceneType": "PREFAB",
+    "settings": {
+        "compilerInsertSpaces": true,
+        "exportClass": true,
+        "autoImport": true,
+        "superClassName": "BaseContainer",
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "b4bb384d-f85e-4178-9068-d412b343de8a",
+            "label": "editor",
+            "scope": "CLASS",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "ae55b1ec-c39b-47bd-af11-095d38f768eb",
+                    "label": "coverlist",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "coverlist"
+                    },
+                    "x": 38,
+                    "y": -421,
+                    "originX": 0.5003933910306845
+                },
+                {
+                    "type": "Image",
+                    "id": "a866e47b-e7bd-4027-9415-62e74a7a154c",
+                    "label": "remove_hint",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "remove-hint"
+                    },
+                    "x": 81,
+                    "y": -421,
+                    "originX": 0.5003679175864606,
+                    "originY": 0.5042735042735043,
+                    "visible": false
+                },
+                {
+                    "type": "Container",
+                    "id": "dc12b6ba-9bdb-4d11-a41d-fd9f13a129eb",
+                    "label": "leftbar",
+                    "scope": "CLASS",
+                    "x": -707,
+                    "y": -266,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "cb350417-8acb-4b6e-bbcf-d24cf00cadc3",
+                            "label": "leftbar_img",
+                            "texture": {
+                                "key": "stampbook",
+                                "frame": "leftbar"
+                            },
+                            "y": 84,
+                            "originY": 0.5007407407407407
+                        },
+                        {
+                            "type": "Triangle",
+                            "id": "eb3ad9c9-aa46-42f5-a5b6-e1a3237b4e72",
+                            "label": "stampcat_arrow",
+                            "x": 96,
+                            "y": -144.5,
+                            "isFilled": true,
+                            "fillColor": "#262626",
+                            "y1": 0,
+                            "x2": 10,
+                            "y2": 7.5,
+                            "x3": 0,
+                            "y3": 15
+                        },
+                        {
+                            "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105f",
+                            "id": "cdd50a71-6850-4061-9320-e85ad063a677",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "visible",
+                                "selectorType"
+                            ],
+                            "label": "icon_selector",
+                            "scope": "CLASS",
+                            "selectorType": "Icons",
+                            "x": 256,
+                            "y": 345,
+                            "visible": false
+                        },
+                        {
+                            "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105f",
+                            "id": "8031c6a4-ddab-4f4f-8ee9-ba8884a797cd",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "visible",
+                                "selectorType"
+                            ],
+                            "label": "pattern_selector",
+                            "scope": "CLASS",
+                            "selectorType": "Patterns",
+                            "x": 256,
+                            "y": 230,
+                            "visible": false
+                        },
+                        {
+                            "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105f",
+                            "id": "71c31cd1-2321-4303-a049-2146a0503e8b",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "visible",
+                                "selectorType"
+                            ],
+                            "label": "highlight_selector",
+                            "scope": "CLASS",
+                            "selectorType": "Highlights",
+                            "x": 256,
+                            "y": 115,
+                            "visible": false
+                        },
+                        {
+                            "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105f",
+                            "id": "c5c87cc3-d20f-48dc-968d-a5b50dddb38c",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "visible"
+                            ],
+                            "label": "colors_selector",
+                            "scope": "CLASS",
+                            "x": 256,
+                            "y": 0,
+                            "visible": false
+                        },
+                        {
+                            "type": "Image",
+                            "id": "dfe0496b-01d7-4a03-92bb-fb968cd52d07",
+                            "label": "editor_selectors_icon",
+                            "texture": {
+                                "key": "stampbook",
+                                "frame": "editor-selectors"
+                            },
+                            "x": 20,
+                            "y": 345,
+                            "originX": 0.5038759689922481
+                        },
+                        {
+                            "type": "Image",
+                            "id": "30cca571-a034-439f-8bd7-869f79b92cd8",
+                            "label": "editor_selectors_pattern",
+                            "texture": {
+                                "key": "stampbook",
+                                "frame": "editor-selectors"
+                            },
+                            "x": 20,
+                            "y": 230,
+                            "originX": 0.5038759689922481
+                        },
+                        {
+                            "type": "Image",
+                            "id": "33fdaa4a-138a-4f94-8ac2-4ac0decbe73c",
+                            "label": "editor_selectors_highlight",
+                            "texture": {
+                                "key": "stampbook",
+                                "frame": "editor-selectors"
+                            },
+                            "x": 20,
+                            "y": 115,
+                            "originX": 0.5038759689922481
+                        },
+                        {
+                            "type": "Image",
+                            "id": "14548724-de9e-4d34-a757-b8a759ed68e1",
+                            "label": "editor_selectors_color",
+                            "texture": {
+                                "key": "stampbook",
+                                "frame": "editor-selectors"
+                            },
+                            "x": 20,
+                            "originX": 0.5038759689922481
+                        },
+                        {
+                            "prefabId": "2dabc377-4f2e-4fcb-9bec-1444078eaa6a",
+                            "id": "85b4e649-1855-40ce-9efa-3608e244f4a0",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "rootModule"
+                            ],
+                            "label": "icon_prefab",
+                            "scope": "CLASS",
+                            "rootModule": true,
+                            "x": 21,
+                            "y": 345
+                        },
+                        {
+                            "prefabId": "95820f69-e7f6-4621-8b59-0dada96ea5db",
+                            "id": "48725597-fe4f-400b-8528-e045514b37e6",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "rootModule"
+                            ],
+                            "label": "pattern_prefab",
+                            "scope": "CLASS",
+                            "rootModule": true,
+                            "x": 21,
+                            "y": 230
+                        },
+                        {
+                            "prefabId": "b3848616-2240-46ac-9aca-4c0b3dc598f9",
+                            "id": "07c41ad9-811d-48ce-8daa-5398c529ab20",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "rootModule"
+                            ],
+                            "label": "highlight_prefab",
+                            "scope": "CLASS",
+                            "rootModule": true,
+                            "x": 21,
+                            "y": 115
+                        },
+                        {
+                            "prefabId": "a1798d3c-b603-46a1-94da-1110b6f06b3a",
+                            "id": "661ac5f5-0f91-4395-a160-640b4f69ee71",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "rootModule"
+                            ],
+                            "label": "color_prefab",
+                            "scope": "CLASS",
+                            "rootModule": true,
+                            "x": 21,
+                            "y": 0
+                        },
+                        {
+                            "prefabId": "98c49b76-de75-42a0-a34a-9dbe4082d54c",
+                            "id": "82742e0b-babc-4c78-ab9a-c4d0dd536e4d",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "visible"
+                            ],
+                            "label": "stampCategory",
+                            "scope": "CLASS",
+                            "x": -115,
+                            "y": -252,
+                            "visible": true
+                        }
+                    ]
+                },
+                {
+                    "type": "Image",
+                    "id": "72d3df85-a00c-49e9-8544-156b8924800b",
+                    "label": "save_btn",
+                    "components": [
+                        "SimpleButton"
+                    ],
+                    "SimpleButton.callback": "() => this.interface.stampbook.saveStampbook()",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "save-btn"
+                    },
+                    "x": 707,
+                    "y": 420,
+                    "originX": 0.5070422535211268
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

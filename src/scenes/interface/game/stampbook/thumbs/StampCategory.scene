@@ -1,0 +1,111 @@
+{
+    "id": "98c49b76-de75-42a0-a34a-9dbe4082d54c",
+    "sceneType": "PREFAB",
+    "settings": {
+        "compilerInsertSpaces": true,
+        "exportClass": true,
+        "autoImport": true,
+        "superClassName": "BaseContainer",
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "f5e3fcac-422d-4fb7-b244-d86752ceaa27",
+            "label": "container_1",
+            "x": -0.018919819965958595,
+            "y": -0.00424807146191597,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "5f86629b-0bfe-40be-a367-a566d849d73e",
+                    "label": "blue_stampcat_bg",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "blue-stampcat-bg"
+                    },
+                    "originX": 0,
+                    "originY": 0
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "d8c4bcab-d6db-4117-acbb-7cb5a6201209",
+                    "label": "zone",
+                    "components": [
+                        "Zone"
+                    ],
+                    "Zone.hoverCallback": "",
+                    "Zone.hoverOutCallback": "",
+                    "Zone.callback": "() => this.interface.stampbook.openCategorySelector();",
+                    "x": 139,
+                    "y": 113,
+                    "isFilled": true,
+                    "fillColor": "#12d7ee",
+                    "fillAlpha": 0.3,
+                    "width": 120,
+                    "height": 120
+                },
+                {
+                    "type": "Image",
+                    "id": "12710077-3735-4aeb-9958-a893bddd0f8e",
+                    "label": "categoryIcon",
+                    "scope": "CLASS",
+                    "texture": {},
+                    "x": 141,
+                    "y": 134,
+                    "visible": false
+                },
+                {
+                    "type": "Text",
+                    "id": "cf41a471-8711-4580-aa5c-929f1f7384ae",
+                    "label": "title",
+                    "scope": "CLASS",
+                    "x": 147,
+                    "y": 70,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Characters",
+                    "align": "center",
+                    "fontFamily": "Burbank Small",
+                    "fontSize": "18px",
+                    "fontStyle": "bold",
+                    "color": "#ffffffff",
+                    "shadow.offsetX": 1,
+                    "shadow.offsetY": 1,
+                    "shadow.fill": true,
+                    "shadow.color": "#191c28ff"
+                },
+                {
+                    "type": "Text",
+                    "id": "a0d693b2-357b-4638-80bb-14fbece438a0",
+                    "label": "allstamps_title",
+                    "scope": "CLASS",
+                    "x": 141,
+                    "y": 69,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "visible": false,
+                    "text": "All Stamps",
+                    "align": "center",
+                    "fontFamily": "Burbank Small",
+                    "fontSize": "19px",
+                    "fontStyle": "bold",
+                    "color": "#4d4d4dff",
+                    "shadow.color": "#191c28ff"
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

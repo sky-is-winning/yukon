@@ -23,7 +23,7 @@
                 {
                     "type": "Rectangle",
                     "id": "d26c3ad8-52c4-40e1-8c6e-6a78d625af4d",
-                    "label": "editor_bg_1",
+                    "label": "block",
                     "scope": "CLASS",
                     "components": [
                         "Interactive"
@@ -68,418 +68,32 @@
                     "visible": false
                 },
                 {
-                    "type": "Container",
+                    "prefabId": "fa483d3c-d3bc-4de2-9bfe-bc755d660a40",
                     "id": "65958c50-39b7-4735-8271-c06a8b64d95f",
+                    "unlock": [
+                        "x",
+                        "y",
+                        "visible"
+                    ],
                     "label": "front_cover",
                     "scope": "CLASS",
-                    "x": 15,
-                    "y": 10,
-                    "visible": false,
-                    "list": [
-                        {
-                            "type": "Image",
-                            "id": "6a8b305c-d4c5-40cc-9043-40f09a90f5c3",
-                            "label": "front_cover_background",
-                            "scope": "CLASS",
-                            "texture": {},
-                            "visible": false
-                        },
-                        {
-                            "type": "Image",
-                            "id": "8c2a7921-1c99-4094-a98d-fb77345a9b25",
-                            "label": "front_cover_clasp",
-                            "scope": "CLASS",
-                            "components": [
-                                "SimpleButton"
-                            ],
-                            "SimpleButton.callback": "() => this.showPage(1)",
-                            "texture": {},
-                            "x": 581,
-                            "y": 21,
-                            "visible": false
-                        },
-                        {
-                            "type": "Image",
-                            "id": "9c9778ba-5fa6-4304-ac5d-3dfd983d951f",
-                            "label": "front_cover_icon",
-                            "scope": "CLASS",
-                            "texture": {},
-                            "x": 561,
-                            "y": 13,
-                            "originY": 0.5039370078740157,
-                            "visible": false
-                        },
-                        {
-                            "type": "Image",
-                            "id": "884636b0-5a80-4ae2-b693-46d3cbc6d664",
-                            "label": "closebtn",
-                            "components": [
-                                "Button"
-                            ],
-                            "Button.spriteName": "closebtn",
-                            "Button.callback": "() => this.close()",
-                            "texture": {
-                                "key": "stampbook",
-                                "frame": "closebtn"
-                            },
-                            "x": 576,
-                            "y": -317
-                        },
-                        {
-                            "type": "Text",
-                            "id": "d7d8f3bf-5b19-4f92-a7f4-5737cae31cba",
-                            "label": "username_text_highlight_2",
-                            "x": -515,
-                            "y": 225,
-                            "originY": 0.5,
-                            "alpha": 0.5,
-                            "alphaTopLeft": 0.5,
-                            "alphaTopRight": 0.5,
-                            "alphaBottomLeft": 0.5,
-                            "alphaBottomRight": 0.5,
-                            "text": "Penguin8888",
-                            "fontFamily": "Burbank Big Wide",
-                            "fontSize": "108px",
-                            "fontStyle": "bold",
-                            "color": "#F4B851",
-                            "shadow.color": "#000000ff"
-                        },
-                        {
-                            "type": "Text",
-                            "id": "04364ff8-fb07-45f7-a76a-f43f9174a694",
-                            "label": "username_text_highlight_1",
-                            "x": -516,
-                            "y": 222,
-                            "originY": 0.5,
-                            "alpha": 0.5,
-                            "alphaTopLeft": 0.5,
-                            "alphaTopRight": 0.5,
-                            "alphaBottomLeft": 0.5,
-                            "alphaBottomRight": 0.5,
-                            "text": "Penguin8888",
-                            "fontFamily": "Burbank Big Wide",
-                            "fontSize": "108px",
-                            "fontStyle": "bold",
-                            "color": "#F4B851",
-                            "shadow.color": "#000000ff"
-                        },
-                        {
-                            "type": "Text",
-                            "id": "22c3b86b-b6a3-4d72-b50e-b66cbba2f907",
-                            "label": "username_text",
-                            "x": -518,
-                            "y": 220,
-                            "originY": 0.5,
-                            "text": "Penguin8888",
-                            "fontFamily": "Burbank Big Wide",
-                            "fontSize": "108px",
-                            "fontStyle": "bold",
-                            "color": "#F4B851",
-                            "shadow.offsetX": -3,
-                            "shadow.offsetY": -3,
-                            "shadow.fill": true,
-                            "shadow.color": "#0000008d"
-                        },
-                        {
-                            "type": "Text",
-                            "id": "80daeec0-cef8-44ec-866a-2f6c9069aea5",
-                            "label": "stampstotal_text_highlight",
-                            "x": -260,
-                            "y": 307,
-                            "originY": 0.5,
-                            "alpha": 0.5,
-                            "alphaTopLeft": 0.5,
-                            "alphaTopRight": 0.5,
-                            "alphaBottomLeft": 0.5,
-                            "alphaBottomRight": 0.5,
-                            "text": "Total Stamps 888/888",
-                            "fontFamily": "Burbank Small",
-                            "fontSize": "28px",
-                            "fontStyle": "bold",
-                            "color": "#F4B851",
-                            "shadow.color": "#000000ff"
-                        },
-                        {
-                            "type": "Text",
-                            "id": "a3809d73-cbb1-4654-93da-5b8a202406c5",
-                            "label": "stampstotal_text",
-                            "x": -262,
-                            "y": 305,
-                            "originY": 0.5,
-                            "text": "Total Stamps 888/888",
-                            "fontFamily": "Burbank Small",
-                            "fontSize": "28px",
-                            "fontStyle": "bold",
-                            "color": "#F4B851",
-                            "shadow.offsetX": -2,
-                            "shadow.offsetY": -2,
-                            "shadow.fill": true,
-                            "shadow.color": "#0000005e"
-                        }
-                    ]
+                    "x": 21,
+                    "y": 39,
+                    "visible": false
                 },
                 {
-                    "type": "Container",
+                    "prefabId": "ceebc92d-3402-480d-9c7b-7eda7e4711f9",
                     "id": "e0c1c218-fe54-44f5-aa02-0632e8d0d0c7",
+                    "unlock": [
+                        "x",
+                        "y",
+                        "visible"
+                    ],
                     "label": "editor",
                     "scope": "CLASS",
-                    "visible": false,
-                    "list": [
-                        {
-                            "type": "Image",
-                            "id": "89782bcf-073e-4dab-b4d2-a7b3bd63edee",
-                            "label": "coverlist",
-                            "texture": {
-                                "key": "stampbook",
-                                "frame": "coverlist"
-                            },
-                            "x": 50,
-                            "y": -439,
-                            "originX": 0.5003933910306845
-                        },
-                        {
-                            "type": "Image",
-                            "id": "300f1b9a-aef9-4747-b9c6-d7c2bb437380",
-                            "label": "remove_hint",
-                            "texture": {
-                                "key": "stampbook",
-                                "frame": "remove-hint"
-                            },
-                            "x": 81,
-                            "y": -421,
-                            "originX": 0.5003679175864606,
-                            "originY": 0.5042735042735043,
-                            "visible": false
-                        },
-                        {
-                            "type": "Container",
-                            "id": "8964e3d0-6f63-4e41-98eb-b090fd8530a1",
-                            "label": "leftbar",
-                            "scope": "CLASS",
-                            "x": -695,
-                            "y": -280,
-                            "list": [
-                                {
-                                    "type": "Image",
-                                    "id": "ea937034-ba96-4214-9800-94f8d8271ab4",
-                                    "label": "leftbar_img",
-                                    "texture": {
-                                        "key": "stampbook",
-                                        "frame": "leftbar"
-                                    },
-                                    "y": 84,
-                                    "originY": 0.5007407407407407
-                                },
-                                {
-                                    "type": "Image",
-                                    "id": "13fb1f44-620a-4daa-8c93-405c817c40c1",
-                                    "label": "blue_stampcat_bg",
-                                    "texture": {
-                                        "key": "stampbook",
-                                        "frame": "blue-stampcat-bg"
-                                    },
-                                    "x": -1,
-                                    "y": -163,
-                                    "originX": 0.5022222222222222
-                                },
-                                {
-                                    "type": "Triangle",
-                                    "id": "56900fa9-d9fe-48b0-b1ba-0accff570383",
-                                    "label": "stampcat_arrow",
-                                    "x": 96,
-                                    "y": -144.5,
-                                    "isFilled": true,
-                                    "fillColor": "#262626",
-                                    "y1": 0,
-                                    "x2": 10,
-                                    "y2": 7.5,
-                                    "x3": 0,
-                                    "y3": 15
-                                },
-                                {
-                                    "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105f",
-                                    "id": "2c9ff5a5-2f65-4880-88ca-43a8f6bdd83d",
-                                    "unlock": [
-                                        "x",
-                                        "y",
-                                        "visible",
-                                        "selectorType"
-                                    ],
-                                    "label": "icon_selector",
-                                    "scope": "CLASS",
-                                    "selectorType": "Icons",
-                                    "x": 256,
-                                    "y": 345,
-                                    "visible": false
-                                },
-                                {
-                                    "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105f",
-                                    "id": "f1277879-6232-405b-9e9f-656eb178b211",
-                                    "unlock": [
-                                        "x",
-                                        "y",
-                                        "visible",
-                                        "selectorType"
-                                    ],
-                                    "label": "pattern_selector",
-                                    "scope": "CLASS",
-                                    "selectorType": "Patterns",
-                                    "x": 256,
-                                    "y": 230,
-                                    "visible": false
-                                },
-                                {
-                                    "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105f",
-                                    "id": "a0f66ccf-98e8-4746-b22e-3238a059e76d",
-                                    "unlock": [
-                                        "x",
-                                        "y",
-                                        "visible",
-                                        "selectorType"
-                                    ],
-                                    "label": "highlight_selector",
-                                    "scope": "CLASS",
-                                    "selectorType": "Highlights",
-                                    "x": 256,
-                                    "y": 115,
-                                    "visible": false
-                                },
-                                {
-                                    "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105f",
-                                    "id": "5c0c7ea7-4715-4bda-ba1f-d83ebbe6ed5b",
-                                    "unlock": [
-                                        "x",
-                                        "y",
-                                        "visible"
-                                    ],
-                                    "label": "colors_selector",
-                                    "scope": "CLASS",
-                                    "x": 256,
-                                    "y": 0,
-                                    "visible": false
-                                },
-                                {
-                                    "type": "Image",
-                                    "id": "62821ffa-8619-42f0-8d26-81871ff9c29b",
-                                    "label": "editor_selectors_icon",
-                                    "texture": {
-                                        "key": "stampbook",
-                                        "frame": "editor-selectors"
-                                    },
-                                    "x": 20,
-                                    "y": 345,
-                                    "originX": 0.5038759689922481
-                                },
-                                {
-                                    "type": "Image",
-                                    "id": "a0a3a14f-cffd-417e-924e-710d7f2f7c7d",
-                                    "label": "editor_selectors_pattern",
-                                    "texture": {
-                                        "key": "stampbook",
-                                        "frame": "editor-selectors"
-                                    },
-                                    "x": 20,
-                                    "y": 230,
-                                    "originX": 0.5038759689922481
-                                },
-                                {
-                                    "type": "Image",
-                                    "id": "58d559cb-49fa-4ca2-9923-d9fda79c9835",
-                                    "label": "editor_selectors_highlight",
-                                    "texture": {
-                                        "key": "stampbook",
-                                        "frame": "editor-selectors"
-                                    },
-                                    "x": 20,
-                                    "y": 115,
-                                    "originX": 0.5038759689922481
-                                },
-                                {
-                                    "type": "Image",
-                                    "id": "114ef2ec-5dff-4d40-ac4d-c55291abb4f8",
-                                    "label": "editor_selectors_color",
-                                    "texture": {
-                                        "key": "stampbook",
-                                        "frame": "editor-selectors"
-                                    },
-                                    "x": 20,
-                                    "originX": 0.5038759689922481
-                                },
-                                {
-                                    "prefabId": "2dabc377-4f2e-4fcb-9bec-1444078eaa6a",
-                                    "id": "3cf1600a-e995-4985-83fb-7e1c341034ee",
-                                    "unlock": [
-                                        "x",
-                                        "y",
-                                        "rootModule"
-                                    ],
-                                    "label": "icon_prefab",
-                                    "scope": "CLASS",
-                                    "rootModule": true,
-                                    "x": 21,
-                                    "y": 345
-                                },
-                                {
-                                    "prefabId": "95820f69-e7f6-4621-8b59-0dada96ea5db",
-                                    "id": "7bc6cd76-2e20-4b99-8597-5c849ca687ea",
-                                    "unlock": [
-                                        "x",
-                                        "y",
-                                        "rootModule"
-                                    ],
-                                    "label": "pattern_prefab",
-                                    "scope": "CLASS",
-                                    "rootModule": true,
-                                    "x": 21,
-                                    "y": 230
-                                },
-                                {
-                                    "prefabId": "b3848616-2240-46ac-9aca-4c0b3dc598f9",
-                                    "id": "3159d1a5-6940-4528-9066-c818d2bbcae0",
-                                    "unlock": [
-                                        "x",
-                                        "y",
-                                        "rootModule"
-                                    ],
-                                    "label": "highlight_prefab",
-                                    "scope": "CLASS",
-                                    "rootModule": true,
-                                    "x": 21,
-                                    "y": 115
-                                },
-                                {
-                                    "prefabId": "a1798d3c-b603-46a1-94da-1110b6f06b3a",
-                                    "id": "51a88e53-bb01-40a5-86ca-4a2e7c90800a",
-                                    "unlock": [
-                                        "x",
-                                        "y",
-                                        "rootModule"
-                                    ],
-                                    "label": "color_prefab",
-                                    "scope": "CLASS",
-                                    "rootModule": true,
-                                    "x": 21,
-                                    "y": 0
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Image",
-                            "id": "a97e12b5-5493-4a96-a451-397f15fbefe3",
-                            "label": "save_btn",
-                            "components": [
-                                "SimpleButton"
-                            ],
-                            "SimpleButton.callback": "() => this.saveStampbook()",
-                            "texture": {
-                                "key": "stampbook",
-                                "frame": "save-btn"
-                            },
-                            "x": 699,
-                            "y": 420,
-                            "originX": 0.5070422535211268
-                        }
-                    ]
+                    "x": 0,
+                    "y": 0,
+                    "visible": false
                 },
                 {
                     "type": "Container",
@@ -1013,23 +627,6 @@
         "version": 5
     },
     "lists": [
-        {
-            "id": "da38a1e2-1685-4e57-ac59-6ac73c1e1fee",
-            "label": "usernameItems",
-            "objectIds": [
-                "22c3b86b-b6a3-4d72-b50e-b66cbba2f907",
-                "04364ff8-fb07-45f7-a76a-f43f9174a694",
-                "d7d8f3bf-5b19-4f92-a7f4-5737cae31cba"
-            ]
-        },
-        {
-            "id": "fe2f3119-f725-44b5-8260-a5cfc810b24a",
-            "label": "stampsTotalItems",
-            "objectIds": [
-                "a3809d73-cbb1-4654-93da-5b8a202406c5",
-                "80daeec0-cef8-44ec-866a-2f6c9069aea5"
-            ]
-        },
         {
             "id": "24cf36ac-9d4a-4bbf-99f0-dab1f15f31d7",
             "label": "polaroidItemsList",

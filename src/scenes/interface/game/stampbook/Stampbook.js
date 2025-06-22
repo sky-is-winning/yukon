@@ -10,12 +10,9 @@ export const preload = {
 import BaseContainer from "../../../base/BaseContainer";
 import Interactive from "../../../components/Interactive";
 import SimpleButton from "../../../components/SimpleButton";
+import StampbookFrontCover from "./StampbookFrontCover";
+import StampbookEditor from "./StampbookEditor";
 import Button from "../../../components/Button";
-import Selectors from "./Selectors";
-import Icon from "./thumbs/Icon";
-import Pattern from "./thumbs/Pattern";
-import Highlight from "./thumbs/Highlight";
-import Color from "./thumbs/Color";
 import Polaroid from "./Polaroid";
 import LoadingPrompt from "../../prompts/LoadingPrompt";
 /* START-USER-IMPORTS */
@@ -29,12 +26,12 @@ export default class Stampbook extends BaseContainer {
     constructor(scene, x, y) {
         super(scene, x ?? 760, y ?? 480);
 
-        // editor_bg_1
-        const editor_bg_1 = scene.add.rectangle(0, 0, 1520, 960);
-        editor_bg_1.isFilled = true;
-        editor_bg_1.fillColor = 0;
-        editor_bg_1.fillAlpha = 0.2;
-        this.add(editor_bg_1);
+        // block
+        const block = scene.add.rectangle(0, 0, 1520, 960);
+        block.isFilled = true;
+        block.fillColor = 0;
+        block.fillAlpha = 0.2;
+        this.add(block);
 
         // edit_btn
         const edit_btn = scene.add.image(701, 419, "stampbook", "edit-btn");
@@ -47,176 +44,14 @@ export default class Stampbook extends BaseContainer {
         this.add(editor_bg);
 
         // front_cover
-        const front_cover = scene.add.container(15, 10);
+        const front_cover = new StampbookFrontCover(scene, 21, 39);
         front_cover.visible = false;
         this.add(front_cover);
 
-        // front_cover_background
-        const front_cover_background = scene.add.image(0, 0, "_MISSING");
-        front_cover_background.visible = false;
-        front_cover.add(front_cover_background);
-
-        // front_cover_clasp
-        const front_cover_clasp = scene.add.image(581, 21, "_MISSING");
-        front_cover_clasp.visible = false;
-        front_cover.add(front_cover_clasp);
-
-        // front_cover_icon
-        const front_cover_icon = scene.add.image(561, 13, "_MISSING");
-        front_cover_icon.setOrigin(0.5, 0.5039370078740157);
-        front_cover_icon.visible = false;
-        front_cover.add(front_cover_icon);
-
-        // closebtn
-        const closebtn = scene.add.image(576, -317, "stampbook", "closebtn");
-        front_cover.add(closebtn);
-
-        // username_text_highlight_2
-        const username_text_highlight_2 = scene.add.text(-515, 225, "", {});
-        username_text_highlight_2.setOrigin(0, 0.5);
-        username_text_highlight_2.alpha = 0.5;
-        username_text_highlight_2.alphaTopLeft = 0.5;
-        username_text_highlight_2.alphaTopRight = 0.5;
-        username_text_highlight_2.alphaBottomLeft = 0.5;
-        username_text_highlight_2.alphaBottomRight = 0.5;
-        username_text_highlight_2.text = "Penguin8888";
-        username_text_highlight_2.setStyle({ "color": "#F4B851", "fontFamily": "Burbank Big Wide", "fontSize": "108px", "fontStyle": "bold", "shadow.color": "#000000ff" });
-        front_cover.add(username_text_highlight_2);
-
-        // username_text_highlight_1
-        const username_text_highlight_1 = scene.add.text(-516, 222, "", {});
-        username_text_highlight_1.setOrigin(0, 0.5);
-        username_text_highlight_1.alpha = 0.5;
-        username_text_highlight_1.alphaTopLeft = 0.5;
-        username_text_highlight_1.alphaTopRight = 0.5;
-        username_text_highlight_1.alphaBottomLeft = 0.5;
-        username_text_highlight_1.alphaBottomRight = 0.5;
-        username_text_highlight_1.text = "Penguin8888";
-        username_text_highlight_1.setStyle({ "color": "#F4B851", "fontFamily": "Burbank Big Wide", "fontSize": "108px", "fontStyle": "bold", "shadow.color": "#000000ff" });
-        front_cover.add(username_text_highlight_1);
-
-        // username_text
-        const username_text = scene.add.text(-518, 220, "", {});
-        username_text.setOrigin(0, 0.5);
-        username_text.text = "Penguin8888";
-        username_text.setStyle({ "color": "#F4B851", "fontFamily": "Burbank Big Wide", "fontSize": "108px", "fontStyle": "bold", "shadow.offsetX":-3,"shadow.offsetY":-3,"shadow.color": "#0000008d", "shadow.fill":true});
-        front_cover.add(username_text);
-
-        // stampstotal_text_highlight
-        const stampstotal_text_highlight = scene.add.text(-260, 307, "", {});
-        stampstotal_text_highlight.setOrigin(0, 0.5);
-        stampstotal_text_highlight.alpha = 0.5;
-        stampstotal_text_highlight.alphaTopLeft = 0.5;
-        stampstotal_text_highlight.alphaTopRight = 0.5;
-        stampstotal_text_highlight.alphaBottomLeft = 0.5;
-        stampstotal_text_highlight.alphaBottomRight = 0.5;
-        stampstotal_text_highlight.text = "Total Stamps 888/888";
-        stampstotal_text_highlight.setStyle({ "color": "#F4B851", "fontFamily": "Burbank Small", "fontSize": "28px", "fontStyle": "bold", "shadow.color": "#000000ff" });
-        front_cover.add(stampstotal_text_highlight);
-
-        // stampstotal_text
-        const stampstotal_text = scene.add.text(-262, 305, "", {});
-        stampstotal_text.setOrigin(0, 0.5);
-        stampstotal_text.text = "Total Stamps 888/888";
-        stampstotal_text.setStyle({ "color": "#F4B851", "fontFamily": "Burbank Small", "fontSize": "28px", "fontStyle": "bold", "shadow.offsetX":-2,"shadow.offsetY":-2,"shadow.color": "#0000005e", "shadow.fill":true});
-        front_cover.add(stampstotal_text);
-
         // editor
-        const editor = scene.add.container(0, 0);
+        const editor = new StampbookEditor(scene, 0, 0);
         editor.visible = false;
         this.add(editor);
-
-        // coverlist
-        const coverlist = scene.add.image(50, -439, "stampbook", "coverlist");
-        coverlist.setOrigin(0.5003933910306845, 0.5);
-        editor.add(coverlist);
-
-        // remove_hint
-        const remove_hint = scene.add.image(81, -421, "stampbook", "remove-hint");
-        remove_hint.setOrigin(0.5003679175864606, 0.5042735042735043);
-        remove_hint.visible = false;
-        editor.add(remove_hint);
-
-        // leftbar
-        const leftbar = scene.add.container(-695, -280);
-        editor.add(leftbar);
-
-        // leftbar_img
-        const leftbar_img = scene.add.image(0, 84, "stampbook", "leftbar");
-        leftbar_img.setOrigin(0.5, 0.5007407407407407);
-        leftbar.add(leftbar_img);
-
-        // blue_stampcat_bg
-        const blue_stampcat_bg = scene.add.image(-1, -163, "stampbook", "blue-stampcat-bg");
-        blue_stampcat_bg.setOrigin(0.5022222222222222, 0.5);
-        leftbar.add(blue_stampcat_bg);
-
-        // stampcat_arrow
-        const stampcat_arrow = scene.add.triangle(96, -144.5, 0, 0, 10, 7.5, 0, 15);
-        stampcat_arrow.isFilled = true;
-        stampcat_arrow.fillColor = 2500134;
-        leftbar.add(stampcat_arrow);
-
-        // icon_selector
-        const icon_selector = new Selectors(scene, 256, 345);
-        icon_selector.visible = false;
-        leftbar.add(icon_selector);
-
-        // pattern_selector
-        const pattern_selector = new Selectors(scene, 256, 230);
-        pattern_selector.visible = false;
-        leftbar.add(pattern_selector);
-
-        // highlight_selector
-        const highlight_selector = new Selectors(scene, 256, 115);
-        highlight_selector.visible = false;
-        leftbar.add(highlight_selector);
-
-        // colors_selector
-        const colors_selector = new Selectors(scene, 256, 0);
-        colors_selector.visible = false;
-        leftbar.add(colors_selector);
-
-        // editor_selectors_icon
-        const editor_selectors_icon = scene.add.image(20, 345, "stampbook", "editor-selectors");
-        editor_selectors_icon.setOrigin(0.5038759689922481, 0.5);
-        leftbar.add(editor_selectors_icon);
-
-        // editor_selectors_pattern
-        const editor_selectors_pattern = scene.add.image(20, 230, "stampbook", "editor-selectors");
-        editor_selectors_pattern.setOrigin(0.5038759689922481, 0.5);
-        leftbar.add(editor_selectors_pattern);
-
-        // editor_selectors_highlight
-        const editor_selectors_highlight = scene.add.image(20, 115, "stampbook", "editor-selectors");
-        editor_selectors_highlight.setOrigin(0.5038759689922481, 0.5);
-        leftbar.add(editor_selectors_highlight);
-
-        // editor_selectors_color
-        const editor_selectors_color = scene.add.image(20, 0, "stampbook", "editor-selectors");
-        editor_selectors_color.setOrigin(0.5038759689922481, 0.5);
-        leftbar.add(editor_selectors_color);
-
-        // icon_prefab
-        const icon_prefab = new Icon(scene, 21, 345);
-        leftbar.add(icon_prefab);
-
-        // pattern_prefab
-        const pattern_prefab = new Pattern(scene, 21, 230);
-        leftbar.add(pattern_prefab);
-
-        // highlight_prefab
-        const highlight_prefab = new Highlight(scene, 21, 115);
-        leftbar.add(highlight_prefab);
-
-        // color_prefab
-        const color_prefab = new Color(scene, 21, 0);
-        leftbar.add(color_prefab);
-
-        // save_btn
-        const save_btn = scene.add.image(699, 420, "stampbook", "save-btn");
-        save_btn.setOrigin(0.5070422535211268, 0.5);
-        editor.add(save_btn);
 
         // book
         const book = scene.add.container(-672, -377);
@@ -263,7 +98,7 @@ export default class Stampbook extends BaseContainer {
         header_txt.setOrigin(0, 0.5);
         header_txt.text = "Events";
         header_txt.setStyle({ "color": "#666666", "fontFamily": "Pumpkin", "fontSize": "64px" });
-        header_txt.setPadding({"left":100});
+        header_txt.setPadding({ "left": 100 });
         upper_page_cntr.add(header_txt);
 
         // totalstamps_txt
@@ -437,12 +272,10 @@ export default class Stampbook extends BaseContainer {
         this.add(loading);
 
         // lists
-        const usernameItems = [username_text, username_text_highlight_1, username_text_highlight_2];
-        const stampsTotalItems = [stampstotal_text, stampstotal_text_highlight];
         const polaroidItemsList = [polaroid_1_cntr, polaroid_2_cntr, polaroid_3_cntr, polaroid_1_count_cntr, polaroid_2_count_cntr, polaroid_3_count_cntr];
 
-        // editor_bg_1 (components)
-        new Interactive(editor_bg_1);
+        // block (components)
+        new Interactive(block);
 
         // edit_btn (components)
         const edit_btnSimpleButton = new SimpleButton(edit_btn);
@@ -450,40 +283,6 @@ export default class Stampbook extends BaseContainer {
 
         // editor_bg (components)
         new Interactive(editor_bg);
-
-        // front_cover_clasp (components)
-        const front_cover_claspSimpleButton = new SimpleButton(front_cover_clasp);
-        front_cover_claspSimpleButton.callback = () => this.showPage(1);
-
-        // closebtn (components)
-        const closebtnButton = new Button(closebtn);
-        closebtnButton.spriteName = "closebtn";
-        closebtnButton.callback = () => this.close();
-
-        // icon_selector (prefab fields)
-        icon_selector.selectorType = "Icons";
-
-        // pattern_selector (prefab fields)
-        pattern_selector.selectorType = "Patterns";
-
-        // highlight_selector (prefab fields)
-        highlight_selector.selectorType = "Highlights";
-
-        // icon_prefab (prefab fields)
-        icon_prefab.rootModule = true;
-
-        // pattern_prefab (prefab fields)
-        pattern_prefab.rootModule = true;
-
-        // highlight_prefab (prefab fields)
-        highlight_prefab.rootModule = true;
-
-        // color_prefab (prefab fields)
-        color_prefab.rootModule = true;
-
-        // save_btn (components)
-        const save_btnSimpleButton = new SimpleButton(save_btn);
-        save_btnSimpleButton.callback = () => this.saveStampbook();
 
         // pageturn_right (components)
         const pageturn_rightButton = new Button(pageturn_right);
@@ -510,22 +309,10 @@ export default class Stampbook extends BaseContainer {
         down_arrowButton.spriteName = "down-arrow";
         down_arrowButton.callback = () => this.showNextStampPage();
 
-        this.editor_bg_1 = editor_bg_1;
+        this.block = block;
         this.edit_btn = edit_btn;
         this.editor_bg = editor_bg;
-        this.front_cover_background = front_cover_background;
-        this.front_cover_clasp = front_cover_clasp;
-        this.front_cover_icon = front_cover_icon;
         this.front_cover = front_cover;
-        this.icon_selector = icon_selector;
-        this.pattern_selector = pattern_selector;
-        this.highlight_selector = highlight_selector;
-        this.colors_selector = colors_selector;
-        this.icon_prefab = icon_prefab;
-        this.pattern_prefab = pattern_prefab;
-        this.highlight_prefab = highlight_prefab;
-        this.color_prefab = color_prefab;
-        this.leftbar = leftbar;
         this.editor = editor;
         this.stampbook_page_background = stampbook_page_background;
         this.insidepage_bg_cntr = insidepage_bg_cntr;
@@ -552,61 +339,11 @@ export default class Stampbook extends BaseContainer {
         this.upper_page_cntr = upper_page_cntr;
         this.book = book;
         this.loading = loading;
-        this.usernameItems = usernameItems;
-        this.stampsTotalItems = stampsTotalItems;
         this.polaroidItemsList = polaroidItemsList;
 
         /* START-USER-CTR-CODE */
         this.loader = new StampbookAssetLoader(this.scene);
         this.interface.stampbook = this;
-
-        this.leftbar.onZoneOver = (id, caller) => {
-            [this.icon_selector, this.pattern_selector, this.highlight_selector, this.colors_selector].forEach(selector => {
-                selector.visible = false;
-                selector.preventingClose = [];
-            });
-
-            let selector;
-            switch (caller) {
-                case "icon":
-                    selector = this.icon_selector;
-                    break;
-                case "pattern":
-                    selector = this.pattern_selector;
-                    break;
-                case "highlight":
-                    selector = this.highlight_selector;
-                    break;
-                default:
-                    selector = this.colors_selector;
-                    break;
-            }
-            if (!selector.inited) {
-                selector.init();
-                selector.inited = true;
-            }
-            selector.visible = true;
-            selector.preventClose(this);
-        }
-
-        this.leftbar.onZoneOut = (id, caller) => {
-            let selector;
-            switch (caller) {
-                case "icon":
-                    selector = this.icon_selector;
-                    break;
-                case "pattern":
-                    selector = this.pattern_selector;
-                    break;
-                case "highlight":
-                    selector = this.highlight_selector;
-                    break;
-                default:
-                    selector = this.colors_selector;
-                    break;
-            }
-            selector.unpreventClose(this);
-        }
 
         this.loading.close = () => this.close();
 
@@ -619,38 +356,14 @@ export default class Stampbook extends BaseContainer {
     }
 
     /** @type {Phaser.GameObjects.Rectangle} */
-    editor_bg_1;
+    block;
     /** @type {Phaser.GameObjects.Image} */
     edit_btn;
     /** @type {Phaser.GameObjects.Image} */
     editor_bg;
-    /** @type {Phaser.GameObjects.Image} */
-    front_cover_background;
-    /** @type {Phaser.GameObjects.Image} */
-    front_cover_clasp;
-    /** @type {Phaser.GameObjects.Image} */
-    front_cover_icon;
-    /** @type {Phaser.GameObjects.Container} */
+    /** @type {StampbookFrontCover} */
     front_cover;
-    /** @type {Selectors} */
-    icon_selector;
-    /** @type {Selectors} */
-    pattern_selector;
-    /** @type {Selectors} */
-    highlight_selector;
-    /** @type {Selectors} */
-    colors_selector;
-    /** @type {Icon} */
-    icon_prefab;
-    /** @type {Pattern} */
-    pattern_prefab;
-    /** @type {Highlight} */
-    highlight_prefab;
-    /** @type {Color} */
-    color_prefab;
-    /** @type {Phaser.GameObjects.Container} */
-    leftbar;
-    /** @type {Phaser.GameObjects.Container} */
+    /** @type {StampbookEditor} */
     editor;
     /** @type {Phaser.GameObjects.Image} */
     stampbook_page_background;
@@ -702,10 +415,6 @@ export default class Stampbook extends BaseContainer {
     book;
     /** @type {LoadingPrompt} */
     loading;
-    /** @type {Phaser.GameObjects.Text[]} */
-    usernameItems;
-    /** @type {Phaser.GameObjects.Text[]} */
-    stampsTotalItems;
     /** @type {Phaser.GameObjects.Container[]} */
     polaroidItemsList;
 
@@ -721,8 +430,8 @@ export default class Stampbook extends BaseContainer {
         this.updatePattern(this.playerdata.pattern);
         this.updateHighlight(this.playerdata.highlight);
         this.updateIcon(this.playerdata.clasp);
-        this.usernameItems.forEach(item => item.text = this.playerdata.nickname);
-        this.stampsTotalItems.forEach(item => item.text = `Total Stamps ${this.playerdata.stamps.length}/${this.world.totalStampsAvailable}`);
+        this.front_cover.usernameItems.forEach(item => item.text = this.playerdata.nickname);
+        this.front_cover.stampsTotalItems.forEach(item => item.text = `Total Stamps ${this.playerdata.stamps.length}/${this.world.totalStampsAvailable}`);
 
         this.front_cover.visible = true;
         this.edit_btn.visible = this.interface.stampbookId == this.world.client.id;
@@ -732,13 +441,14 @@ export default class Stampbook extends BaseContainer {
     editStampbook() {
         this.editor_bg.visible = true;
         this.editor.visible = true;
-        this.front_cover_clasp.disableInteractive();
+        this.toggleClaspClickable(false);
+        this.editor.stampCategory.loadCategory(0)
     }
 
     saveStampbook() {
         this.editor_bg.visible = false;
         this.editor.visible = false;
-        this.front_cover_clasp.setInteractive();
+        this.toggleClaspClickable(true);
     }
 
     close() {
@@ -748,20 +458,38 @@ export default class Stampbook extends BaseContainer {
         this.interface.destroyWidget(this)
     }
 
-    updateColor(id) {
-        id = parseInt(id);
-        if (id == this.color_prefab.id) return;
-        this.playerdata.color = id;
-        this.front_cover_background.visible = false;
-        this.loader.loadColorPattern(`${id}_${this.playerdata.pattern}`, () => {
-            this.front_cover_background.setTexture(`stampbook-assets/color-patterns/${id}_${this.playerdata.pattern}`)
-            this.front_cover_background.visible = true;
+    setFrontCoverBackground(color, pattern) {
+        this.front_cover.background.visible = false;
+        this.loader.loadColorPattern(`${color}_${pattern}`, () => {
+            this.front_cover.background.setTexture(`stampbook-assets/color-patterns/${color}_${pattern}`)
+            this.front_cover.background.visible = true;
         });
+    }
+
+    toggleClaspClickable(toggle) {
+        if (toggle) {
+            this.front_cover.clasp.setInteractive();
+        } else {
+            this.front_cover.clasp.disableInteractive();
+        }
+    }
+
+    updateColor(id) {
+        this.setFrontCoverBackground(id, this.playerdata.pattern);
         this.interface.events.emit("updateStampbookColor", id);
-        this.color_prefab.setId(id);
+        this.editor.color_prefab.setId(id);
+    }
+
+    setColor(id) {
+        id = parseInt(id);
+        if (id == this.editor.color_prefab.id) return;
+        this.playerdata.color = id;
+
+        this.updateColor(id);
+
         if (!this.crumbs.cover.color_highlight[id].includes(this.playerdata.highlight)) {
-            this.updateHighlight(this.crumbs.cover.color_highlight[id][0]);
-            this.highlight_selector.init();
+            this.setHighlight(this.crumbs.cover.color_highlight[id][0]);
+            this.editor.highlight_selector.init();
         }
 
         if (this.interface.stampbookId == this.world.client.id) {
@@ -770,52 +498,71 @@ export default class Stampbook extends BaseContainer {
     }
 
     updatePattern(id) {
-        id = parseInt(id);
-        if (id == this.pattern_prefab.id) id = 0;
-        this.playerdata.pattern = id;
-        this.front_cover_background.visible = false;
-        this.loader.loadColorPattern(`${this.playerdata.color}_${id}`, () => {
-            this.front_cover_background.setTexture(`stampbook-assets/color-patterns/${this.playerdata.color}_${id}`)
-            this.front_cover_background.visible = true;
-        });
+        this.setFrontCoverBackground(this.playerdata.color, id);
         this.interface.events.emit("updateStampbookPattern", id);
-        this.pattern_prefab.setId(id);
+        this.editor.pattern_prefab.setId(id);
+    }
+
+    setPattern(id) {
+        id = parseInt(id);
+        if (id == this.editor.pattern_prefab.id) return;
+        this.playerdata.pattern = id;
+
+        this.updatePattern(id);
 
         if (this.interface.stampbookId == this.world.client.id) {
             this.network.send("update_stampbook", { pattern: id });
         }
     }
 
-    updateHighlight(id) {
-        id = parseInt(id);
-        if (id == this.highlight_prefab.id) return
-        this.playerdata.highlight = id;
-        this.front_cover_clasp.visible = false;
+    setFrontCoverClaspHighlight(id) {
+        this.front_cover.clasp.visible = false;
         this.loader.loadHighlight(id, () => {
-            this.front_cover_clasp.setTexture(`stampbook-assets/highlight/${id}`)
-            this.front_cover_clasp.visible = true;
+            this.front_cover.clasp.setTexture(`stampbook-assets/highlight/${id}`)
+            this.front_cover.clasp.visible = true;
         });
+    }
+
+    updateHighlight(id) {
+        this.setFrontCoverClaspHighlight(id);
         this.interface.events.emit("updateStampbookHighlight", id);
-        this.highlight_prefab.setId(id);
-        this.usernameItems.forEach(item => item.setColor(this.crumbs.cover.highlight[id]));
-        this.stampsTotalItems.forEach(item => item.setColor(this.crumbs.cover.highlight[id]));
+        this.editor.highlight_prefab.setId(id);
+        this.front_cover.usernameItems.forEach(item => item.setColor(this.crumbs.cover.highlight[id]));
+        this.front_cover.stampsTotalItems.forEach(item => item.setColor(this.crumbs.cover.highlight[id]));
+    }
+
+    setHighlight(id) {
+        id = parseInt(id);
+        if (id == this.editor.highlight_prefab.id) return;
+        this.playerdata.highlight = id;
+
+        this.updateHighlight(id);
 
         if (this.interface.stampbookId == this.world.client.id) {
             this.network.send("update_stampbook", { highlight: id });
         }
     }
 
-    updateIcon(id) {
-        id = parseInt(id);
-        if (id == this.icon_prefab.id) return;
-        this.playerdata.clasp = id;
-        this.front_cover_icon.visible = false;
+    setFrontCoverClaspIcon(id) {
+        this.front_cover.icon.visible = false;
         this.loader.loadClasp(id, () => {
-            this.front_cover_icon.setTexture(`stampbook-assets/clasp/${id}`)
-            this.front_cover_icon.visible = true;
+            this.front_cover.icon.setTexture(`stampbook-assets/clasp/${id}`)
+            this.front_cover.icon.visible = true;
         });
+    }
+
+    updateIcon(id) {
+        this.setFrontCoverClaspIcon(id);
         this.interface.events.emit("updateStampbookIcon", id);
-        this.icon_prefab.setId(id);
+        this.editor.icon_prefab.setId(id);
+    }
+
+    setIcon(id) {
+        id = parseInt(id);
+        if (id == this.editor.icon_prefab.id) return;
+        this.playerdata.clasp = id;
+
+        this.updateIcon(id);
 
         if (this.interface.stampbookId == this.world.client.id) {
             this.network.send("update_stampbook", { clasp: id });
@@ -823,7 +570,7 @@ export default class Stampbook extends BaseContainer {
     }
 
     getPageData(page) {
-        return this.crumbs.stamps[page-1];
+        return this.crumbs.stamps[page - 1];
     }
 
     getStampsByGroupId(id) {
@@ -925,7 +672,7 @@ export default class Stampbook extends BaseContainer {
         const stamps = this.getOwnedStampsByGroupId(group_id).length;
         this.polaroids_cntr.visible = true;
         this.polaroidItemsList.forEach(item => item.visible = false);
-        for (let i = 0; i < 3; i++){
+        for (let i = 0; i < 3; i++) {
             const polaroid = polaroids[i];
             if (polaroid) {
                 if (stamps >= polaroid.stamp_count) {

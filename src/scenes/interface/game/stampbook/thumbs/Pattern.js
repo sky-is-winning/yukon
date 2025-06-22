@@ -35,7 +35,7 @@ export default class Pattern extends BaseContainer {
         const zoneZone = new Zone(zone);
         zoneZone.hoverCallback = () => this.parentContainer.onZoneOver(this.id, "pattern");
         zoneZone.hoverOutCallback = () => this.parentContainer.onZoneOut(this.id, "pattern");
-        zoneZone.callback = () => { if (!this.rootModule) this.interface.stampbook.updatePattern(this.id) };;
+        zoneZone.callback = () => { if (!this.rootModule) this.interface.stampbook.setPattern(this.id) };;
 
         this.background = background;
         this.remove_pattern = remove_pattern;

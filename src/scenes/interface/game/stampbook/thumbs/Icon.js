@@ -31,7 +31,7 @@ export default class Icon extends BaseContainer {
         const zoneZone = new Zone(zone);
         zoneZone.hoverCallback = () => this.parentContainer.onZoneOver(this.id, "icon");
         zoneZone.hoverOutCallback = () => this.parentContainer.onZoneOut(this.id, "icon");
-        zoneZone.callback = () => { if (!this.rootModule) this.interface.stampbook.updateIcon(this.id) };;
+        zoneZone.callback = () => { if (!this.rootModule) this.interface.stampbook.setIcon(this.id) };;
 
         this.background = background;
         this.foreground = foreground;

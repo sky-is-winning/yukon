@@ -1,0 +1,69 @@
+{
+    "id": "948f9606-dfbb-4534-aac2-af1f46e22cda",
+    "sceneType": "PREFAB",
+    "settings": {
+        "compilerInsertSpaces": true,
+        "exportClass": true,
+        "autoImport": true,
+        "superClassName": "BaseContainer",
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "bd82cef4-6d91-4f0e-b3cf-eb6f5afe3141",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "1e8a1c3d-9c7b-444e-9da4-60500600eab3",
+                    "label": "zone",
+                    "components": [
+                        "Zone"
+                    ],
+                    "Zone.hoverCallback": "() => this.onZoneOver()",
+                    "Zone.hoverOutCallback": "() => this.onZoneOut()",
+                    "Zone.callback": "() => { this.interface.stampbook.updateEditorCategory(this.id) };",
+                    "x": 43,
+                    "isFilled": true,
+                    "fillColor": "#12d7ee",
+                    "fillAlpha": 0.3,
+                    "width": 120,
+                    "height": 30
+                },
+                {
+                    "type": "Image",
+                    "id": "1ce9a03c-e714-498e-8113-d595fece8eb9",
+                    "label": "categoryIcon",
+                    "scope": "CLASS",
+                    "texture": {},
+                    "visible": false
+                },
+                {
+                    "type": "Text",
+                    "id": "99b1bb26-791b-41e4-8475-bc88dd870fe7",
+                    "label": "title",
+                    "scope": "CLASS",
+                    "x": 18,
+                    "originY": 0.5,
+                    "text": "Events",
+                    "fontFamily": "Burbank Small",
+                    "fontStyle": "bold",
+                    "color": "#000000ff",
+                    "shadow.color": "#191c28ff"
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

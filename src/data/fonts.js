@@ -5,6 +5,7 @@ const fonts = {
             'Arial Narrow:n4,n7',
             'Asterisk:n4',
             'Burbank Big Regular:n7',
+            'Burbank Big Regular Black:n4',
             'Burbank Big Wide:n4,n7',
             'Burbank Small:n4,n7',
             'CCComiccrazy:n4,n7,i4,i7',

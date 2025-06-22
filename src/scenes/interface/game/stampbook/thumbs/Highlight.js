@@ -32,7 +32,7 @@ export default class Highlight extends BaseContainer {
         const zoneZone = new Zone(zone);
         zoneZone.hoverCallback = () => this.parentContainer.onZoneOver(this.id, "highlight");
         zoneZone.hoverOutCallback = () => this.parentContainer.onZoneOut(this.id, "highlight");
-        zoneZone.callback = () => { if (!this.rootModule) this.interface.stampbook.updateHighlight(this.id) };;
+        zoneZone.callback = () => { if (!this.rootModule) this.interface.stampbook.setHighlight(this.id) };;
 
         this.background = background;
         this.foreground = foreground;

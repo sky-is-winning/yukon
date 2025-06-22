@@ -47,7 +47,7 @@
                     ],
                     "Zone.hoverCallback": "() => this.parentContainer.onZoneOver(this.id, \"pattern\")",
                     "Zone.hoverOutCallback": "() => this.parentContainer.onZoneOut(this.id, \"pattern\")",
-                    "Zone.callback": "() => { if (!this.rootModule) this.interface.stampbook.updatePattern(this.id) };",
+                    "Zone.callback": "() => { if (!this.rootModule) this.interface.stampbook.setPattern(this.id) };",
                     "isFilled": true,
                     "fillColor": "#12d7ee",
                     "fillAlpha": 0.3,
