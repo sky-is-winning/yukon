@@ -8,7 +8,7 @@ import Zone from "../../../../components/Zone";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class StampCategoryDropdown extends BaseContainer {
+export default class StampCategoryDropdownItem extends BaseContainer {
 
     constructor(scene, x, y) {
         super(scene, x ?? 0, y ?? 0);

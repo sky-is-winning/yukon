@@ -769,6 +769,13 @@ export default class Stampbook extends BaseContainer {
         this.down_arrow.visible = this.stamps_cntr.currentPage < this.stamps_cntr.pages.length - 1;
         this.up_arrow.visible = this.stamps_cntr.currentPage > 0;
     }
+
+    openCategorySelector() {
+        if (!this.editor.categorySelector.inited) {
+            this.editor.categorySelector.init();
+        }
+        this.editor.categorySelector.visible = true;
+    }
     /* END-USER-CODE */
 }
 

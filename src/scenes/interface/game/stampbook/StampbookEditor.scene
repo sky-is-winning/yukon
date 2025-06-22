@@ -244,6 +244,21 @@
                             "y": 0
                         },
                         {
+                            "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105d",
+                            "id": "681f80d2-0197-4f3f-b19e-9195c79772b8",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "visible",
+                                "selectorType"
+                            ],
+                            "label": "categorySelector",
+                            "scope": "CLASS",
+                            "x": 32,
+                            "y": -136,
+                            "visible": false
+                        },
+                        {
                             "prefabId": "98c49b76-de75-42a0-a34a-9dbe4082d54c",
                             "id": "82742e0b-babc-4c78-ab9a-c4d0dd536e4d",
                             "unlock": [

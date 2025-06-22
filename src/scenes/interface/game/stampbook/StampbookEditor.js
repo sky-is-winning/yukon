@@ -9,6 +9,7 @@ import Icon from "./thumbs/Icon";
 import Pattern from "./thumbs/Pattern";
 import Highlight from "./thumbs/Highlight";
 import Color from "./thumbs/Color";
+import CategorySelector from "./CategorySelector";
 import StampCategory from "./thumbs/StampCategory";
 import SimpleButton from "../../../components/SimpleButton";
 /* START-USER-IMPORTS */
@@ -101,6 +102,11 @@ export default class StampbookEditor extends BaseContainer {
         const color_prefab = new Color(scene, 21, 0);
         leftbar.add(color_prefab);
 
+        // categorySelector
+        const categorySelector = new CategorySelector(scene, 32, -136);
+        categorySelector.visible = false;
+        leftbar.add(categorySelector);
+
         // stampCategory
         const stampCategory = new StampCategory(scene, -115, -252);
         stampCategory.visible = true;
@@ -144,6 +150,7 @@ export default class StampbookEditor extends BaseContainer {
         this.pattern_prefab = pattern_prefab;
         this.highlight_prefab = highlight_prefab;
         this.color_prefab = color_prefab;
+        this.categorySelector = categorySelector;
         this.stampCategory = stampCategory;
         this.leftbar = leftbar;
 
@@ -214,6 +221,8 @@ export default class StampbookEditor extends BaseContainer {
     highlight_prefab;
     /** @type {Color} */
     color_prefab;
+    /** @type {CategorySelector} */
+    categorySelector;
     /** @type {StampCategory} */
     stampCategory;
     /** @type {Phaser.GameObjects.Container} */
