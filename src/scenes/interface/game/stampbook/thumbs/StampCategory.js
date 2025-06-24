@@ -4,6 +4,7 @@
 /* START OF COMPILED CODE */
 
 import BaseContainer from "../../../../base/BaseContainer";
+import CategorySelector from "../CategorySelector";
 import Zone from "../../../../components/Zone";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
@@ -17,6 +18,15 @@ export default class StampCategory extends BaseContainer {
         const blue_stampcat_bg = scene.add.image(0, 0, "stampbook", "blue-stampcat-bg");
         blue_stampcat_bg.setOrigin(0, 0);
         this.add(blue_stampcat_bg);
+
+        // categorySelectorPositionOffset
+        const categorySelectorPositionOffset = scene.add.container(130, 127);
+        this.add(categorySelectorPositionOffset);
+
+        // categorySelector
+        const categorySelector = new CategorySelector(scene, 155.01347613044518, 164.99258550744867);
+        categorySelector.visible = false;
+        categorySelectorPositionOffset.add(categorySelector);
 
         // zone
         const zone = scene.add.rectangle(139, 113, 120, 120);
@@ -47,11 +57,11 @@ export default class StampCategory extends BaseContainer {
 
         // zone (components)
         const zoneZone = new Zone(zone);
-        zoneZone.hoverCallback;
-        zoneZone.hoverOutCallback;
-        zoneZone.callback = () => this.interface.stampbook.openCategorySelector();;
+        zoneZone.hoverCallback = () => this.parentContainer.onZoneOver(0, "category");
+        zoneZone.hoverOutCallback = () => this.parentContainer.onZoneOut(0, "category");
 
         this.blue_stampcat_bg = blue_stampcat_bg;
+        this.categorySelector = categorySelector;
         this.categoryIcon = categoryIcon;
         this.title = title;
         this.allstamps_title = allstamps_title;
@@ -63,6 +73,8 @@ export default class StampCategory extends BaseContainer {
 
     /** @type {Phaser.GameObjects.Image} */
     blue_stampcat_bg;
+    /** @type {CategorySelector} */
+    categorySelector;
     /** @type {Phaser.GameObjects.Image} */
     categoryIcon;
     /** @type {Phaser.GameObjects.Text} */

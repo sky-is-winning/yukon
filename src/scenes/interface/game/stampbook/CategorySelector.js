@@ -15,22 +15,31 @@ export default class CategorySelector extends BaseContainer {
         super(scene, x ?? -0.000019750649542533928, y ?? -0.00003439855461640287);
 
         // selector_nineslice
-        const selector_nineslice = scene.add.nineslice(155.0000197567554, 165.00003434347764, "stampbook", "selector-nineslice", 280, 300, 25, 25, 25, 25);
+        const selector_nineslice = scene.add.nineslice(0, 0, "stampbook", "selector-nineslice", 280, 300, 25, 25, 25, 25);
         selector_nineslice.setOrigin(0.5, 0.5021097046413502);
         this.add(selector_nineslice);
 
         // selected_nineslice
-        const selected_nineslice = scene.add.nineslice(155.0000197567554, 165.00003434347764, "stampbook", "selected-nineslice", 280, 300, 25, 25, 25, 25);
+        const selected_nineslice = scene.add.nineslice(0, 0, "stampbook", "selected-nineslice", 280, 300, 25, 25, 25, 25);
         selected_nineslice.visible = false;
         this.add(selected_nineslice);
 
+        // seperators_container
+        const seperators_container = scene.add.container(0, 0);
+        this.add(seperators_container);
+
         // zone
-        const zone = scene.add.rectangle(155.0000197567554, 165.00003434347764, 310, 330);
+        const zone = scene.add.rectangle(0, 0, 310, 330);
         zone.visible = false;
         zone.isFilled = true;
         zone.fillColor = 1234926;
         zone.fillAlpha = 0.3;
         this.add(zone);
+
+        // selector_outline_nineslice
+        const selector_outline_nineslice = scene.add.nineslice(0, 0, "stampbook", "selector-outline-nineslice", 280, 300, 25, 25, 25, 25);
+        selector_outline_nineslice.setOrigin(0.5, 0.5021097046413502);
+        this.add(selector_outline_nineslice);
 
         // zone (components)
         const zoneZone = new Zone(zone);
@@ -39,7 +48,9 @@ export default class CategorySelector extends BaseContainer {
 
         this.selector_nineslice = selector_nineslice;
         this.selected_nineslice = selected_nineslice;
+        this.seperators_container = seperators_container;
         this.zone = zone;
+        this.selector_outline_nineslice = selector_outline_nineslice;
 
         /* START-USER-CTR-CODE */
         this.preventingClose = [];
@@ -50,44 +61,49 @@ export default class CategorySelector extends BaseContainer {
     selector_nineslice;
     /** @type {Phaser.GameObjects.NineSlice} */
     selected_nineslice;
+    /** @type {Phaser.GameObjects.Container} */
+    seperators_container;
     /** @type {Phaser.GameObjects.Rectangle} */
     zone;
+    /** @type {Phaser.GameObjects.NineSlice} */
+    selector_outline_nineslice;
 
     /* START-USER-CODE */
 
-    init() {
-        if (!this.anchorX) {
-            this.anchorX = this.x;
-        }
-        this.x = this.anchorX;
-        this.config = Object.values(this.crumbs.stamps)
+    init(parent_group_id) {
+        this.currentParentGroupId = parent_group_id;
+        this.config = Object.values(this.crumbs.stamps).filter(c => c.parent_group_id === parent_group_id || parent_group_id == 0 && c.parent_group_id === -1);
+        this.config.sort((a, b) => (b.group_id == 0 ? 9001 : b.group_id) - a.group_id);
         this.masks = {};
         this.sprites = [];
 
         const rows = this.config.length;
-        const middleRowY = rows % 2 === 0 ? -50 : 0;
+        const middleRowY = 0;
         const middleRow = Math.floor(rows / 2);
-        const width = 280
-        const height = 40
+        const width = 240
+        const height = 50
         for (let i = 0; i < this.config.length; i++) {
             const row = i;
-            const x = 0;
+            const x = -80;
             const y = middleRowY - ((row - middleRow) * height);
             const sprite = new StampCategoryDropdownItem(this.scene, x, y);
             this.add(sprite);
             this.sprites.push(sprite);
-            console.log(this.config[i]);
             sprite.loadCategory(this.config[i].group_id);
         }
 
-        for (let i = 0; i < rows - 1; i++) {
-            const separator = this.scene.add.rectangle(200, -50 + (i * height), width, 3, 0xAAAAAA);
-            this.add(separator);
+        for (let i = 0; i < rows; i++) {
+            const separator = this.scene.add.rectangle(0, -125 + (i * height), width, 1, 0xAAAAAA);
+            this.seperators_container.add(separator);
         }
 
-        this.selector_nineslice.setSize(width, rows * height);
-        this.selected_nineslice.setSize(width, rows * height);
+        this.selector_nineslice.setSize(width, rows * height + 50);
+        this.selected_nineslice.setSize(width, rows * height + 50);
+        this.selector_outline_nineslice.setSize(width, rows * height + 50);
         this.zone.setSize(width + 30, rows * height + 30);
+
+        this.x = width / 2;
+        this.y = (rows * height + 50) / 2;
 
         this.inited = true;
     }
@@ -114,9 +130,9 @@ export default class CategorySelector extends BaseContainer {
         for (let i = 0; i < this.config.length; i++) {
             const matrix = this.sprites[i].getWorldTransformMatrix();
             const graphics = this.scene.make.graphics();
-            graphics.fillStyle(this.crumbs.cover.highlight[this.config[i]], 1);
-            graphics.fillRect(matrix.getX(0, 0) - 70, matrix.getY(0, 0) - 50, 140, 100);
-            this.masks[this.config[i]] = graphics.createGeometryMask();
+            graphics.fillStyle(0xfffff, 1);
+            graphics.fillRect(matrix.getX(0, 0) - 40, matrix.getY(0, 0) - 25, 240, 50);
+            this.masks[this.config[i].group_id] = graphics.createGeometryMask();
         }
     }
 
@@ -131,7 +147,7 @@ export default class CategorySelector extends BaseContainer {
     unpreventClose(a) {
         this.preventingClose = this.preventingClose.filter(c => c !== a);
 
-        setTimeout(() => {
+        this.closeTimeout = setTimeout(() => {
             if (this.preventingClose.length === 0) {
                 this.visible = false;
             }

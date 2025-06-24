@@ -53,6 +53,12 @@
                     "bottomHeight": 25
                 },
                 {
+                    "type": "Container",
+                    "id": "1287315c-9a2e-4648-9b8e-6db0060fd43a",
+                    "label": "seperators_container",
+                    "scope": "CLASS"
+                },
+                {
                     "type": "Rectangle",
                     "id": "ffd2dc6c-f440-4678-a509-3d6978e00474",
                     "label": "zone",
@@ -68,6 +74,23 @@
                     "fillAlpha": 0.3,
                     "width": 310,
                     "height": 330
+                },
+                {
+                    "type": "NineSlice",
+                    "id": "a3be23bc-7680-43b2-9296-9eeb893fddb1",
+                    "label": "selector_outline_nineslice",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "selector-outline-nineslice"
+                    },
+                    "originY": 0.5021097046413502,
+                    "width": 280,
+                    "height": 300,
+                    "leftWidth": 25,
+                    "rightWidth": 25,
+                    "topHeight": 25,
+                    "bottomHeight": 25
                 }
             ]
         }

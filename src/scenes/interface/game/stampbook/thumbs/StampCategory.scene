@@ -33,15 +33,38 @@
                     "originY": 0
                 },
                 {
+                    "type": "Container",
+                    "id": "b59de285-329f-46a0-994d-c4bdb355d471",
+                    "label": "categorySelectorPositionOffset",
+                    "x": 130,
+                    "y": 127,
+                    "list": [
+                        {
+                            "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105d",
+                            "id": "b17ae917-bec4-4c77-a747-653655bde431",
+                            "unlock": [
+                                "x",
+                                "y",
+                                "visible",
+                                "selectorType"
+                            ],
+                            "label": "categorySelector",
+                            "scope": "CLASS",
+                            "x": 155.01347613044518,
+                            "y": 164.99258550744867,
+                            "visible": false
+                        }
+                    ]
+                },
+                {
                     "type": "Rectangle",
                     "id": "d8c4bcab-d6db-4117-acbb-7cb5a6201209",
                     "label": "zone",
                     "components": [
                         "Zone"
                     ],
-                    "Zone.hoverCallback": "",
-                    "Zone.hoverOutCallback": "",
-                    "Zone.callback": "() => this.interface.stampbook.openCategorySelector();",
+                    "Zone.hoverCallback": "() => this.parentContainer.onZoneOver(0, \"category\")",
+                    "Zone.hoverOutCallback": "() => this.parentContainer.onZoneOut(0, \"category\")",
                     "x": 139,
                     "y": 113,
                     "isFilled": true,

@@ -59,8 +59,8 @@ export default class Stamp extends BaseContainer {
 
         // stamp (components)
         const stampSimpleButton = new SimpleButton(stamp);
-        stampSimpleButton.hoverCallback = () => {this.stampHover.visible = true};
-        stampSimpleButton.hoverOutCallback = () => {this.stampHover.visible = false};
+        stampSimpleButton.hoverCallback = () => { this.stampHover.visible = true };
+        stampSimpleButton.hoverOutCallback = () => { this.stampHover.visible = false };
 
         this.shadow = shadow;
         this.stamp = stamp;
@@ -122,6 +122,16 @@ export default class Stamp extends BaseContainer {
             this.onLoad(this.id);
         });
         this.stampHover.setStamp(stamp);
+    }
+
+    setCoverStamp(stamp, scale = 1) {
+        this.scale = scale;
+        this.id = stamp;
+        this.spinner.visible = true;
+        this.interface.stampbook.loader.loadStamp(this.id, () => {
+            this.onLoad(this.id);
+        });
+        this.stampHover = {}
     }
     /* END-USER-CODE */
 }

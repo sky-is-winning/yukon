@@ -27,6 +27,10 @@ export default class Selectors extends BaseContainer {
         selected_nineslice.visible = false;
         this.add(selected_nineslice);
 
+        // seperators_container
+        const seperators_container = scene.add.container(0, 0);
+        this.add(seperators_container);
+
         // zone
         const zone = scene.add.rectangle(0, 0, 310, 330);
         zone.visible = false;
@@ -35,6 +39,11 @@ export default class Selectors extends BaseContainer {
         zone.fillAlpha = 0.3;
         this.add(zone);
 
+        // selector_outline_nineslice
+        const selector_outline_nineslice = scene.add.nineslice(0, 0, "stampbook", "selector-outline-nineslice", 280, 300, 25, 25, 25, 25);
+        selector_outline_nineslice.setOrigin(0.5, 0.5021097046413502);
+        this.add(selector_outline_nineslice);
+
         // zone (components)
         const zoneZone = new Zone(zone);
         zoneZone.hoverCallback = () => this.preventClose(this);
@@ -42,7 +51,9 @@ export default class Selectors extends BaseContainer {
 
         this.selector_nineslice = selector_nineslice;
         this.selected_nineslice = selected_nineslice;
+        this.seperators_container = seperators_container;
         this.zone = zone;
+        this.selector_outline_nineslice = selector_outline_nineslice;
 
         /* START-USER-CTR-CODE */
         this.preventingClose = [];
@@ -53,8 +64,12 @@ export default class Selectors extends BaseContainer {
     selector_nineslice;
     /** @type {Phaser.GameObjects.NineSlice} */
     selected_nineslice;
+    /** @type {Phaser.GameObjects.Container} */
+    seperators_container;
     /** @type {Phaser.GameObjects.Rectangle} */
     zone;
+    /** @type {Phaser.GameObjects.NineSlice} */
+    selector_outline_nineslice;
     /** @type {string} */
     selectorType = "Colors";
 
@@ -85,7 +100,7 @@ export default class Selectors extends BaseContainer {
                 this.spriteType = Icon;
                 break;
         }
-        this.config = [ ...this.config ].reverse();
+        this.config = [...this.config].reverse();
         this.masks = {};
         this.sprites = [];
 
@@ -104,18 +119,19 @@ export default class Selectors extends BaseContainer {
             sprite.setId(this.config[i]);
         }
 
-        for (let i = 0; i < rows-1; i++) {
+        for (let i = 0; i < rows - 1; i++) {
             const separator = this.scene.add.rectangle(0, -50 + (i * 100), width, 3, 0xAAAAAA);
-            this.add(separator);
+            this.seperators_container.add(separator);
         }
 
         if (evenColors) {
             const separator = this.scene.add.rectangle(0, 0, 3, rows * 100, 0xAAAAAA);
-            this.add(separator);
+            this.seperators_container.add(separator);
         }
 
         this.selector_nineslice.setSize(width, rows * 100);
         this.selected_nineslice.setSize(width, rows * 100);
+        this.selector_outline_nineslice.setSize(width, rows * 100);
         this.zone.setSize(width + 30, rows * 100 + 30);
 
         if (!evenColors) {

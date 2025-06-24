@@ -28,12 +28,12 @@
                     "Zone.hoverCallback": "() => this.onZoneOver()",
                     "Zone.hoverOutCallback": "() => this.onZoneOut()",
                     "Zone.callback": "() => { this.interface.stampbook.updateEditorCategory(this.id) };",
-                    "x": 43,
+                    "x": 80,
                     "isFilled": true,
                     "fillColor": "#12d7ee",
                     "fillAlpha": 0.3,
-                    "width": 120,
-                    "height": 30
+                    "width": 240,
+                    "height": 50
                 },
                 {
                     "type": "Image",
@@ -41,20 +41,37 @@
                     "label": "categoryIcon",
                     "scope": "CLASS",
                     "texture": {},
+                    "x": -10,
+                    "scaleX": 0.4,
+                    "scaleY": 0.4,
                     "visible": false
                 },
                 {
                     "type": "Text",
-                    "id": "99b1bb26-791b-41e4-8475-bc88dd870fe7",
+                    "id": "94831bf1-543f-4c02-a6ea-6176eeef8f0b",
                     "label": "title",
                     "scope": "CLASS",
-                    "x": 18,
+                    "x": 20,
                     "originY": 0.5,
-                    "text": "Events",
+                    "text": "Category",
                     "fontFamily": "Burbank Small",
+                    "fontSize": "24px",
                     "fontStyle": "bold",
-                    "color": "#000000ff",
-                    "shadow.color": "#191c28ff"
+                    "color": "#000000ff"
+                },
+                {
+                    "type": "Triangle",
+                    "id": "05af1618-4746-4c00-8c8e-3a0c9351a973",
+                    "label": "arrow",
+                    "scope": "CLASS",
+                    "x": 187,
+                    "isFilled": true,
+                    "fillColor": "#262626",
+                    "y1": 0,
+                    "x2": 10,
+                    "y2": 7.5,
+                    "x3": 0,
+                    "y3": 15
                 }
             ]
         }

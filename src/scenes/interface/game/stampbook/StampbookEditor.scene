@@ -32,18 +32,12 @@
                     "originX": 0.5003933910306845
                 },
                 {
-                    "type": "Image",
-                    "id": "a866e47b-e7bd-4027-9415-62e74a7a154c",
-                    "label": "remove_hint",
-                    "texture": {
-                        "key": "stampbook",
-                        "frame": "remove-hint"
-                    },
-                    "x": 81,
-                    "y": -421,
-                    "originX": 0.5003679175864606,
-                    "originY": 0.5042735042735043,
-                    "visible": false
+                    "type": "Container",
+                    "id": "e7ed88e4-6b8c-482f-b01f-a43b8b43df9f",
+                    "label": "stampsContainer",
+                    "scope": "CLASS",
+                    "x": -475,
+                    "y": -419
                 },
                 {
                     "type": "Container",
@@ -63,20 +57,6 @@
                             },
                             "y": 84,
                             "originY": 0.5007407407407407
-                        },
-                        {
-                            "type": "Triangle",
-                            "id": "eb3ad9c9-aa46-42f5-a5b6-e1a3237b4e72",
-                            "label": "stampcat_arrow",
-                            "x": 96,
-                            "y": -144.5,
-                            "isFilled": true,
-                            "fillColor": "#262626",
-                            "y1": 0,
-                            "x2": 10,
-                            "y2": 7.5,
-                            "x3": 0,
-                            "y3": 15
                         },
                         {
                             "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105f",
@@ -244,21 +224,6 @@
                             "y": 0
                         },
                         {
-                            "prefabId": "4c9c204f-e25d-4632-8413-df4e0c0f105d",
-                            "id": "681f80d2-0197-4f3f-b19e-9195c79772b8",
-                            "unlock": [
-                                "x",
-                                "y",
-                                "visible",
-                                "selectorType"
-                            ],
-                            "label": "categorySelector",
-                            "scope": "CLASS",
-                            "x": 32,
-                            "y": -136,
-                            "visible": false
-                        },
-                        {
                             "prefabId": "98c49b76-de75-42a0-a34a-9dbe4082d54c",
                             "id": "82742e0b-babc-4c78-ab9a-c4d0dd536e4d",
                             "unlock": [
@@ -271,6 +236,20 @@
                             "x": -115,
                             "y": -252,
                             "visible": true
+                        },
+                        {
+                            "type": "Triangle",
+                            "id": "eb3ad9c9-aa46-42f5-a5b6-e1a3237b4e72",
+                            "label": "stampcat_arrow",
+                            "x": 96,
+                            "y": -144.5,
+                            "isFilled": true,
+                            "fillColor": "#262626",
+                            "y1": 0,
+                            "x2": 10,
+                            "y2": 7.5,
+                            "x3": 0,
+                            "y3": 15
                         }
                     ]
                 },
@@ -289,6 +268,89 @@
                     "x": 707,
                     "y": 420,
                     "originX": 0.5070422535211268
+                },
+                {
+                    "type": "Triangle",
+                    "id": "225affe1-3aa4-477f-b661-75419a6ae326",
+                    "label": "arrow_right",
+                    "scope": "CLASS",
+                    "x": 641,
+                    "y": -419,
+                    "isFilled": true,
+                    "fillColor": "#AAAAAA",
+                    "y1": 0,
+                    "x2": 14,
+                    "y2": 30,
+                    "x3": 0,
+                    "y3": 60
+                },
+                {
+                    "type": "Triangle",
+                    "id": "88c3469d-5a94-49f5-937b-388441af4aea",
+                    "label": "arrow_left",
+                    "scope": "CLASS",
+                    "x": -566,
+                    "y": -419,
+                    "scaleX": -1,
+                    "isFilled": true,
+                    "fillColor": "#AAAAAA",
+                    "y1": 0,
+                    "x2": 14,
+                    "y2": 30,
+                    "x3": 0,
+                    "y3": 60
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "439789cf-3d5b-4baf-af4b-b1af920a1990",
+                    "label": "right_zone",
+                    "scope": "CLASS",
+                    "components": [
+                        "Zone"
+                    ],
+                    "Zone.hoverCallback": "",
+                    "Zone.hoverOutCallback": "",
+                    "Zone.callback": "() => this.stampPage(1)",
+                    "x": 646,
+                    "y": -426,
+                    "isFilled": true,
+                    "fillColor": "#12d7ee",
+                    "fillAlpha": 0.3,
+                    "width": 40,
+                    "height": 100
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "f013905f-57c3-4f6a-95ec-52541a20395b",
+                    "label": "left_zone",
+                    "scope": "CLASS",
+                    "components": [
+                        "Zone"
+                    ],
+                    "Zone.hoverCallback": "",
+                    "Zone.hoverOutCallback": "",
+                    "Zone.callback": "() => this.stampPage(-1)",
+                    "x": -573,
+                    "y": -419,
+                    "isFilled": true,
+                    "fillColor": "#12d7ee",
+                    "fillAlpha": 0.3,
+                    "width": 40,
+                    "height": 100
+                },
+                {
+                    "type": "Image",
+                    "id": "a866e47b-e7bd-4027-9415-62e74a7a154c",
+                    "label": "remove_hint",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "remove-hint"
+                    },
+                    "x": 89,
+                    "y": -421,
+                    "originX": 0.5003679175864606,
+                    "originY": 0.5042735042735043,
+                    "visible": false
                 }
             ]
         }

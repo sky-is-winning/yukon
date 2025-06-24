@@ -29,8 +29,6 @@
                         "key": "stampbook",
                         "frame": "selector-nineslice"
                     },
-                    "x": 155.0000197567554,
-                    "y": 165.00003434347764,
                     "originY": 0.5021097046413502,
                     "width": 280,
                     "height": 300,
@@ -48,8 +46,6 @@
                         "key": "stampbook",
                         "frame": "selected-nineslice"
                     },
-                    "x": 155.0000197567554,
-                    "y": 165.00003434347764,
                     "visible": false,
                     "width": 280,
                     "height": 300,
@@ -57,6 +53,12 @@
                     "rightWidth": 25,
                     "topHeight": 25,
                     "bottomHeight": 25
+                },
+                {
+                    "type": "Container",
+                    "id": "bea650c9-b116-4759-bee9-743a90cae4fc",
+                    "label": "seperators_container",
+                    "scope": "CLASS"
                 },
                 {
                     "type": "Rectangle",
@@ -68,14 +70,29 @@
                     ],
                     "Zone.hoverCallback": "() => this.preventClose(this)",
                     "Zone.hoverOutCallback": "() => this.unpreventClose(this)",
-                    "x": 155.0000197567554,
-                    "y": 165.00003434347764,
                     "visible": false,
                     "isFilled": true,
                     "fillColor": "#12d7ee",
                     "fillAlpha": 0.3,
                     "width": 310,
                     "height": 330
+                },
+                {
+                    "type": "NineSlice",
+                    "id": "e680b359-3be8-41c9-a6d2-4f43c4803f4a",
+                    "label": "selector_outline_nineslice",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "selector-outline-nineslice"
+                    },
+                    "originY": 0.5021097046413502,
+                    "width": 280,
+                    "height": 300,
+                    "leftWidth": 25,
+                    "rightWidth": 25,
+                    "topHeight": 25,
+                    "bottomHeight": 25
                 }
             ]
         }

@@ -442,7 +442,7 @@ export default class Stampbook extends BaseContainer {
         this.editor_bg.visible = true;
         this.editor.visible = true;
         this.toggleClaspClickable(false);
-        this.editor.stampCategory.loadCategory(0)
+        this.editor.showCategory(0);
     }
 
     saveStampbook() {
@@ -771,10 +771,14 @@ export default class Stampbook extends BaseContainer {
     }
 
     openCategorySelector() {
-        if (!this.editor.categorySelector.inited) {
-            this.editor.categorySelector.init();
-        }
-        this.editor.categorySelector.visible = true;
+        this.editor.leftbar.onZoneOver(0, "category")
+    }
+
+    updateEditorCategory(category) {
+        clearTimeout(this.editor.stampCategory.categorySelector.closeTimeout)
+        this.editor.stampCategory.categorySelector.visible = false;
+        this.editor.stampCategory.categorySelector.preventingClose = []
+        this.editor.showCategory(category);
     }
     /* END-USER-CODE */
 }
