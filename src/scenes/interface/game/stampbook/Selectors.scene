@@ -72,8 +72,8 @@
                     "isFilled": true,
                     "fillColor": "#12d7ee",
                     "fillAlpha": 0.3,
-                    "width": 310,
-                    "height": 330
+                    "width": 280,
+                    "height": 300
                 },
                 {
                     "type": "NineSlice",

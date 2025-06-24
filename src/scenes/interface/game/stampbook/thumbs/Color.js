@@ -25,6 +25,11 @@ export default class Color extends BaseContainer {
         zone.fillAlpha = 0.3;
         this.add(zone);
 
+        // editor_selectors
+        const editor_selectors = scene.add.image(0, 0, "stampbook", "editor-selectors");
+        editor_selectors.setOrigin(0.5038759689922481, 0.5);
+        this.add(editor_selectors);
+
         // zone (components)
         const zoneZone = new Zone(zone);
         zoneZone.hoverCallback = () => this.parentContainer.onZoneOver(this.id, "color");

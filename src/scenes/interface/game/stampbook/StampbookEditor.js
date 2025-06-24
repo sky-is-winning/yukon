@@ -4,14 +4,14 @@
 /* START OF COMPILED CODE */
 
 import BaseContainer from "../../../base/BaseContainer";
+import SimpleButton from "../../../components/SimpleButton";
+import Zone from "../../../components/Zone";
 import Selectors from "./Selectors";
 import Icon from "./thumbs/Icon";
 import Pattern from "./thumbs/Pattern";
 import Highlight from "./thumbs/Highlight";
 import Color from "./thumbs/Color";
 import StampCategory from "./thumbs/StampCategory";
-import SimpleButton from "../../../components/SimpleButton";
-import Zone from "../../../components/Zone";
 /* START-USER-IMPORTS */
 import Stamp from "./Stamp";
 /* END-USER-IMPORTS */
@@ -29,82 +29,6 @@ export default class StampbookEditor extends BaseContainer {
         // stampsContainer
         const stampsContainer = scene.add.container(-475, -419);
         this.add(stampsContainer);
-
-        // leftbar
-        const leftbar = scene.add.container(-707, -266);
-        this.add(leftbar);
-
-        // leftbar_img
-        const leftbar_img = scene.add.image(0, 84, "stampbook", "leftbar");
-        leftbar_img.setOrigin(0.5, 0.5007407407407407);
-        leftbar.add(leftbar_img);
-
-        // icon_selector
-        const icon_selector = new Selectors(scene, 256, 345);
-        icon_selector.visible = false;
-        leftbar.add(icon_selector);
-
-        // pattern_selector
-        const pattern_selector = new Selectors(scene, 256, 230);
-        pattern_selector.visible = false;
-        leftbar.add(pattern_selector);
-
-        // highlight_selector
-        const highlight_selector = new Selectors(scene, 256, 115);
-        highlight_selector.visible = false;
-        leftbar.add(highlight_selector);
-
-        // colors_selector
-        const colors_selector = new Selectors(scene, 256, 0);
-        colors_selector.visible = false;
-        leftbar.add(colors_selector);
-
-        // editor_selectors_icon
-        const editor_selectors_icon = scene.add.image(20, 345, "stampbook", "editor-selectors");
-        editor_selectors_icon.setOrigin(0.5038759689922481, 0.5);
-        leftbar.add(editor_selectors_icon);
-
-        // editor_selectors_pattern
-        const editor_selectors_pattern = scene.add.image(20, 230, "stampbook", "editor-selectors");
-        editor_selectors_pattern.setOrigin(0.5038759689922481, 0.5);
-        leftbar.add(editor_selectors_pattern);
-
-        // editor_selectors_highlight
-        const editor_selectors_highlight = scene.add.image(20, 115, "stampbook", "editor-selectors");
-        editor_selectors_highlight.setOrigin(0.5038759689922481, 0.5);
-        leftbar.add(editor_selectors_highlight);
-
-        // editor_selectors_color
-        const editor_selectors_color = scene.add.image(20, 0, "stampbook", "editor-selectors");
-        editor_selectors_color.setOrigin(0.5038759689922481, 0.5);
-        leftbar.add(editor_selectors_color);
-
-        // icon_prefab
-        const icon_prefab = new Icon(scene, 21, 345);
-        leftbar.add(icon_prefab);
-
-        // pattern_prefab
-        const pattern_prefab = new Pattern(scene, 21, 230);
-        leftbar.add(pattern_prefab);
-
-        // highlight_prefab
-        const highlight_prefab = new Highlight(scene, 21, 115);
-        leftbar.add(highlight_prefab);
-
-        // color_prefab
-        const color_prefab = new Color(scene, 21, 0);
-        leftbar.add(color_prefab);
-
-        // stampCategory
-        const stampCategory = new StampCategory(scene, -115, -252);
-        stampCategory.visible = true;
-        leftbar.add(stampCategory);
-
-        // stampcat_arrow
-        const stampcat_arrow = scene.add.triangle(96, -144.5, 0, 0, 10, 7.5, 0, 15);
-        stampcat_arrow.isFilled = true;
-        stampcat_arrow.fillColor = 2500134;
-        leftbar.add(stampcat_arrow);
 
         // save_btn
         const save_btn = scene.add.image(707, 420, "stampbook", "save-btn");
@@ -144,6 +68,78 @@ export default class StampbookEditor extends BaseContainer {
         remove_hint.visible = false;
         this.add(remove_hint);
 
+        // leftbar
+        const leftbar = scene.add.container(-707, -266);
+        this.add(leftbar);
+
+        // leftbar_img
+        const leftbar_img = scene.add.image(0, 84, "stampbook", "leftbar");
+        leftbar_img.setOrigin(0.5, 0.5007407407407407);
+        leftbar.add(leftbar_img);
+
+        // icon_selector
+        const icon_selector = new Selectors(scene, 210, 345);
+        icon_selector.visible = false;
+        leftbar.add(icon_selector);
+
+        // pattern_selector
+        const pattern_selector = new Selectors(scene, 210, 230);
+        pattern_selector.visible = false;
+        leftbar.add(pattern_selector);
+
+        // highlight_selector
+        const highlight_selector = new Selectors(scene, 210, 115);
+        highlight_selector.visible = false;
+        leftbar.add(highlight_selector);
+
+        // color_selector
+        const color_selector = new Selectors(scene, 210, 0);
+        color_selector.visible = false;
+        leftbar.add(color_selector);
+
+        // icon_prefab
+        const icon_prefab = new Icon(scene, 21, 345);
+        leftbar.add(icon_prefab);
+
+        // pattern_prefab
+        const pattern_prefab = new Pattern(scene, 21, 230);
+        leftbar.add(pattern_prefab);
+
+        // highlight_prefab
+        const highlight_prefab = new Highlight(scene, 21, 115);
+        leftbar.add(highlight_prefab);
+
+        // color_prefab
+        const color_prefab = new Color(scene, 21, 0);
+        leftbar.add(color_prefab);
+
+        // stampCategory
+        const stampCategory = new StampCategory(scene, -115, -252);
+        stampCategory.visible = true;
+        leftbar.add(stampCategory);
+
+        // stampcat_arrow
+        const stampcat_arrow = scene.add.triangle(96, -144.5, 0, 0, 10, 7.5, 0, 15);
+        stampcat_arrow.isFilled = true;
+        stampcat_arrow.fillColor = 2500134;
+        leftbar.add(stampcat_arrow);
+
+        // save_btn (components)
+        const save_btnSimpleButton = new SimpleButton(save_btn);
+        save_btnSimpleButton.callback = () => this.interface.stampbook.saveStampbook();
+
+        // right_zone (components)
+        const right_zoneZone = new Zone(right_zone);
+        right_zoneZone.hoverCallback;
+        right_zoneZone.hoverOutCallback;
+        right_zoneZone.callback = () => this.stampPage(1);
+
+        // left_zone (components)
+        const left_zoneZone = new Zone(left_zone);
+        left_zoneZone.hoverCallback;
+        left_zoneZone.hoverOutCallback;
+        left_zoneZone.callback = () => this.stampPage(-1);
+
         // icon_selector (prefab fields)
         icon_selector.selectorType = "Icons";
 
@@ -165,67 +161,61 @@ export default class StampbookEditor extends BaseContainer {
         // color_prefab (prefab fields)
         color_prefab.rootModule = true;
 
-        // save_btn (components)
-        const save_btnSimpleButton = new SimpleButton(save_btn);
-        save_btnSimpleButton.callback = () => this.interface.stampbook.saveStampbook();
-
-        // right_zone (components)
-        const right_zoneZone = new Zone(right_zone);
-        right_zoneZone.hoverCallback;
-        right_zoneZone.hoverOutCallback;
-        right_zoneZone.callback = () => this.stampPage(1);
-
-        // left_zone (components)
-        const left_zoneZone = new Zone(left_zone);
-        left_zoneZone.hoverCallback;
-        left_zoneZone.hoverOutCallback;
-        left_zoneZone.callback = () => this.stampPage(-1);
-
         this.stampsContainer = stampsContainer;
+        this.arrow_right = arrow_right;
+        this.arrow_left = arrow_left;
+        this.right_zone = right_zone;
+        this.left_zone = left_zone;
         this.icon_selector = icon_selector;
         this.pattern_selector = pattern_selector;
         this.highlight_selector = highlight_selector;
-        this.colors_selector = colors_selector;
+        this.color_selector = color_selector;
         this.icon_prefab = icon_prefab;
         this.pattern_prefab = pattern_prefab;
         this.highlight_prefab = highlight_prefab;
         this.color_prefab = color_prefab;
         this.stampCategory = stampCategory;
         this.leftbar = leftbar;
-        this.arrow_right = arrow_right;
-        this.arrow_left = arrow_left;
-        this.right_zone = right_zone;
-        this.left_zone = left_zone;
 
         /* START-USER-CTR-CODE */
         this.leftbar.onZoneOver = (id, caller) => {
-            [this.icon_selector, this.pattern_selector, this.highlight_selector, this.colors_selector, this.stampCategory.categorySelector].forEach(selector => {
+            [this.icon_selector, this.pattern_selector, this.highlight_selector, this.color_selector, this.stampCategory.categorySelector].forEach(selector => {
                 selector.visible = false;
                 selector.preventingClose = [];
             });
 
             let selector;
+            let prefab;
             switch (caller) {
                 case "icon":
                     selector = this.icon_selector;
+                    prefab = this.icon_prefab;
                     break;
                 case "pattern":
                     selector = this.pattern_selector;
+                    prefab = this.pattern_prefab;
                     break;
                 case "highlight":
                     selector = this.highlight_selector;
+                    prefab = this.highlight_prefab;
                     break;
                 case "category":
                     selector = this.stampCategory.categorySelector;
+                    prefab = this.stampCategory
                     break;
                 default:
-                    selector = this.colors_selector;
+                    selector = this.color_selector;
+                    prefab = this.color_prefab;
                     break;
             }
             if (!selector.inited) {
                 selector.init(id);
                 selector.inited = true;
             }
+
+            this.leftbar.bringToTop(selector);
+            this.leftbar.bringToTop(prefab);
+
             selector.visible = true;
             selector.preventClose(this);
         }
@@ -246,7 +236,7 @@ export default class StampbookEditor extends BaseContainer {
                     selector = this.stampCategory.categorySelector;
                     break;
                 default:
-                    selector = this.colors_selector;
+                    selector = this.color_selector;
                     break;
             }
             selector.unpreventClose(this);
@@ -256,6 +246,14 @@ export default class StampbookEditor extends BaseContainer {
 
     /** @type {Phaser.GameObjects.Container} */
     stampsContainer;
+    /** @type {Phaser.GameObjects.Triangle} */
+    arrow_right;
+    /** @type {Phaser.GameObjects.Triangle} */
+    arrow_left;
+    /** @type {Phaser.GameObjects.Rectangle} */
+    right_zone;
+    /** @type {Phaser.GameObjects.Rectangle} */
+    left_zone;
     /** @type {Selectors} */
     icon_selector;
     /** @type {Selectors} */
@@ -263,7 +261,7 @@ export default class StampbookEditor extends BaseContainer {
     /** @type {Selectors} */
     highlight_selector;
     /** @type {Selectors} */
-    colors_selector;
+    color_selector;
     /** @type {Icon} */
     icon_prefab;
     /** @type {Pattern} */
@@ -276,14 +274,6 @@ export default class StampbookEditor extends BaseContainer {
     stampCategory;
     /** @type {Phaser.GameObjects.Container} */
     leftbar;
-    /** @type {Phaser.GameObjects.Triangle} */
-    arrow_right;
-    /** @type {Phaser.GameObjects.Triangle} */
-    arrow_left;
-    /** @type {Phaser.GameObjects.Rectangle} */
-    right_zone;
-    /** @type {Phaser.GameObjects.Rectangle} */
-    left_zone;
 
     /* START-USER-CODE */
 

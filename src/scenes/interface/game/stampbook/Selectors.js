@@ -32,7 +32,7 @@ export default class Selectors extends BaseContainer {
         this.add(seperators_container);
 
         // zone
-        const zone = scene.add.rectangle(0, 0, 310, 330);
+        const zone = scene.add.rectangle(0, 0, 280, 300);
         zone.visible = false;
         zone.isFilled = true;
         zone.fillColor = 1234926;
@@ -104,16 +104,17 @@ export default class Selectors extends BaseContainer {
         this.masks = {};
         this.sprites = [];
 
-        const evenColors = this.config.length % 2 === 0;
-        const rows = evenColors ? this.config.length / 2 : this.config.length;
+        const evenItems = this.config.length % 2 === 0;
+        const rows = evenItems ? this.config.length / 2 : this.config.length;
         const middleRowY = rows % 2 === 0 ? -50 : 0;
         const middleRow = Math.floor(rows / 2);
-        const width = evenColors ? 280 : 140
+        const width = evenItems ? 280 : 140
         for (let i = 0; i < this.config.length; i++) {
-            const row = evenColors ? Math.floor(i / 2) : i;
-            const x = evenColors ? (i % 2 === 0 ? 70 : -70) : 0;
+            const row = evenItems ? Math.floor(i / 2) : i;
+            const x = evenItems ? (i % 2 === 0 ? 70 : -70) : 0;
             const y = middleRowY - ((row - middleRow) * 100);
             const sprite = new this.spriteType(this.scene, x, y);
+            sprite.scale = 0.8;
             this.add(sprite);
             this.sprites.push(sprite);
             sprite.setId(this.config[i]);
@@ -124,7 +125,7 @@ export default class Selectors extends BaseContainer {
             this.seperators_container.add(separator);
         }
 
-        if (evenColors) {
+        if (evenItems) {
             const separator = this.scene.add.rectangle(0, 0, 3, rows * 100, 0xAAAAAA);
             this.seperators_container.add(separator);
         }
@@ -134,7 +135,7 @@ export default class Selectors extends BaseContainer {
         this.selector_outline_nineslice.setSize(width, rows * 100);
         this.zone.setSize(width + 30, rows * 100 + 30);
 
-        if (!evenColors) {
+        if (!evenItems) {
             this.x -= 70;
         }
     }
@@ -178,7 +179,7 @@ export default class Selectors extends BaseContainer {
     unpreventClose(a) {
         this.preventingClose = this.preventingClose.filter(c => c !== a);
 
-        setTimeout(() => {
+        this.closeTimeout = setTimeout(() => {
             if (this.preventingClose.length === 0) {
                 this.visible = false;
             }

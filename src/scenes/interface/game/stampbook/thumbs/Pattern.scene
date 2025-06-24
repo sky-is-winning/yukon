@@ -30,6 +30,19 @@
                 },
                 {
                     "type": "Rectangle",
+                    "id": "71a00f0f-90a0-46e5-a085-3af3757e8120",
+                    "label": "remove_pattern_shadow",
+                    "scope": "CLASS",
+                    "y": 1,
+                    "angle": 34,
+                    "isFilled": true,
+                    "fillColor": "#000000",
+                    "fillAlpha": 0.5,
+                    "width": 145,
+                    "height": 5
+                },
+                {
+                    "type": "Rectangle",
                     "id": "28692be9-8603-4ffc-a9c0-c440ff5328e5",
                     "label": "remove_pattern",
                     "scope": "CLASS",
@@ -53,6 +66,16 @@
                     "fillAlpha": 0.3,
                     "width": 115,
                     "height": 80
+                },
+                {
+                    "type": "Image",
+                    "id": "68795b6c-ab02-4da8-ac07-cb07e7c122f8",
+                    "label": "editor_selectors",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "editor-selectors"
+                    },
+                    "originX": 0.5038759689922481
                 }
             ]
         }

@@ -29,7 +29,7 @@ export default class CategorySelector extends BaseContainer {
         this.add(seperators_container);
 
         // zone
-        const zone = scene.add.rectangle(0, 0, 310, 330);
+        const zone = scene.add.rectangle(0, 0, 280, 300);
         zone.visible = false;
         zone.isFilled = true;
         zone.fillColor = 1234926;

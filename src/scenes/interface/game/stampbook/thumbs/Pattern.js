@@ -18,6 +18,14 @@ export default class Pattern extends BaseContainer {
         background.visible = false;
         this.add(background);
 
+        // remove_pattern_shadow
+        const remove_pattern_shadow = scene.add.rectangle(0, 1, 145, 5);
+        remove_pattern_shadow.angle = 34;
+        remove_pattern_shadow.isFilled = true;
+        remove_pattern_shadow.fillColor = 0;
+        remove_pattern_shadow.fillAlpha = 0.5;
+        this.add(remove_pattern_shadow);
+
         // remove_pattern
         const remove_pattern = scene.add.rectangle(0, 0, 145, 5);
         remove_pattern.angle = 34;
@@ -31,6 +39,11 @@ export default class Pattern extends BaseContainer {
         zone.fillAlpha = 0.3;
         this.add(zone);
 
+        // editor_selectors
+        const editor_selectors = scene.add.image(0, 0, "stampbook", "editor-selectors");
+        editor_selectors.setOrigin(0.5038759689922481, 0.5);
+        this.add(editor_selectors);
+
         // zone (components)
         const zoneZone = new Zone(zone);
         zoneZone.hoverCallback = () => this.parentContainer.onZoneOver(this.id, "pattern");
@@ -38,6 +51,7 @@ export default class Pattern extends BaseContainer {
         zoneZone.callback = () => { if (!this.rootModule) this.interface.stampbook.setPattern(this.id) };;
 
         this.background = background;
+        this.remove_pattern_shadow = remove_pattern_shadow;
         this.remove_pattern = remove_pattern;
 
         /* START-USER-CTR-CODE */
@@ -46,6 +60,8 @@ export default class Pattern extends BaseContainer {
 
     /** @type {Phaser.GameObjects.Image} */
     background;
+    /** @type {Phaser.GameObjects.Rectangle} */
+    remove_pattern_shadow;
     /** @type {Phaser.GameObjects.Rectangle} */
     remove_pattern;
     /** @type {boolean} */
@@ -64,6 +80,7 @@ export default class Pattern extends BaseContainer {
             });
             this.interface.events.on("updateStampbookPattern", (pattern) => {
                 this.remove_pattern.visible = pattern == id && !this.rootModule;
+                this.remove_pattern_shadow.visible = this.remove_pattern.visible;
             });
             this.hasListeners = true;
         }
@@ -74,6 +91,7 @@ export default class Pattern extends BaseContainer {
             this.background.visible = true;
         });
         this.remove_pattern.visible = this.interface.stampbook.playerdata.pattern == id && !this.rootModule;
+        this.remove_pattern_shadow.visible = this.remove_pattern.visible;
     }
 
     /* END-USER-CODE */

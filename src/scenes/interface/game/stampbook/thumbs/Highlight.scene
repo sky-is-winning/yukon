@@ -49,6 +49,16 @@
                     "fillAlpha": 0.3,
                     "width": 115,
                     "height": 80
+                },
+                {
+                    "type": "Image",
+                    "id": "8b16e25c-af89-47d2-a0a2-62eef83638c6",
+                    "label": "editor_selectors",
+                    "texture": {
+                        "key": "stampbook",
+                        "frame": "editor-selectors"
+                    },
+                    "originX": 0.5038759689922481
                 }
             ]
         }

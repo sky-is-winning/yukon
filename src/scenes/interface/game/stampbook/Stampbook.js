@@ -481,6 +481,8 @@ export default class Stampbook extends BaseContainer {
     }
 
     setColor(id) {
+        this.closeSelector(this.editor.color_selector);
+
         id = parseInt(id);
         if (id == this.editor.color_prefab.id) return;
         this.playerdata.color = id;
@@ -504,8 +506,10 @@ export default class Stampbook extends BaseContainer {
     }
 
     setPattern(id) {
+        this.closeSelector(this.editor.pattern_selector);
+
         id = parseInt(id);
-        if (id == this.editor.pattern_prefab.id) return;
+        if (id == this.editor.pattern_prefab.id) return this.setPattern(0);
         this.playerdata.pattern = id;
 
         this.updatePattern(id);
@@ -532,6 +536,8 @@ export default class Stampbook extends BaseContainer {
     }
 
     setHighlight(id) {
+        this.closeSelector(this.editor.highlight_selector);
+
         id = parseInt(id);
         if (id == this.editor.highlight_prefab.id) return;
         this.playerdata.highlight = id;
@@ -558,6 +564,8 @@ export default class Stampbook extends BaseContainer {
     }
 
     setIcon(id) {
+        this.closeSelector(this.editor.icon_selector);
+
         id = parseInt(id);
         if (id == this.editor.icon_prefab.id) return;
         this.playerdata.clasp = id;
@@ -775,10 +783,14 @@ export default class Stampbook extends BaseContainer {
     }
 
     updateEditorCategory(category) {
-        clearTimeout(this.editor.stampCategory.categorySelector.closeTimeout)
-        this.editor.stampCategory.categorySelector.visible = false;
-        this.editor.stampCategory.categorySelector.preventingClose = []
+        this.closeSelector(this.editor.stampCategory.categorySelector);
         this.editor.showCategory(category);
+    }
+
+    closeSelector(selector) {
+        clearTimeout(selector.closeTimeout);
+        selector.visible = false;
+        selector.preventingClose = [];
     }
     /* END-USER-CODE */
 }
