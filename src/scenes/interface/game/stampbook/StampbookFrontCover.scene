@@ -108,6 +108,7 @@
                     "type": "Text",
                     "id": "fdfb8327-0625-4637-ac9e-1ed5c1061755",
                     "label": "username_text",
+                    "scope": "CLASS",
                     "x": -518,
                     "y": 220,
                     "originY": 0.5,
@@ -143,6 +144,7 @@
                     "type": "Text",
                     "id": "4ea778c3-3ae6-4ce4-87fe-dc420f18cad7",
                     "label": "stampstotal_text",
+                    "scope": "CLASS",
                     "x": -262,
                     "y": 305,
                     "originY": 0.5,
@@ -155,6 +157,14 @@
                     "shadow.offsetY": -2,
                     "shadow.fill": true,
                     "shadow.color": "#0000005e"
+                },
+                {
+                    "type": "Container",
+                    "id": "05a889a9-316b-4a7e-99bf-9517272dfe8b",
+                    "label": "coverStampsContainer",
+                    "scope": "CLASS",
+                    "x": -781,
+                    "y": -519
                 }
             ]
         }

@@ -14,21 +14,6 @@ export default class Stamp extends BaseContainer {
     constructor(scene, x, y) {
         super(scene, x ?? 0, y ?? 0);
 
-        // shadow
-        const shadow = scene.add.image(-3, 5, "main", "stampprompt/5_1");
-        shadow.visible = false;
-        shadow.alpha = 0.3;
-        shadow.alphaTopLeft = 0.3;
-        shadow.alphaTopRight = 0.3;
-        shadow.alphaBottomLeft = 0.3;
-        shadow.alphaBottomRight = 0.3;
-        shadow.tintFill = true;
-        shadow.tintTopLeft = 0;
-        shadow.tintTopRight = 0;
-        shadow.tintBottomLeft = 0;
-        shadow.tintBottomRight = 0;
-        this.add(shadow);
-
         // stamp
         const stamp = scene.add.image(0, 0, "main", "stampprompt/5_1");
         stamp.visible = false;
@@ -62,7 +47,6 @@ export default class Stamp extends BaseContainer {
         stampSimpleButton.hoverCallback = () => { this.stampHover.visible = true };
         stampSimpleButton.hoverOutCallback = () => { this.stampHover.visible = false };
 
-        this.shadow = shadow;
         this.stamp = stamp;
         this.blocker = blocker;
         this.spinner = spinner;
@@ -82,8 +66,6 @@ export default class Stamp extends BaseContainer {
     }
 
     /** @type {Phaser.GameObjects.Image} */
-    shadow;
-    /** @type {Phaser.GameObjects.Image} */
     stamp;
     /** @type {Phaser.GameObjects.Image} */
     blocker;
@@ -94,13 +76,11 @@ export default class Stamp extends BaseContainer {
 
     /* START-USER-CODE */
 
-    onLoad(id) {
+    onLoad(id, scale = 2) {
         if (!this.active) return;
-        this.stamp.setTexture(`stampbook-assets/stamps/${id}`);
-        this.shadow.setTexture(`stampbook-assets/stamps/${id}`);
-        this.blocker.setTexture(`stampbook-assets/stamps/${id}`);
+        this.stamp.setTexture(`stampbook-assets/stamps/@${scale}x/${id}`);
+        this.blocker.setTexture(`stampbook-assets/stamps/@${scale}x/${id}`);
         this.stamp.visible = true;
-        this.shadow.visible = true;
         this.blocker.visible = !this.scene.world.client.stamps.includes(id);
 
         this.spinner.visible = false;
@@ -125,12 +105,11 @@ export default class Stamp extends BaseContainer {
     }
 
     setCoverStamp(stamp, scale = 1) {
-        this.scale = scale;
         this.id = stamp;
         this.spinner.visible = true;
         this.interface.stampbook.loader.loadStamp(this.id, () => {
-            this.onLoad(this.id);
-        });
+            this.onLoad(this.id, scale);
+        }, scale);
         this.stampHover = {}
     }
     /* END-USER-CODE */

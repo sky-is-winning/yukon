@@ -84,6 +84,10 @@ export default class StampbookFrontCover extends BaseContainer {
         stampstotal_text.setStyle({ "color": "#F4B851", "fontFamily": "Burbank Small", "fontSize": "28px", "fontStyle": "bold", "shadow.offsetX":-2,"shadow.offsetY":-2,"shadow.color": "#0000005e", "shadow.fill":true});
         this.add(stampstotal_text);
 
+        // coverStampsContainer
+        const coverStampsContainer = scene.add.container(-781, -519);
+        this.add(coverStampsContainer);
+
         // lists
         const usernameItems = [username_text, username_text_highlight_1, username_text_highlight_2];
         const stampsTotalItems = [stampstotal_text_highlight, stampstotal_text];
@@ -100,6 +104,9 @@ export default class StampbookFrontCover extends BaseContainer {
         this.background = background;
         this.clasp = clasp;
         this.icon = icon;
+        this.username_text = username_text;
+        this.stampstotal_text = stampstotal_text;
+        this.coverStampsContainer = coverStampsContainer;
         this.usernameItems = usernameItems;
         this.stampsTotalItems = stampsTotalItems;
 
@@ -114,6 +121,12 @@ export default class StampbookFrontCover extends BaseContainer {
     clasp;
     /** @type {Phaser.GameObjects.Image} */
     icon;
+    /** @type {Phaser.GameObjects.Text} */
+    username_text;
+    /** @type {Phaser.GameObjects.Text} */
+    stampstotal_text;
+    /** @type {Phaser.GameObjects.Container} */
+    coverStampsContainer;
     /** @type {Phaser.GameObjects.Text[]} */
     usernameItems;
     /** @type {Phaser.GameObjects.Text[]} */

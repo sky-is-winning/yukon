@@ -433,6 +433,10 @@ export default class Stampbook extends BaseContainer {
         this.front_cover.usernameItems.forEach(item => item.text = this.playerdata.nickname);
         this.front_cover.stampsTotalItems.forEach(item => item.text = `Total Stamps ${this.playerdata.stamps.length}/${this.world.totalStampsAvailable}`);
 
+        this.playerdata.cover.forEach(stamp => {
+            this.addCoverStamp(stamp.id, stamp.x, stamp.y);
+        });
+
         this.front_cover.visible = true;
         this.edit_btn.visible = this.interface.stampbookId == this.world.client.id;
         this.loading.visible = false;
@@ -449,6 +453,8 @@ export default class Stampbook extends BaseContainer {
         this.editor_bg.visible = false;
         this.editor.visible = false;
         this.toggleClaspClickable(true);
+
+        this.network.send("update_stampbook", { color: this.playerdata.color, pattern: this.playerdata.pattern, highlight: this.playerdata.highlight, clasp: this.playerdata.clasp, cover: this.front_cover.coverStampsContainer.getAll().map(stamp => ({ id: stamp.id, x: stamp.x, y: stamp.y, type: "stamp" })) });
     }
 
     close() {
@@ -493,10 +499,6 @@ export default class Stampbook extends BaseContainer {
             this.setHighlight(this.crumbs.cover.color_highlight[id][0]);
             this.editor.highlight_selector.init();
         }
-
-        if (this.interface.stampbookId == this.world.client.id) {
-            this.network.send("update_stampbook", { color: id });
-        }
     }
 
     updatePattern(id) {
@@ -513,10 +515,6 @@ export default class Stampbook extends BaseContainer {
         this.playerdata.pattern = id;
 
         this.updatePattern(id);
-
-        if (this.interface.stampbookId == this.world.client.id) {
-            this.network.send("update_stampbook", { pattern: id });
-        }
     }
 
     setFrontCoverClaspHighlight(id) {
@@ -543,10 +541,6 @@ export default class Stampbook extends BaseContainer {
         this.playerdata.highlight = id;
 
         this.updateHighlight(id);
-
-        if (this.interface.stampbookId == this.world.client.id) {
-            this.network.send("update_stampbook", { highlight: id });
-        }
     }
 
     setFrontCoverClaspIcon(id) {
@@ -571,10 +565,6 @@ export default class Stampbook extends BaseContainer {
         this.playerdata.clasp = id;
 
         this.updateIcon(id);
-
-        if (this.interface.stampbookId == this.world.client.id) {
-            this.network.send("update_stampbook", { clasp: id });
-        }
     }
 
     getPageData(page) {
@@ -791,6 +781,24 @@ export default class Stampbook extends BaseContainer {
         clearTimeout(selector.closeTimeout);
         selector.visible = false;
         selector.preventingClose = [];
+    }
+
+    addCoverStamp(stampId, x, y) {
+        if (!this.playerdata.stamps.includes(stampId)) {
+            return;
+        }
+
+        const stamp = new Stamp(this.scene, x, y);
+        stamp.setCoverStamp(stampId, 3);
+        this.front_cover.coverStampsContainer.add(stamp);
+
+        stamp.stamp.on("pointerdown", (pointer) => {
+            this.editor.onPointerDown(stamp, pointer);
+        });
+
+        if (!this.editor.validatePosition(stamp)) {
+            stamp.destroy();
+        }
     }
     /* END-USER-CODE */
 }

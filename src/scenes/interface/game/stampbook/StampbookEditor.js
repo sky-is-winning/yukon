@@ -62,11 +62,15 @@ export default class StampbookEditor extends BaseContainer {
         left_zone.fillAlpha = 0.3;
         this.add(left_zone);
 
-        // remove_hint
-        const remove_hint = scene.add.image(89, -421, "stampbook", "remove-hint");
-        remove_hint.setOrigin(0.5003679175864606, 0.5042735042735043);
-        remove_hint.visible = false;
-        this.add(remove_hint);
+        // removeHint
+        const removeHint = scene.add.image(89, -421, "stampbook", "remove-hint");
+        removeHint.setOrigin(0.5003679175864606, 0.5042735042735043);
+        removeHint.visible = false;
+        this.add(removeHint);
+
+        // bookStampCntr
+        const bookStampCntr = scene.add.container(-760, -480);
+        this.add(bookStampCntr);
 
         // leftbar
         const leftbar = scene.add.container(-707, -266);
@@ -124,6 +128,58 @@ export default class StampbookEditor extends BaseContainer {
         stampcat_arrow.fillColor = 2500134;
         leftbar.add(stampcat_arrow);
 
+        // topBlocker
+        const topBlocker = scene.add.rectangle(-760, -480, 1520, 180);
+        topBlocker.setOrigin(0, 0);
+        topBlocker.fillColor = 2328324;
+        topBlocker.fillAlpha = 0.6;
+        this.add(topBlocker);
+
+        // bottomBlocker
+        const bottomBlocker = scene.add.rectangle(-760, 340, 1520, 140);
+        bottomBlocker.setOrigin(0, 0);
+        bottomBlocker.fillColor = 2328324;
+        bottomBlocker.fillAlpha = 0.6;
+        this.add(bottomBlocker);
+
+        // rightBlocker
+        const rightBlocker = scene.add.rectangle(620, -480, 140, 960);
+        rightBlocker.setOrigin(0, 0);
+        rightBlocker.fillColor = 2328324;
+        rightBlocker.fillAlpha = 0.6;
+        this.add(rightBlocker);
+
+        // leftBlocker
+        const leftBlocker = scene.add.rectangle(-760, -480, 170, 960);
+        leftBlocker.setOrigin(0, 0);
+        leftBlocker.fillColor = 2328324;
+        leftBlocker.fillAlpha = 0.6;
+        this.add(leftBlocker);
+
+        // wordmarkBlocker
+        const wordmarkBlocker = scene.add.rectangle(339, 185, 240, 155);
+        wordmarkBlocker.setOrigin(0, 0);
+        wordmarkBlocker.fillColor = 2328324;
+        wordmarkBlocker.fillAlpha = 0.6;
+        this.add(wordmarkBlocker);
+
+        // claspBlocker
+        const claspBlocker = scene.add.rectangle(490, -30, 130, 180);
+        claspBlocker.setOrigin(0, 0);
+        claspBlocker.fillColor = 2328324;
+        claspBlocker.fillAlpha = 0.6;
+        this.add(claspBlocker);
+
+        // closeBlocker
+        const closeBlocker = scene.add.rectangle(560, -300, 60, 60);
+        closeBlocker.setOrigin(0, 0);
+        closeBlocker.fillColor = 2328324;
+        closeBlocker.fillAlpha = 0.6;
+        this.add(closeBlocker);
+
+        // lists
+        const stampBlockers = [topBlocker, closeBlocker, claspBlocker, wordmarkBlocker, leftBlocker, rightBlocker, bottomBlocker];
+
         // save_btn (components)
         const save_btnSimpleButton = new SimpleButton(save_btn);
         save_btnSimpleButton.callback = () => this.interface.stampbook.saveStampbook();
@@ -166,6 +222,8 @@ export default class StampbookEditor extends BaseContainer {
         this.arrow_left = arrow_left;
         this.right_zone = right_zone;
         this.left_zone = left_zone;
+        this.removeHint = removeHint;
+        this.bookStampCntr = bookStampCntr;
         this.icon_selector = icon_selector;
         this.pattern_selector = pattern_selector;
         this.highlight_selector = highlight_selector;
@@ -176,6 +234,7 @@ export default class StampbookEditor extends BaseContainer {
         this.color_prefab = color_prefab;
         this.stampCategory = stampCategory;
         this.leftbar = leftbar;
+        this.stampBlockers = stampBlockers;
 
         /* START-USER-CTR-CODE */
         this.leftbar.onZoneOver = (id, caller) => {
@@ -254,6 +313,10 @@ export default class StampbookEditor extends BaseContainer {
     right_zone;
     /** @type {Phaser.GameObjects.Rectangle} */
     left_zone;
+    /** @type {Phaser.GameObjects.Image} */
+    removeHint;
+    /** @type {Phaser.GameObjects.Container} */
+    bookStampCntr;
     /** @type {Selectors} */
     icon_selector;
     /** @type {Selectors} */
@@ -274,6 +337,8 @@ export default class StampbookEditor extends BaseContainer {
     stampCategory;
     /** @type {Phaser.GameObjects.Container} */
     leftbar;
+    /** @type {Phaser.GameObjects.Rectangle[]} */
+    stampBlockers;
 
     /* START-USER-CODE */
 
@@ -297,7 +362,8 @@ export default class StampbookEditor extends BaseContainer {
         for (let i = 0; i < 10; i++) {
             if (this.stamps[this.currentPage * 10 + i]) {
                 let stampObj = new Stamp(this.scene, i * 113, 0);
-                stampObj.setCoverStamp(this.stamps[this.currentPage * 10 + i], 0.5);
+                stampObj.setCoverStamp(this.stamps[this.currentPage * 10 + i], 1);
+                this.addDragProperties(stampObj);
                 this.stampsContainer.add(stampObj);
             }
         }
@@ -305,6 +371,67 @@ export default class StampbookEditor extends BaseContainer {
         this.arrow_right.visible = this.currentPage < Math.ceil(this.stamps.length / 10) - 1;
         this.left_zone.zone.visible = this.arrow_left.visible;
         this.right_zone.zone.visible = this.arrow_right.visible;
+    }
+
+    addDragProperties(stampObj) {
+        stampObj.stamp.on("pointerdown", (pointer) => {
+            this.onPointerDown(stampObj, pointer);
+        });
+    }
+
+    onPointerDown(stampObj, pointer) {
+        const dragStamp = new Stamp(this.scene, pointer.x, pointer.y);
+        dragStamp.setCoverStamp(stampObj.id, 3);
+        this.bookStampCntr.add(dragStamp);
+
+        this.interface.input.on('pointermove', this.onPointerMove, { dragStamp: dragStamp, editor: this });
+        this.interface.input.once('pointerup', this.onPointerUp, { dragStamp: dragStamp, editor: this });
+        this.stamps = this.stamps.filter(s => s !== stampObj.id);
+
+        stampObj.destroy();
+
+        this.stampPage(0);
+        this.removeHint.visible = true;
+    }
+
+    onPointerMove(pointer) {
+        this.dragStamp.x = pointer.x;
+        this.dragStamp.y = pointer.y;
+        this.dragStamp.alpha = this.editor.validatePosition.bind(this.editor)(this.dragStamp) ? 1 : 0.5;
+    }
+
+    onPointerUp(pointer) {
+        this.editor.interface.input.off('pointermove', this.onPointerMove, this);
+        this.editor.removeHint.visible = false;
+        if (this.editor.validatePosition.bind(this.editor)(this.dragStamp)) {
+            this.editor.interface.stampbook.addCoverStamp(this.dragStamp.id, pointer.x, pointer.y);
+        }
+        this.dragStamp.destroy();
+    }
+
+    validatePosition(dragStamp) {
+        for (const gameObject of this.interface.stampbook.front_cover.coverStampsContainer.getAll()) {
+            if (gameObject === dragStamp) continue;
+            if (Phaser.Geom.Intersects.RectangleToRectangle(gameObject.stamp.getBounds(), dragStamp.stamp.getBounds())) {
+                return false;
+            }
+        }
+
+        if (Phaser.Geom.Intersects.RectangleToRectangle(this.interface.stampbook.front_cover.username_text.getBounds(), dragStamp.stamp.getBounds())) {
+            return false;
+        }
+
+        if (Phaser.Geom.Intersects.RectangleToRectangle(this.interface.stampbook.front_cover.stampstotal_text.getBounds(), dragStamp.stamp.getBounds())) {
+            return false;
+        }
+
+        for (const gameObject of this.stampBlockers) {
+            if (Phaser.Geom.Intersects.RectangleToRectangle(gameObject.getBounds(), dragStamp.stamp.getBounds())) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /* END-USER-CODE */

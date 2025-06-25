@@ -20,29 +20,6 @@
             "list": [
                 {
                     "type": "Image",
-                    "id": "11f53242-2282-4309-8761-74131ec908f2",
-                    "label": "shadow",
-                    "scope": "CLASS",
-                    "texture": {
-                        "key": "main",
-                        "frame": "stampprompt/5_1"
-                    },
-                    "x": -3,
-                    "y": 5,
-                    "visible": false,
-                    "alpha": 0.3,
-                    "alphaTopLeft": 0.3,
-                    "alphaTopRight": 0.3,
-                    "alphaBottomLeft": 0.3,
-                    "alphaBottomRight": 0.3,
-                    "tintTopLeft": "#000000",
-                    "tintTopRight": "#000000",
-                    "tintBottomLeft": "#000000",
-                    "tintBottomRight": "#000000",
-                    "tintFill": true
-                },
-                {
-                    "type": "Image",
                     "id": "7f2c7bc6-583f-4805-b524-ecf375acb25b",
                     "label": "stamp",
                     "scope": "CLASS",

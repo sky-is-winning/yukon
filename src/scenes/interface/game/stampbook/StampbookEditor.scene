@@ -127,7 +127,8 @@
                 {
                     "type": "Image",
                     "id": "a866e47b-e7bd-4027-9415-62e74a7a154c",
-                    "label": "remove_hint",
+                    "label": "removeHint",
+                    "scope": "CLASS",
                     "texture": {
                         "key": "stampbook",
                         "frame": "remove-hint"
@@ -137,6 +138,14 @@
                     "originX": 0.5003679175864606,
                     "originY": 0.5042735042735043,
                     "visible": false
+                },
+                {
+                    "type": "Container",
+                    "id": "4a6c59ea-72d2-409a-834b-e45e3faf8ff8",
+                    "label": "bookStampCntr",
+                    "scope": "CLASS",
+                    "x": -760,
+                    "y": -480
                 },
                 {
                     "type": "Container",
@@ -304,6 +313,97 @@
                             "y3": 15
                         }
                     ]
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "13d4ee4d-6458-414b-8554-d540bd3f3abc",
+                    "label": "topBlocker",
+                    "x": -760,
+                    "y": -480,
+                    "originX": 0,
+                    "originY": 0,
+                    "fillColor": "#238704",
+                    "fillAlpha": 0.6,
+                    "width": 1520,
+                    "height": 180
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "0b3cd124-bde2-480a-b768-a2c0d2d5ee1e",
+                    "label": "bottomBlocker",
+                    "x": -760,
+                    "y": 340,
+                    "originX": 0,
+                    "originY": 0,
+                    "fillColor": "#238704",
+                    "fillAlpha": 0.6,
+                    "width": 1520,
+                    "height": 140
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "bf6ba9c9-15bd-4197-a02c-ad49be4da0e1",
+                    "label": "rightBlocker",
+                    "x": 620,
+                    "y": -480,
+                    "originX": 0,
+                    "originY": 0,
+                    "fillColor": "#238704",
+                    "fillAlpha": 0.6,
+                    "width": 140,
+                    "height": 960
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "98591f87-af4b-488d-baa4-66a5deaf0599",
+                    "label": "leftBlocker",
+                    "x": -760,
+                    "y": -480,
+                    "originX": 0,
+                    "originY": 0,
+                    "fillColor": "#238704",
+                    "fillAlpha": 0.6,
+                    "width": 170,
+                    "height": 960
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "0bdbb9ff-f1ef-4cd6-8570-4a61834402e1",
+                    "label": "wordmarkBlocker",
+                    "x": 339,
+                    "y": 185,
+                    "originX": 0,
+                    "originY": 0,
+                    "fillColor": "#238704",
+                    "fillAlpha": 0.6,
+                    "width": 240,
+                    "height": 155
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "dc979f1a-bf7a-4f81-98d0-45ceb53acb46",
+                    "label": "claspBlocker",
+                    "x": 490,
+                    "y": -30,
+                    "originX": 0,
+                    "originY": 0,
+                    "fillColor": "#238704",
+                    "fillAlpha": 0.6,
+                    "width": 130,
+                    "height": 180
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "e798d22e-251c-41c4-82e2-b0c710991243",
+                    "label": "closeBlocker",
+                    "x": 560,
+                    "y": -300,
+                    "originX": 0,
+                    "originY": 0,
+                    "fillColor": "#238704",
+                    "fillAlpha": 0.6,
+                    "width": 60,
+                    "height": 60
                 }
             ]
         }
@@ -314,5 +414,20 @@
         "url": "https://phasereditor2d.com",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
         "version": 5
-    }
+    },
+    "lists": [
+        {
+            "id": "fcfce770-1124-4029-a752-bf3c16555c62",
+            "label": "stampBlockers",
+            "objectIds": [
+                "13d4ee4d-6458-414b-8554-d540bd3f3abc",
+                "e798d22e-251c-41c4-82e2-b0c710991243",
+                "dc979f1a-bf7a-4f81-98d0-45ceb53acb46",
+                "0bdbb9ff-f1ef-4cd6-8570-4a61834402e1",
+                "98591f87-af4b-488d-baa4-66a5deaf0599",
+                "bf6ba9c9-15bd-4197-a02c-ad49be4da0e1",
+                "0b3cd124-bde2-480a-b768-a2c0d2d5ee1e"
+            ]
+        }
+    ]
 }

@@ -28,14 +28,14 @@ const AWARD_IDS = {
 const ASSET_BASE_URL = location.href
 
 export default class StampbookAssetLoader extends BaseLoader {
-    
+
     constructor(scene) {
         super(scene)
-    
+
         this.baseURL = `/assets/media/interface/game/stampbook/`
         this.keyPrefix = 'stampbook-assets/'
     }
-    
+
     loadCategory(id, callback) {
         const key = this.getKey(`category/${id}`)
         const hoverKey = this.getKey(`category/${id}-hover`)
@@ -57,7 +57,7 @@ export default class StampbookAssetLoader extends BaseLoader {
         this.checkComplete('image', key, () => {
             callback()
         })
-        
+
         this.image(key, `category-headers/${id}.png`)
 
         this.start()
@@ -171,20 +171,20 @@ export default class StampbookAssetLoader extends BaseLoader {
         this.start()
     }
 
-    loadStamp(id, callback) {
-        const key = this.getKey(`stamps/${id}`)
+    loadStamp(id, callback, scale = 2) {
+        const key = this.getKey(`stamps/@${scale}x/${id}`)
 
         this.checkComplete('image', key, () => {
             callback()
         })
 
-        this.image(key, `stamps/${id}.webp`)
+        this.image(key, `stamps/@${scale}x/${id}.png`)
 
         this.start()
     }
 
     loadAward(id, callback) {
-        const key = this.getKey(`stamps/${id}`)
+        const key = this.getKey(`stamps/@2x/${id}`)
 
         this.checkComplete('image', key, () => {
             callback()
