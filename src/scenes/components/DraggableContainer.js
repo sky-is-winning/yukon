@@ -49,8 +49,8 @@ export default class DraggableContainer extends EventComponent {
     }
 
     onDown(pointer) {
-        if (this.gameObject.widgetLayer && pointer.button == 0) {
-            this.gameObject.widgetLayer.bringToTop(this.gameObject)
+        if (this.gameObject.floatingLayer && pointer.button === 0) {
+            this.gameObject.floatingLayer.bringToTop(this.gameObject)
         }
     }
 

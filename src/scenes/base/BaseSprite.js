@@ -1,27 +1,16 @@
 export default class BaseSprite extends Phaser.GameObjects.Sprite {
 
-    get crumbs() {
-        return this.scene.crumbs
-    }
+    constructor(scene, x, y, texture, frame) {
+        super(scene, x, y, texture, frame)
 
-    get network() {
-        return this.scene.network
-    }
+        this.crumbs = scene.crumbs
+        this.network = scene.network
+        this.soundManager = scene.soundManager
 
-    get soundManager() {
-        return this.scene.soundManager
-    }
-
-    get interface() {
-        return this.scene.interface
-    }
-
-    get world() {
-        return this.scene.world
-    }
-
-    get ruffle() {
-        return this.scene.ruffle
+        this.interface = scene.interface
+        this.memory = scene.memory
+        this.ruffle = scene.ruffle
+        this.world = scene.world
     }
 
     getString(...args) {

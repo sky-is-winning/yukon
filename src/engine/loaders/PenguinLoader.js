@@ -60,11 +60,11 @@ export default class PenguinLoader {
             hitAreaCallback: Phaser.Geom.Ellipse.Contains
         })
 
-        penguin.on('pointerup', () => this.onPenguinClick(penguin.id))
+        penguin.on('pointerup', () => this.onPenguinClick(penguin.id, penguin.username))
     }
 
-    onPenguinClick(id) {
-        this.world.interface.showCard(id)
+    onPenguinClick(id, username) {
+        this.world.interface.showCard(id, username)
     }
 
 }

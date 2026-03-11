@@ -14,19 +14,34 @@ export default class EmoteBalloon extends Balloon {
         this.addBalloon(width, height)
         this.addPointer(width, 'balloon-emote')
         this.add(this.emote)
+
+        this.emoteSounds = this.crumbs.sounds.emotes
     }
 
     show(emote) {
-        const frame = `emotes/${emote}`
+        const emoteExists = this.checkExists(emote)
 
-        // If emote frame doesn't exist, set to 1
-        if (!this.world.textures.get('main').has(frame)) {
-            frame = 'emotes/1'
-        }
+        const resolvedEmote = emoteExists ? emote : 1
+
+        const frame = this.getTextureKey(resolvedEmote)
 
         this.emote.setFrame(frame)
 
         super.show()
+
+        if (resolvedEmote in this.emoteSounds) {
+            this.soundManager.play(this.emoteSounds[resolvedEmote])
+        }
+    }
+
+    checkExists(emote) {
+        return this.world.textures.get('main').has(
+            this.getTextureKey(emote)
+        )
+    }
+
+    getTextureKey(emote) {
+        return `emotes/${emote}`
     }
 
     addEmote() {

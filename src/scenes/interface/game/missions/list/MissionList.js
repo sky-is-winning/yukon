@@ -81,15 +81,6 @@ export default class MissionList extends BaseContainer {
 
     /* START-USER-CODE */
 
-    show() {
-        this.scrollY = 0
-        this.missions.y = this.scrollY
-
-        this.updateInput()
-
-        super.show()
-    }
-
     onUpClick() {
         if (this.scrollY + missionHeight <= this.maxY) {
             this.scrollY += missionHeight
@@ -145,10 +136,6 @@ export default class MissionList extends BaseContainer {
 
         // 3 missions visible at a time, keep last item at bottom
         this.minY = -y + (missionHeight * 2)
-    }
-
-    clearMissions() {
-        this.missions.removeAll(true)
     }
 
     createMask() {

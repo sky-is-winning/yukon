@@ -2,7 +2,7 @@ import CoinPrompt from '@scenes/interface/prompts/CoinPrompt'
 import ErrorPrompt from './ErrorPrompt'
 import ItemPrompt from '@scenes/interface/prompts/ItemPrompt'
 import InputPrompt from '@scenes/interface/prompts/InputPrompt'
-import LoadingPromptFactory from './LoadingPromptFactory'
+import LoadingPrompt from '@scenes/interface/prompts/LoadingPrompt'
 import WindowPrompt from '@scenes/interface/prompts/WindowPrompt'
 
 import MailErrorPrompt from '@scenes/interface/prompts/MailErrorPrompt'
@@ -24,12 +24,11 @@ export default class PromptController {
         this.error = this.createPrompt(ErrorPrompt)
         this.item = this.createPrompt(ItemPrompt)
         this.input = this.createPrompt(InputPrompt)
+        this.loading = this.createPrompt(LoadingPrompt)
         this.window = this.createPrompt(WindowPrompt)
 
         this.mailError = this.createPrompt(MailErrorPrompt)
         this.mailSuccess = this.createPrompt(MailSuccessPrompt)
-
-        this.loadingPromptFactory = new LoadingPromptFactory(this.interface)
     }
 
     get coins() {
@@ -95,8 +94,8 @@ export default class PromptController {
         this.window.show(text, buttonLayout, callback, noCallback)
     }
 
-    showLoading(text, key, url, callback = () => {}) {
-        this.loadingPromptFactory.showLoading(text, key, url, callback)
+    showLoading(text) {
+        this.loading.show(text)
     }
 
     showMailError(text) {
@@ -158,7 +157,7 @@ export default class PromptController {
     }
 
     hideAll() {
-        this.loadingPromptFactory.hideAll()
+        this.loading.close()
     }
 
 }

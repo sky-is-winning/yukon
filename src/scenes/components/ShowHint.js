@@ -21,6 +21,9 @@ export default class ShowHint extends EventComponent {
         gameObject["__ShowHint"] = this;
 
         /* START-USER-CTR-CODE */
+
+        this.hint = gameObject.scene.interface.hint
+
         /* END-USER-CTR-CODE */
     }
 
@@ -32,12 +35,8 @@ export default class ShowHint extends EventComponent {
 
     /* START-USER-CODE */
 
-    get hint() {
-        return this.gameObject.scene.interface.hint
-    }
-
     start() {
-        let gameObject = (this.gameObject.zone) ? this.gameObject.zone : this.gameObject
+        const gameObject = this.gameObject.zone ? this.gameObject.zone : this.gameObject
 
         gameObject.on('pointerover', () => this.onOver())
         gameObject.on('pointerout', () => this.onOut())

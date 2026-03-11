@@ -6,12 +6,6 @@ import FloorButton from './buttons/FloorButton'
 import UpgradeButton from './buttons/UpgradeButton'
 
 
-export const preload = {
-    key: 'igloocatalog-pack',
-    url: 'assets/media/interface/catalogs/igloo/igloocatalog-pack.json',
-    loadString: ['loading', 'igloocatalog']
-}
-
 /* START OF COMPILED CODE */
 
 export default class IglooCatalog extends BookContainer {

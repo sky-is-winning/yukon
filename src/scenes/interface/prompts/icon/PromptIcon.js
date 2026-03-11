@@ -49,6 +49,12 @@ export default class PromptIcon extends BaseImage {
         this.visible = true
     }
 
+    reset() {
+        this.currentKey = ''
+
+        this.setTexture()
+    }
+
     /* END-USER-CODE */
 }
 

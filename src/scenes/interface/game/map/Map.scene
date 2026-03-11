@@ -5,7 +5,9 @@
         "compilerInsertSpaces": true,
         "javaScriptInitFieldsInConstructor": true,
         "exportClass": true,
-        "superClassName": "BaseContainer",
+        "autoImport": true,
+        "displayName": "",
+        "superClassName": "BaseDynamicWidget",
         "preloadMethodName": "",
         "preloadPackFiles": [],
         "createMethodName": "",
@@ -17,7 +19,6 @@
             "type": "Container",
             "id": "bfaa02be-42e7-4151-a022-1a38f8f54b3a",
             "label": "container_1",
-            "components": [],
             "x": 760,
             "y": 480,
             "list": [
@@ -73,7 +74,6 @@
                     "type": "Image",
                     "id": "78f24163-a8fc-466e-aef4-9d47733701c5",
                     "label": "mountains",
-                    "components": [],
                     "texture": {
                         "key": "map",
                         "frame": "mountains"
@@ -85,7 +85,6 @@
                     "type": "Image",
                     "id": "7195e0a7-5c4e-4f00-9419-5a583b6c23e2",
                     "label": "island",
-                    "components": [],
                     "texture": {
                         "key": "map",
                         "frame": "island"
@@ -373,7 +372,7 @@
                         "Button"
                     ],
                     "Button.spriteName": "grey-button",
-                    "Button.callback": "() => { this.visible = false }",
+                    "Button.callback": "() => this.close()",
                     "texture": {
                         "key": "main",
                         "frame": "grey-button"
@@ -385,7 +384,6 @@
                     "type": "Image",
                     "id": "45830b5d-99cb-41f8-8903-65046e08ebfe",
                     "label": "grey_x",
-                    "components": [],
                     "texture": {
                         "key": "main",
                         "frame": "grey-x"
@@ -403,20 +401,18 @@
                     ],
                     "label": "iglooMap",
                     "scope": "CLASS",
-                    "components": [],
                     "x": 0,
                     "y": 0,
-                    "visible": false,
-                    "nestedPrefabs": []
+                    "visible": false
                 }
             ]
         }
     ],
     "plainObjects": [],
     "meta": {
-        "app": "Phaser Editor 2D - Scene Editor",
-        "url": "https://phasereditor2d.com",
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
-        "version": 3
+        "version": 5
     }
 }

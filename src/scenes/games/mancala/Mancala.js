@@ -1,20 +1,22 @@
-import BaseContainer from '@scenes/base/BaseContainer'
-
-import { Button, DraggableContainer, SimpleButton } from '@components/components'
-
-import MancalaHint from './MancalaHint'
-import MancalaPlayer from './MancalaPlayer'
-
-
-export const preload = {
-    key: 'mancala-pack',
-    url: 'assets/media/games/mancala/mancala-pack.json',
-    loadString: 'mancala'
-}
+const maxStoneColor = 5
+const holeSize = 49
+const dropDelay = 168
+const captureDelay = 130
 
 /* START OF COMPILED CODE */
 
-export default class Mancala extends BaseContainer {
+import BaseDynamicWidget from "../../base/BaseDynamicWidget";
+import DraggableContainer from "../../components/DraggableContainer";
+import MancalaPlayer from "./MancalaPlayer";
+import MancalaHint from "./MancalaHint";
+import Button from "../../components/Button";
+/* START-USER-IMPORTS */
+
+import SimpleButton from '@scenes/components/SimpleButton'
+
+/* END-USER-IMPORTS */
+
+export default class Mancala extends BaseDynamicWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 760, y ?? 480);
@@ -176,15 +178,27 @@ export default class Mancala extends BaseContainer {
 
         /* START-USER-CTR-CODE */
 
-        this.maxStoneColor = 5
-        this.holeSize = 49
-        this.dropDelay = 168
-        this.captureDelay = 130
+        this.map = null
+        this.currentTurn = 1
+        this.myTurn = null
+        this.started = false
+        this.gameOver = false
 
-        popup.setInteractive()
-        popup.on('animationcomplete', (animation) => this.onPopupComplete(animation))
+        // Waiting for turn to finish
+        this.wait = false
+
+        this.moveQueue = []
+        this.timerEvents = []
+        this.stones = []
 
         this.createButtons()
+
+        popup.setInteractive()
+        popup.on('animationcomplete', animation => this.onPopupComplete(animation))
+
+        this.addListeners()
+
+        scene.events.once('update', () => this.network.send('get_game'))
 
         /* END-USER-CTR-CODE */
     }
@@ -220,26 +234,6 @@ export default class Mancala extends BaseContainer {
         this.network.events.off('start_game', this.handleStartGame, this)
         this.network.events.off('send_move', this.handleSendMove, this)
         this.network.events.off('close_game', this.handleCloseGame, this)
-    }
-
-    show() {
-        this.map = null
-        this.currentTurn = 1
-        this.myTurn = null
-        this.started = false
-        this.gameOver = false
-
-        // Waiting for turn to finish
-        this.wait = false
-
-        this.moveQueue = []
-        this.timerEvents = []
-        this.stones = []
-
-        super.show()
-
-        this.addListeners()
-        this.network.send('get_game')
     }
 
     close() {
@@ -322,7 +316,7 @@ export default class Mancala extends BaseContainer {
             for (let j = 0; j < count; j++) {
                 this.createStone(i, currentColor)
 
-                currentColor = (currentColor >= this.maxStoneColor)
+                currentColor = (currentColor >= maxStoneColor)
                     ? 1
                     : currentColor + 1
             }
@@ -416,7 +410,7 @@ export default class Mancala extends BaseContainer {
             i++
 
             if (hole.stones.length === 0) {
-                this.delayedCall(i * this.dropDelay, () => {
+                this.delayedCall(i * dropDelay, () => {
                     this.updateTurn(nextHole, args.move)
                 })
             }
@@ -442,7 +436,7 @@ export default class Mancala extends BaseContainer {
         return hole
     }
 
-    dropStone(i, stone, hole, delay = this.dropDelay) {
+    dropStone(i, stone, hole, delay = dropDelay) {
         this.delayedCall(i * delay, () => {
             stone.anims.play(`mancala/stone/${stone.color}/drop`)
 
@@ -461,8 +455,8 @@ export default class Mancala extends BaseContainer {
         let randomNum = Math.random() * 6.283185307179586
 
         // Randomize position in hole
-        stone.x = hole.x + Math.sin(randomNum) * Phaser.Math.Between(0, this.holeSize / 4)
-        stone.y = hole.y + Math.cos(randomNum) * Phaser.Math.Between(0, this.holeSize / 4)
+        stone.x = hole.x + Math.sin(randomNum) * Phaser.Math.Between(0, holeSize / 4)
+        stone.y = hole.y + Math.cos(randomNum) * Phaser.Math.Between(0, holeSize / 4)
 
         hole.stones.push(stone)
     }
@@ -525,14 +519,14 @@ export default class Mancala extends BaseContainer {
         while (captureHole.stones.length > 0) {
             let stone = captureHole.stones.shift()
 
-            this.dropStone(i, stone, currentMancala, this.captureDelay)
+            this.dropStone(i, stone, currentMancala, captureDelay)
 
             i++
         }
 
-        this.dropStone(i, this.holes[hole].stones.shift(), currentMancala, this.captureDelay)
+        this.dropStone(i, this.holes[hole].stones.shift(), currentMancala, captureDelay)
 
-        this.delayedCall(i * this.captureDelay, () => {
+        this.delayedCall(i * captureDelay, () => {
             this.showPopup('capture')
         })
     }
@@ -564,21 +558,11 @@ export default class Mancala extends BaseContainer {
 
     leaveTable() {
         this.removeListeners()
-        this.resetGame()
+
+        this.scene.time.removeEvent(this.timerEvents)
+        this.world.client.sendLeaveSeat()
 
         super.close()
-
-        this.world.client.sendLeaveSeat()
-    }
-
-    resetGame() {
-        this.scene.time.removeEvent(this.timerEvents)
-
-        this.stones.map(stone => stone.destroy())
-        this.holes.map(hole => hole.stones = [])
-
-        this.mancalaPlayer1.reset()
-        this.mancalaPlayer2.reset()
     }
 
     delayedCall(delay, callback) {

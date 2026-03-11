@@ -1,15 +1,15 @@
 import BaseScene from '@scenes/base/BaseScene'
 
+import drawFrame from './frame/drawFrame'
 import Hint from '@scenes/interface/game/hint/Hint'
-import MetricsManager from './metrics/MetricsManager'
 import PromptController from './prompt/PromptController'
+import WidgetManager from './widget/WidgetManager'
+import PaperDollLoader from '@engine/loaders/PaperDollLoader'
 
 
 const Status = Phaser.Scenes
 
 export default class InterfaceController extends BaseScene {
-
-    metricsManager = new MetricsManager()
 
     goingToSleep = new Set()
 
@@ -19,19 +19,15 @@ export default class InterfaceController extends BaseScene {
 
         this.prompt = new PromptController(this)
 
-        this.widgets = this.crumbs.widgets
-        // Dynamically loaded widgets
-        this.loadedWidgets = {}
+        this.widgets = new WidgetManager(this)
+        this.add.existing(this.widgets)
 
-        // Draw frame
-        const graphics = this.add.graphics()
-
-        graphics.lineStyle(16, this.crumbs.frameColor, 1)
-        graphics.strokeRoundedRect(0, 0, 1520, 960, 15)
-        graphics.depth = 100
+        drawFrame(this)
 
         // Last scene interacted with
         this.lastScene
+
+        this.paperDollLoader = new PaperDollLoader(this)
     }
 
     get loading() {
@@ -70,6 +66,8 @@ export default class InterfaceController extends BaseScene {
     }
 
     hideInterface(clearChat = true) {
+        this.closeWidgets()
+
         this.sleepScene(this.main, { clearChat })
     }
 
@@ -116,7 +114,7 @@ export default class InterfaceController extends BaseScene {
             this.scene.bringToTop(scene)
         }
 
-        // Keeps InterfaceController scene always on top, for prompts
+        // Keeps InterfaceController scene always on top
         this.scene.bringToTop()
 
         this.input.setDefaultCursor('default')
@@ -131,11 +129,11 @@ export default class InterfaceController extends BaseScene {
     }
 
     showTourMessage(id, roomId) {
-        if (!(roomId in this.crumbs.scenes.rooms)) {
+        if (!(roomId in this.crumbs.rooms)) {
             return
         }
 
-        const roomName = this.crumbs.scenes.rooms[roomId].key.toLowerCase()
+        const roomName = this.crumbs.rooms[roomId].key.toLowerCase()
         const message = this.crumbs.tour_messages[roomName]
 
         if (message) {
@@ -143,8 +141,8 @@ export default class InterfaceController extends BaseScene {
         }
     }
 
-    showCard(id, refresh = false) {
-        this.main.playerCard.showCard(id, refresh)
+    showCard(playerId, username) {
+        this.main.playerCard.show(playerId, username)
     }
 
     /**
@@ -158,90 +156,39 @@ export default class InterfaceController extends BaseScene {
     }
 
     refreshPlayerCard() {
-        if (this.main.playerCard.visible && this.main.playerCard.id == this.world.client.id) {
-            this.showCard(this.world.client.id, true)
+        if (this.main.playerCard.visible && this.main.playerCard.id === this.world.client.id) {
+            this.main.playerCard.setCoins(this.world.client.coins)
         }
     }
 
-    showWidget(widget) {
-        if (widget.widgetLayer) {
-            widget.widgetLayer.bringToTop(widget)
-        }
-
-        widget.show()
+    loadWidget(key, floatingLayer = null) {
+        this.widgets.loadWidget(key, floatingLayer)
     }
 
-    destroyWidget(widget) {
-        widget.destroy()
-
-        for (const key in this.loadedWidgets) {
-            if (this.loadedWidgets[key] == widget) {
-                delete this.loadedWidgets[key]
-            }
-        }
+    removeWidget(widget) {
+        this.widgets.removeWidget(widget)
     }
 
-    loadWidget(key, addToWidgetLayer = false) {
-        if (!(key in this.widgets)) {
-            return
-        }
-
-        if (key in this.loadedWidgets) {
-            return this.showWidget(this.loadedWidgets[key])
-        }
-
-        const preload = this.widgets[key].preload
-        const callback = () => this.onWidgetLoaded(key, addToWidgetLayer)
-
-        if (!preload) {
-            callback()
-            return
-        }
-
-        const text = this.getWidgetLoadString(preload.loadString)
-
-        this.prompt.showLoading(text, preload.key, preload.url, () => {
-            callback()
-        })
+    closeWidgets() {
+        this.widgets?.closeWidgets()
     }
 
-    getWidgetLoadString(loadString) {
-        if (Array.isArray(loadString)) {
-            return this.getString(...loadString)
-        } else {
-            return this.getString(loadString)
-        }
-    }
-
-    onWidgetLoaded(key, addToWidgetLayer) {
-        const scene = (addToWidgetLayer) ? this.main : this
-
-        const widget = new this.widgets[key].default(scene)
-
-        this.loadedWidgets[key] = widget
-
-        if (addToWidgetLayer) {
-            this.main.addToWidgetLayer(widget)
-        } else {
-            this.add.existing(widget)
-            widget.depth = -1
-        }
-
-        scene.events.once('update', () => {
-            this.showWidget(widget)
-        })
+    unloadWidgets() {
+        this.widgets.unloadWidgets()
     }
 
     updateCatalogCoins(coins) {
-        const books = Object.values(this.loadedWidgets).filter(
-            widget => widget.isBook
-        )
+        const books = this.widgets.findWidget(widget => widget.isBook)
 
         books.forEach(book => {
             if (book.coins) {
                 book.setCoins(coins)
             }
         })
+    }
+
+    getColor(id) {
+        return this.crumbs.colors[id - 1] || this.crumbs.colors[0]
     }
 
     resetCursor(scene = this) {

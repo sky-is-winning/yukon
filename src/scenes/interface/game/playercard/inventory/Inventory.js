@@ -320,6 +320,18 @@ export default class Inventory extends BaseContainer {
         }
     }
 
+    reset() {
+        for (const slot of this.slots) {
+            if (slot.item) {
+                slot.item.destroy()
+            }
+
+            if (slot.spinner) {
+                slot.spinner.destroy()
+            }
+        }
+    }
+
     /* END-USER-CODE */
 }
 

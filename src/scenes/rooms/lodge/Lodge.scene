@@ -8,7 +8,8 @@
         "superClassName": "RoomScene",
         "preloadMethodName": "_preload",
         "preloadPackFiles": [
-            "yukon/assets/media/rooms/lodge/lodge-pack.json"
+            "yukon/assets/media/rooms/lodge/lodge-pack.json",
+            "yukon/assets/media/shared/tables/four/four_tables-pack.json"
         ],
         "createMethodName": "_create",
         "sceneKey": "Lodge",
@@ -20,7 +21,6 @@
             "type": "Image",
             "id": "76eaef0a-15dc-43f1-9bc8-5622f0ec228e",
             "label": "bg",
-            "components": [],
             "texture": {
                 "key": "lodge",
                 "frame": "bg"
@@ -53,7 +53,6 @@
             "type": "Image",
             "id": "53e3dc25-0ed5-456d-ab6b-fcf13df0fceb",
             "label": "footrest",
-            "components": [],
             "texture": {
                 "key": "lodge",
                 "frame": "footrest"
@@ -67,7 +66,6 @@
             "type": "Image",
             "id": "c015247e-c4dd-45b4-a287-6530da7dbc01",
             "label": "chair",
-            "components": [],
             "texture": {
                 "key": "lodge",
                 "frame": "chair"
@@ -123,7 +121,6 @@
             "type": "Image",
             "id": "77cd1882-69fd-448c-979f-f284c45113b8",
             "label": "rods",
-            "components": [],
             "texture": {
                 "key": "lodge",
                 "frame": "rods"
@@ -175,7 +172,6 @@
             "type": "Image",
             "id": "74960a23-c275-47bd-89f3-9f7d6f6e3cd1",
             "label": "catalog_small_tape",
-            "components": [],
             "texture": {
                 "key": "lodge",
                 "frame": "catalog_small_tape"
@@ -194,10 +190,8 @@
             ],
             "label": "table207",
             "scope": "CLASS",
-            "components": [],
             "x": 1020,
-            "y": 814,
-            "nestedPrefabs": []
+            "y": 814
         },
         {
             "prefabId": "8163f2e4-12be-4ba3-9eb1-464060e5ecd3",
@@ -208,10 +202,8 @@
             ],
             "label": "table206",
             "scope": "CLASS",
-            "components": [],
             "x": 620,
-            "y": 794,
-            "nestedPrefabs": []
+            "y": 794
         },
         {
             "prefabId": "a6e91d83-75ce-421c-94ea-d375188195eb",
@@ -222,10 +214,8 @@
             ],
             "label": "table205",
             "scope": "CLASS",
-            "components": [],
             "x": 600,
-            "y": 513,
-            "nestedPrefabs": []
+            "y": 513
         },
         {
             "type": "Image",
@@ -330,10 +320,10 @@
     ],
     "plainObjects": [],
     "meta": {
-        "app": "Phaser Editor 2D - Scene Editor",
-        "url": "https://phasereditor2d.com",
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
-        "version": 3
+        "version": 5
     },
     "lists": [
         {

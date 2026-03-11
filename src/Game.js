@@ -1,4 +1,11 @@
+import './patches/patches'
+
 import Boot from '@engine/boot/Boot'
+import InterfaceController from '@engine/interface/InterfaceController'
+import MemoryManager from '@engine/memory/MemoryManager'
+import RuffleController from '@engine/ruffle/RuffleController'
+import WorldController from '@engine/world/WorldController'
+
 import Network from '@engine/network/Network'
 import registerNinePatchContainerFactory from '@engine/utils/ninepatch/registerNinePatchContainerFactory'
 import SoundManager from '@engine/sound/SoundManager'
@@ -25,6 +32,13 @@ export default class Game extends Phaser.Game {
 
         registerNinePatchContainerFactory()
 
+        // Add initial scenes
+        this.scene.add('InterfaceController', InterfaceController)
+        this.scene.add('MemoryManager', MemoryManager)
+        this.scene.add('RuffleController', RuffleController)
+        this.scene.add('WorldController', WorldController)
+
+        // Start boot
         this.scene.add('Boot', Boot, true)
     }
 

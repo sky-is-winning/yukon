@@ -46,12 +46,6 @@ npm install
 npm run dev
 ```
 
-* Running [Phaser Editor](https://phasereditor2d.com/) for scene editing.
-
-```console
-npm run editor
-```
-
 * Building the client for production. Production files can be found in "/dist".
 
 ```console

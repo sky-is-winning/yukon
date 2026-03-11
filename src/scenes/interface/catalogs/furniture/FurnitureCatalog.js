@@ -5,12 +5,6 @@ import { Button, Interactive } from '@components/components'
 import BuyButton from './buttons/BuyButton'
 
 
-export const preload = {
-    key: 'furniturecatalog-pack',
-    url: 'assets/media/interface/catalogs/furniture/furniturecatalog-pack.json',
-    loadString: ['loading', 'furniturecatalog']
-}
-
 /* START OF COMPILED CODE */
 
 export default class FurnitureCatalog extends BookContainer {

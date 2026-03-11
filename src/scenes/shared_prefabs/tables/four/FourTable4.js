@@ -19,13 +19,13 @@ export default class FourTable4 extends Phaser.GameObjects.Container {
 
 
         // table
-        const table = scene.add.image(0, 0, "attic", "table/table_4");
+        const table = scene.add.image(0, 0, "four_tables", "table_4");
         table.setOrigin(0.5033557046979866, 0.5308641975308642);
         this.add(table);
 
         // game
-        const game = scene.add.image(-5, -58, "attic", "table/game_4");
-        game.setOrigin(0.4537037037037037, 0.4805194805194805);
+        const game = scene.add.image(-5, -59, "four_tables", "game_4");
+        game.setOrigin(0.4537037037037037, 0.4675324675324675);
         this.add(game);
 
         // done2
@@ -46,7 +46,7 @@ export default class FourTable4 extends Phaser.GameObjects.Container {
 
         // game (components)
         const gameButton = new Button(game);
-        gameButton.spriteName = "table/game_4";
+        gameButton.spriteName = "game_4";
         gameButton.activeFrame = false;
         const gameMoveTo = new MoveTo(game);
         gameMoveTo.x = this.x;

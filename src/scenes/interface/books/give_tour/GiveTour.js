@@ -1,9 +1,3 @@
-export const preload = {
-    key: 'give_tour-pack',
-    url: 'assets/media/interface/books/give_tour/give_tour-pack.json',
-    loadString: 'give_tour'
-}
-
 /* START OF COMPILED CODE */
 
 import BookContainer from "../BookContainer";
@@ -101,7 +95,6 @@ export default class GiveTour extends BookContainer {
 
         // page1
         const page1 = scene.add.container(0, 0);
-        page1.visible = false;
         this.add(page1);
 
         // page0001

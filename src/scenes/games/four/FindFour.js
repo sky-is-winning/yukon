@@ -1,19 +1,16 @@
-import BaseContainer from '@scenes/base/BaseContainer'
-
-import { Button, DraggableContainer, SimpleButton } from '@components/components'
-
-import FindFourPlayer from './FindFourPlayer'
-
-
-export const preload = {
-    key: 'four-pack',
-    url: 'assets/media/games/four/four-pack.json',
-    loadString: 'four'
-}
-
 /* START OF COMPILED CODE */
 
-export default class FindFour extends BaseContainer {
+import BaseDynamicWidget from "../../base/BaseDynamicWidget";
+import DraggableContainer from "../../components/DraggableContainer";
+import FindFourPlayer from "./FindFourPlayer";
+import Button from "../../components/Button";
+/* START-USER-IMPORTS */
+
+import SimpleButton from '@scenes/components/SimpleButton'
+
+/* END-USER-IMPORTS */
+
+export default class FindFour extends BaseDynamicWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 730, y ?? 340);
@@ -119,11 +116,23 @@ export default class FindFour extends BaseContainer {
 
         /* START-USER-CTR-CODE */
 
-        this.scene = scene
-
+        this.timerEvents = []
         this.counters = []
         this.buttons = []
+
         this.createButtons()
+
+        this.map = null
+        this.myTurn = null
+        this.currentTurn = 1
+        this.started = false
+
+        this.addListeners()
+
+        scene.events.once('update', () => {
+            this.updateButtons()
+            this.network.send('get_game')
+        })
 
         /* END-USER-CTR-CODE */
     }
@@ -151,21 +160,6 @@ export default class FindFour extends BaseContainer {
         this.network.events.off('start_game', this.handleStartGame, this)
         this.network.events.off('send_move', this.handleSendMove, this)
         this.network.events.off('close_game', this.handleCloseGame, this)
-    }
-
-    show() {
-        this.map = null
-        this.myTurn = null
-        this.currentTurn = 1
-        this.started = false
-
-        this.visible = true
-
-        this.updateButtons()
-        this.updateHover()
-
-        this.addListeners()
-        this.network.send('get_game')
     }
 
     close() {
@@ -331,6 +325,8 @@ export default class FindFour extends BaseContainer {
             },
             repeat: y
         })
+
+        this.timerEvents.push(timer)
     }
 
     updateTurn(turn) {
@@ -364,20 +360,11 @@ export default class FindFour extends BaseContainer {
 
     leaveTable() {
         this.removeListeners()
-        this.resetGame()
 
-        this.visible = false
-
+        this.scene.time.removeEvent(this.timerEvents)
         this.world.client.sendLeaveSeat()
-    }
 
-    resetGame() {
-        for (let counter of this.counters) {
-            counter.destroy()
-        }
-
-        this.player1.reset()
-        this.player2.reset()
+        super.close()
     }
 
     /* END-USER-CODE */

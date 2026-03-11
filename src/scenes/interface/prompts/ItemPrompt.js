@@ -1,6 +1,3 @@
-import ItemPromptLoader from '@engine/loaders/ItemPromptLoader'
-
-
 /* START OF COMPILED CODE */
 
 import BaseContainer from "../../base/BaseContainer";
@@ -72,8 +69,6 @@ export default class ItemPrompt extends BaseContainer {
 
         this.text.setWordWrapWidth(616, true)
 
-        this.loader = new ItemPromptLoader(scene, this)
-
         /* END-USER-CTR-CODE */
     }
 
@@ -87,6 +82,12 @@ export default class ItemPrompt extends BaseContainer {
         super.show()
 
         this.promptIcon.loadIcon(loadConfig)
+    }
+
+    close() {
+        this.promptIcon.reset()
+
+        super.close()
     }
 
     showItem(id) {

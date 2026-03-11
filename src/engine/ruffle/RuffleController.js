@@ -26,8 +26,6 @@ export default class RuffleController extends BaseScene {
         this.player = null
         this.container = null
 
-        this.isActive = false
-
         this.path = ''
 
         // Object accessed from Flash ExternalInterface
@@ -91,8 +89,8 @@ export default class RuffleController extends BaseScene {
             joinRoom: (roomId) => {
                 this.close()
 
-                if (roomId in this.crumbs.scenes.rooms) {
-                    const room = this.crumbs.scenes.rooms[roomId]
+                if (roomId in this.crumbs.rooms) {
+                    const room = this.crumbs.rooms[roomId]
 
                     this.world.client.sendJoinRoom(roomId, room.key, room.x, room.y)
                 }
@@ -158,7 +156,7 @@ export default class RuffleController extends BaseScene {
     }
 
     update() {
-        if (this.isActive) {
+        if (this.interface.prompt.isPromptVisible) {
             // Lower DOM container depth so that prompt is above Ruffle content
             if (this.interface.prompt.isPromptVisible) {
                 this.sendToBack()
@@ -170,22 +168,17 @@ export default class RuffleController extends BaseScene {
         }
     }
 
-    bootGame(game) {
-        const gamePath = game.path || `${game.key}/bootstrap.swf`
+    bootGame(path, music) {
+        this.path = `${gamesPath}${path}`
+        this.music = music || 0
 
-        this.path = `${gamesPath}${gamePath}`
-        this.music = game.music || 0
-
-        this.boot()
+        this.events.once('update', () => this.boot())
     }
 
     boot() {
-        this.isActive = true
-
         const ruffle = window.RufflePlayer.newest()
 
         this.player = ruffle.createPlayer()
-
         this.container.setElement(this.player, this.playerStyle)
 
         this.player.load({
@@ -203,18 +196,22 @@ export default class RuffleController extends BaseScene {
         })
     }
 
-    close() {
-        setTimeout(() => {
-            this.player.pause()
-        }, 100)
+    stop() {
+        this.events.off('update')
 
-        this.container.visible = false
-        this.isActive = false
+        this.path = null
+        this.music = null
 
-        this.stopMusic()
+        this.removePlayer()
         this.resetDepth()
+        this.stopMusic()
 
-        this.scene.sleep()
+        this.scene.stop()
+    }
+
+    removePlayer() {
+        this.player?.remove()
+        this.player = null
     }
 
     resetDepth() {

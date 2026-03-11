@@ -30,9 +30,10 @@ export default class IglooScene extends RoomScene {
     }
 
     init(data) {
-        this.args = data.args
-        this.id = data.args.igloo
-        this.music = data.args.music
+        super.init({ id: data.igloo, users: data.users })
+
+        this.args = data
+        this.music = data.music
 
         this.loader = new FurnitureLoader(this)
         this.petLoader = new IglooPetLoader(this)
@@ -41,10 +42,6 @@ export default class IglooScene extends RoomScene {
         this.quantities = {}
 
         this.pets = {}
-
-        this.events.once('shutdown', () => this.onShutdown())
-
-        super.init()
     }
 
     preload() {
@@ -74,10 +71,6 @@ export default class IglooScene extends RoomScene {
         let activeQuantity = (this.quantities[item]) ? this.quantities[item] : 0
 
         return Math.max(inventoryQuantity - activeQuantity, 0)
-    }
-
-    onShutdown() {
-        this.interface.hideIglooEdit()
     }
 
     create() {
@@ -179,13 +172,11 @@ export default class IglooScene extends RoomScene {
     updateFlooring(flooring) {
         this.args.flooring = flooring
 
-        // Close catalog
-        for (let widget in this.interface.loadedWidgets) {
-            widget = this.interface.loadedWidgets[widget]
+        const books = this.interface.widgets.findWidget(widget => widget.isBook)
 
-            if (widget.isBook && widget.visible) {
-                widget.close()
-            }
+        // Close catalog
+        for (const widget of books) {
+            widget.close()
         }
 
         if (flooring == 0 && this.flooring) {
@@ -244,7 +235,7 @@ export default class IglooScene extends RoomScene {
     }
 
     updateIgloo(type) {
-        if (this.id != this.world.client.id || this.args.type == type || !(type in this.crumbs.scenes.igloos)) {
+        if (this.id != this.world.client.id || this.args.type == type || !(type in this.crumbs.igloos)) {
             return
         }
 
@@ -273,6 +264,12 @@ export default class IglooScene extends RoomScene {
 
         this.pets[pet.id] = iglooPet
         this.add.existing(iglooPet)
+    }
+
+    stop() {
+        this.interface.hideIglooEdit()
+
+        super.stop()
     }
 
     /*========== Physics ==========*/

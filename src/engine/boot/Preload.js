@@ -46,6 +46,7 @@ export default class Preload extends BaseScene {
         this.interface.hideLoading()
 
         this.scene.start('InterfaceController')
+        this.scene.start('MemoryManager')
         this.scene.start('Start')
 
         this.interface.bringToTop()

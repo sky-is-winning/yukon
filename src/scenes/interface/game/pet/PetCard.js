@@ -1,6 +1,6 @@
 /* START OF COMPILED CODE */
 
-import BaseContainer from "../../../base/BaseContainer";
+import BaseWidget from "../../../base/BaseWidget";
 import DraggableContainer from "../../../components/DraggableContainer";
 import PetInventory from "./inventory/PetInventory";
 import Button from "../../../components/Button";
@@ -9,7 +9,7 @@ import SimpleButton from "../../../components/SimpleButton";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class PetCard extends BaseContainer {
+export default class PetCard extends BaseWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 760, y ?? 480);
@@ -227,7 +227,6 @@ export default class PetCard extends BaseContainer {
         this.closeInventory()
         this.updateStats()
 
-        this.widgetLayer.bringToTop(this)
         super.show()
     }
 

@@ -50,6 +50,7 @@ export default class Lodge extends RoomScene {
     _preload() {
 
         this.load.pack("lodge-pack", "assets/media/rooms/lodge/lodge-pack.json");
+        this.load.pack("four_tables-pack", "assets/media/shared/tables/four/four_tables-pack.json");
     }
 
     /** @returns {void} */

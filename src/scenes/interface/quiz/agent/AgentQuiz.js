@@ -1,12 +1,6 @@
-export const preload = {
-    key: 'agent_quiz-pack',
-    url: 'assets/media/interface/quiz/agent/agent_quiz-pack.json',
-    loadString: 'agent_quiz'
-}
-
 /* START OF COMPILED CODE */
 
-import BaseContainer from "../../../base/BaseContainer";
+import BaseDynamicWidget from "../../../base/BaseDynamicWidget";
 import Interactive from "../../../components/Interactive";
 import QuizButton from "../button/QuizButton";
 import Button from "../../../components/Button";
@@ -16,7 +10,7 @@ import MultiChoiceQuiz from '@engine/interface/quiz/MultiChoiceQuiz'
 
 /* END-USER-IMPORTS */
 
-export default class AgentQuiz extends BaseContainer {
+export default class AgentQuiz extends BaseDynamicWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 0, y ?? 0);
@@ -275,13 +269,15 @@ export default class AgentQuiz extends BaseContainer {
 
         this.quiz = null
 
+        this.setupQuiz()
+
         /* END-USER-CTR-CODE */
     }
 
 
     /* START-USER-CODE */
 
-    show() {
+    setupQuiz() {
         if (this.world.client.isSecretAgent) {
             this.setAlready()
 
@@ -292,8 +288,6 @@ export default class AgentQuiz extends BaseContainer {
             this.quiz = new MultiChoiceQuiz(this.crumbs.agent_quiz)
             this.setStart()
         }
-
-        super.show()
     }
 
     setStart() {

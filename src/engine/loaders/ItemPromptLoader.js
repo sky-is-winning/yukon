@@ -31,9 +31,13 @@ export default class ItemPromptLoader extends BaseLoader {
     }
 
     onFileComplete(key, scale) {
-        if (this.textureExists(key)) {
-            this.prompt.addIcon(key, scale)
+        if (!this.textureExists(key)) {
+            return
         }
+
+        this.memory.register(key)
+
+        this.prompt.addIcon(key, scale)
     }
 
 }

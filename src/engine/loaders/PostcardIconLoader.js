@@ -58,6 +58,8 @@ export default class PostcardIconLoader extends BaseLoader {
             return
         }
 
+        this.memory.register(key)
+
         const index = this.pageIds.indexOf(postcard)
         const postcardItem = this.postcardItems[index]
 
@@ -75,8 +77,6 @@ export default class PostcardIconLoader extends BaseLoader {
     }
 
     onLoadError(file) {
-        super.onLoadError(file)
-
         const postcard = this.getKeyId(file.key)
 
         const index = this.pageIds.indexOf(postcard)

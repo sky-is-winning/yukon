@@ -1,9 +1,3 @@
-export const preload = {
-    key: 'petscatalog-pack',
-    url: 'assets/media/interface/catalogs/pets/petscatalog-pack.json',
-    loadString: ['loading', 'petscatalog']
-}
-
 /* START OF COMPILED CODE */
 
 import BookContainer from "../../books/BookContainer";

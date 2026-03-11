@@ -80,7 +80,7 @@ export default class BuddyItem extends BaseContainer {
             return
         }
 
-        this.interface.showCard(this.id)
+        this.interface.showCard(this.id, this.username.text)
     }
 
     showRemoveIgnore() {

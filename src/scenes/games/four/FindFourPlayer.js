@@ -79,28 +79,11 @@ export default class FindFourPlayer extends Phaser.GameObjects.Container {
         this.counter.visible = true
     }
 
-    reset() {
-        this.turnId = null
+    setActive() {
+        const active = this.turnId === this.parentContainer.currentTurn
 
-        this.spinner.visible = true
-        this.waiting.visible = true
-
-        this.username.text = ''
-        this.username.visible = false
-
-        this.counter.setFrame('counter_1')
-        this.counter.visible = false
-
-        this.setActive(true)
-    }
-
-    setActive(reset = null) {
-        let active = (reset)
-            ? false
-            : this.turnId === this.parentContainer.currentTurn
-
-        let color = (active) ? '#fff' : this.inactiveColor
-        let stroke = (active) ? '#000' : this.inactiveStroke
+        const color = active ? '#fff' : this.inactiveColor
+        const stroke = active ? '#000' : this.inactiveStroke
 
         this.username.setColor(color)
         this.username.setStroke(stroke)

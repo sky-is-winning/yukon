@@ -24,7 +24,7 @@ export default class Table extends Plugin {
     joinTable(args) {
         this.world.client.sendMoveToSeat(args.table, args.seat)
 
-        this.interface.loadWidget(this.types[args.game], true)
+        this.interface.loadWidget(this.types[args.game], this.interface.main.widgetLayer)
     }
 
     updateTable(args) {

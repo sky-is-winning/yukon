@@ -235,7 +235,6 @@
                     "type": "Container",
                     "id": "fc3f2a73-762a-4d4f-a636-6617da1cf847",
                     "label": "page1",
-                    "visible": false,
                     "list": [
                         {
                             "type": "Image",
@@ -354,8 +353,8 @@
     ],
     "plainObjects": [],
     "meta": {
-        "app": "Phaser Editor 2D - Scene Editor",
-        "url": "https://phasereditor2d.com",
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
         "version": 5
     },

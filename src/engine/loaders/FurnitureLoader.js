@@ -29,6 +29,8 @@ export default class FurnitureLoader extends BaseLoader {
             return
         }
 
+        this.memory.register(key)
+
         let sprite = new FurnitureSprite(this.scene, item, crate, x, y, key, rotation, frame)
         this.scene.add.existing(sprite)
     }

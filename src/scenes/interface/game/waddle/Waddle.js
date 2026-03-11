@@ -1,13 +1,13 @@
 /* START OF COMPILED CODE */
 
-import BaseContainer from "../../../base/BaseContainer";
+import BaseWidget from "../../../base/BaseWidget";
 import DraggableContainer from "../../../components/DraggableContainer";
 import WaddleItem from "./waddle_item/WaddleItem";
 import Button from "../../../components/Button";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class Waddle extends BaseContainer {
+export default class Waddle extends BaseWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 760, y ?? 480);

@@ -76,8 +76,10 @@ export default class Igloo extends Plugin {
     }
 
     getIgloos(args) {
-        if (this.interface.loadedWidgets.Map) {
-            this.interface.loadedWidgets.Map.iglooMap.setIgloos(args.igloos)
+        const map = this.interface.widgets.getWidget('Map')
+
+        if (map) {
+            map.iglooMap.setIgloos(args.igloos)
         }
     }
 

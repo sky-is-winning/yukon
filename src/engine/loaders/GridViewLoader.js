@@ -79,7 +79,13 @@ export default class GridViewLoader extends BaseLoader {
     }
 
     onFileComplete(key, item) {
-        if (!this.gridView.visible || !this.textureExists(key)) {
+        if (!this.textureExists(key)) {
+            return
+        }
+
+        this.memory.register(key)
+
+        if (!this.gridView.visible) {
             return
         }
 
@@ -92,8 +98,6 @@ export default class GridViewLoader extends BaseLoader {
     }
 
     onLoadError(file) {
-        super.onLoadError(file)
-
         if (!this.gridView.visible) {
             return
         }

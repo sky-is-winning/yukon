@@ -1,28 +1,34 @@
-import BaseContainer from '@scenes/base/BaseContainer'
-
-import { Animation, Button, DraggableContainer, Interactive } from '@components/components'
-
-import Inventory from './inventory/Inventory'
-import InventorySort from './inventory_sort/InventorySort'
-import Buttons from './buttons/Buttons'
-import PaperDoll from './paperdoll/PaperDoll'
-
-
 /* START OF COMPILED CODE */
 
-export default class PlayerCard extends BaseContainer {
+import BaseWidget from "../../../base/BaseWidget";
+import DraggableContainer from "../../../components/DraggableContainer";
+import Interactive from "../../../components/Interactive";
+import PaperDoll from "./paperdoll/PaperDoll";
+import Buttons from "./buttons/Buttons";
+import Button from "../../../components/Button";
+import InventorySort from "./inventory_sort/InventorySort";
+import Inventory from "./inventory/Inventory";
+import Animation from "../../../components/Animation";
+/* START-USER-IMPORTS */
+/* END-USER-IMPORTS */
+
+export default class PlayerCard extends BaseWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 760, y ?? 460);
 
         /** @type {Phaser.GameObjects.Container} */
         this.photo;
+        /** @type {Phaser.GameObjects.Image} */
+        this.spinner;
         /** @type {PaperDoll} */
         this.paperDoll;
         /** @type {Buttons} */
         this.buttons;
         /** @type {Phaser.GameObjects.Text} */
         this.coins;
+        /** @type {Phaser.GameObjects.Container} */
+        this.stats;
         /** @type {Phaser.GameObjects.Text} */
         this.stamps;
         /** @type {Phaser.GameObjects.Container} */
@@ -48,12 +54,17 @@ export default class PlayerCard extends BaseContainer {
         const photo = scene.add.container(-205, -206);
         this.add(photo);
 
+        // spinner
+        const spinner = scene.add.image(0, -2, "main", "card-spinner");
+        this.add(spinner);
+
         // card_bg
         const card_bg = scene.add.image(0, 0, "main", "card-bg-player");
         this.add(card_bg);
 
         // paperDoll
         const paperDoll = new PaperDoll(scene, 0, 0);
+        paperDoll.visible = false;
         this.add(paperDoll);
 
         // buttons
@@ -63,6 +74,7 @@ export default class PlayerCard extends BaseContainer {
 
         // stats
         const stats = scene.add.container(-13, 255);
+        stats.visible = false;
         this.add(stats);
 
         // card_coin
@@ -73,14 +85,14 @@ export default class PlayerCard extends BaseContainer {
         const coins = scene.add.text(-126, -25, "", {});
         coins.setOrigin(0, 0.5);
         coins.text = "Your Coins: 000000";
-        coins.setStyle({ "color": "#000000ff", "fixedWidth":300,"fontFamily": "Arial", "fontSize": "24px" });
+        coins.setStyle({ "color": "#000000ff", "fixedWidth": 300, "fontFamily": "Arial", "fontSize": "24px" });
         stats.add(coins);
 
         // stamps
         const stamps = scene.add.text(-126, 23, "", {});
         stamps.setOrigin(0, 0.5);
         stamps.text = "Your Stamps: 88/888";
-        stamps.setStyle({ "color": "#000000ff", "fixedWidth":300,"fontFamily": "Arial", "fontSize": "24px" });
+        stamps.setStyle({ "color": "#000000ff", "fixedWidth": 300, "fontFamily": "Arial", "fontSize": "24px" });
         stats.add(stamps);
 
         // stamp_button
@@ -95,7 +107,7 @@ export default class PlayerCard extends BaseContainer {
         const username = scene.add.text(0, -238, "", {});
         username.setOrigin(0.5, 0.5);
         username.text = "Username";
-        username.setStyle({ "align": "center", "color": "#000000ff", "fixedWidth":360,"fontFamily": "Arial", "fontSize": "32px", "fontStyle": "bold" });
+        username.setStyle({ "align": "center", "color": "#000000ff", "fixedWidth": 360, "fontFamily": "Arial", "fontSize": "32px", "fontStyle": "bold" });
         this.add(username);
 
         // x_button
@@ -113,6 +125,7 @@ export default class PlayerCard extends BaseContainer {
 
         // inventory
         const inventory = new Inventory(scene, -135, 33);
+        inventory.visible = false;
         this.add(inventory);
 
         // badge
@@ -129,7 +142,7 @@ export default class PlayerCard extends BaseContainer {
         badge.add(badge_lines_lines);
 
         // stripes
-        const stripes = scene.add.image(0, 56, "main", "badge/stripes/4");
+        const stripes = scene.add.image(0, 56, "main", "badge/stripes/0");
         stripes.setOrigin(0.5, 0.5051546391752577);
         badge.add(stripes);
 
@@ -157,7 +170,7 @@ export default class PlayerCard extends BaseContainer {
         // x_button (components)
         const x_buttonButton = new Button(x_button);
         x_buttonButton.spriteName = "blue-button";
-        x_buttonButton.callback = () => { this.visible = false };
+        x_buttonButton.callback = () => this.close();
 
         // badge_lines_lines (components)
         const badge_lines_linesAnimation = new Animation(badge_lines_lines);
@@ -165,6 +178,7 @@ export default class PlayerCard extends BaseContainer {
         badge_lines_linesAnimation.end = 180;
 
         this.photo = photo;
+        this.spinner = spinner;
         this.paperDoll = paperDoll;
         this.buttons = buttons;
         this.coins = coins;
@@ -178,8 +192,17 @@ export default class PlayerCard extends BaseContainer {
 
         /* START-USER-CTR-CODE */
 
-        // Active penguin id
+        // Active player id
         this.id = null
+
+        this.spinnerTween = scene.tweens.add({
+            targets: spinner,
+            angle: { from: 0, to: 180 },
+            duration: 900,
+            repeat: -1,
+            ease: 'Cubic',
+            paused: true
+        })
 
         /* END-USER-CTR-CODE */
     }
@@ -187,90 +210,117 @@ export default class PlayerCard extends BaseContainer {
 
     /* START-USER-CODE */
 
-    /**
-     * Shows a player card by id, if the user is found in the current room the penguin object can
-     * be taken from there. Otherwise the penguin object must be fetched from the server.
-     *
-     * @param {number} id - Penguin ID
-     * @param {boolean} refresh - Whether or not a card should pass the already open check
-     */
-    showCard(id, refresh = false) {
-        // Don't open player's card if it's already open
-        if (id == this.id && this.visible && !refresh) {
-            this.interface.showWidget(this)
+    show(playerId, username) {
+        if (this.visible && playerId === this.id) {
             return
         }
 
-        if (id in this.world.room.penguins) {
-            let penguin = this.world.room.penguins[id]
-            this._showCard(penguin, penguin.items.flat)
+        this.reset()
+
+        this.id = playerId
+
+        this.setUsername(username)
+        this.updateButtons()
+
+        if (playerId in this.world.room.penguins) {
+            this.updatePlayer(this.world.room.penguins[playerId])
 
         } else {
-            // Fetch penguin object from server
-            this.network.send('get_player', { id: id })
+            this.startSpinner()
+            this.network.send('get_player', { id: playerId })
+        }
+
+        super.show()
+    }
+
+    close() {
+        super.close()
+        this.reset()
+    }
+
+    updatePlayer(player) {
+        const { id, username, joinTime, isClient } = player
+
+        if (id !== this.id) {
+            return
+        }
+
+        this.updateElements({
+            username,
+            coins: isClient ? this.world.client.coins : 0,
+            isClient
+        })
+
+        this.loadDoll(player.items?.flat || player, isClient)
+
+        this.updateBadge(joinTime)
+
+        this.inventorySort.closeMenu()
+    }
+
+    updateElements({ username, coins, isClient }) {
+        this.setUsername(username)
+        this.setCoins(coins)
+
+        this.inventory.visible = isClient
+        this.stats.visible = isClient
+        this.buttons.visible = !isClient
+
+        if (isClient) {
+            this.updateInventory()
         }
     }
 
-    /**
-     * Primary showCard function, which accepts a penguin object, and optionally an items object to
-     * fill the player card with the correct data. The items object is not required if the penguin is fetched
-     * from the server due to all necessary data being available from the penguin object.
-     *
-     * @param {object} penguin - Penguin object
-     * @param {object} items - Penguin items object
-     */
-    _showCard(penguin, items = penguin) {
-        // Text
-        this.username.text = penguin.username
+    setUsername(username) {
+        this.username.text = username
+    }
 
-        // Paper doll
-        this.paperDoll.loadDoll(items, penguin.isClient)
+    setCoins(coins) {
+        this.coins.text = `Your Coins: ${coins}`
+    }
 
-        // Visible elements
-        if (penguin.isClient) {
-            this.coins.text = `Your Coins: ${this.world.client.coins}`
-            this.stamps.text = `Your Stamps: ${this.world.client.stamps.length}/${this.world.totalStampsAvailable}`
-            this.stats.visible = true
-            this.buttons.visible = false
-            this.inventory.visible = true
-            this.inventory.showPage()
+    setStamps(stamps) {
+        this.stamps.text = `Your Stamps: ${this.world.client.stamps.length}/${this.world.totalStampsAvailable}`
+    }
 
-        } else {
-            this.stats.visible = false
-            this.buttons.visible = true
-            this.inventory.visible = false
-        }
+    updateInventory() {
+        this.inventory.showPage()
+    }
 
-        this.inventorySort.closeMenu()
+    loadDoll(items, isClient) {
+        this.paperDoll.visible = true
+        this.paperDoll.loadDoll(items, isClient)
+    }
 
-        this.id = penguin.id
-
-        this.updateButtons()
-        this.updateBadge(penguin.joinTime)
-
-        this.interface.showWidget(this)
+    resetDoll() {
+        this.paperDoll.visible = false
+        this.paperDoll.removeItems()
     }
 
     updateButtons() {
         if (this.buttons.visible) {
-            let relationship = this.world.getRelationship(this.id)
+            const relationship = this.world.getRelationship(this.id)
+
             this.buttons.updateButtons(relationship)
         }
     }
 
-    updateBadge(joinTime) {
+    resetButtons() {
+        this.buttons.resetButtons()
+    }
+
+    updateBadge(joinTime = null) {
+        this.badge.visible = !!joinTime
+
         if (!joinTime) {
-            this.badge.visible = false
             return
         }
 
-        this.badge.visible = true
+        const oneDay = 1000 * 60 * 60 * 24
+        const timeDiff = Date.now() - Date.parse(joinTime)
+        const daysDiff = Math.round(timeDiff / oneDay)
 
-        let oneDay = 1000 * 60 * 60 * 24
-        let timeDiff = Date.now() - Date.parse(joinTime)
-        let daysDiff = Math.round(timeDiff / oneDay)
-
-        let months = Math.floor(daysDiff / 30)
+        const months = Math.floor(daysDiff / 30)
         let frame
 
         if (months <= 6) {
@@ -291,6 +341,39 @@ export default class PlayerCard extends BaseContainer {
     loadStampbook(id) {
         this.interface.stampbookId = id
         this.interface.loadWidget("Stampbook")
+    }
+
+    startSpinner() {
+        this.spinnerTween.seek(0)
+        this.spinnerTween.resume()
+
+        this.spinner.visible = true
+    }
+
+    stopSpinner() {
+        this.spinner.visible = false
+
+        this.spinnerTween.pause()
+        this.spinner.angle = 0
+    }
+
+    reset() {
+        this.id = null
+
+        this.updateElements({
+            username: '',
+            coins: 0,
+            isClient: false
+        })
+
+        this.resetDoll()
+
+        this.resetButtons()
+        this.updateBadge()
+
+        this.inventory.reset()
+
+        this.stopSpinner()
     }
 
     /* END-USER-CODE */

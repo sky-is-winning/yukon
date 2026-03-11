@@ -99,24 +99,8 @@ export default class MancalaPlayer extends Phaser.GameObjects.Container {
         this.score.visible = true
     }
 
-    reset() {
-        this.turnId = null
-
-        this.spinner.visible = true
-        this.waiting.visible = true
-
-        this.username.text = ''
-        this.username.visible = false
-        this.score.visible = false
-
-        this.setActive(true)
-        this.setScoreText(0)
-    }
-
-    setActive(reset = false) {
-        let active = (reset)
-            ? false
-            : this.turnId === this.parentContainer.currentTurn
+    setActive() {
+        let active = this.turnId === this.parentContainer.currentTurn
 
         let color = (active) ? '#fff' : this.inactiveColor
         let stroke = (active) ? '#000' : this.inactiveStroke

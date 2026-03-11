@@ -626,9 +626,9 @@ export default class CardJitsu extends GameScene {
             return
         }
 
-        this.interface.events.once('sensei_ready', () => {
-            this.interface.loadedWidgets.Sensei.rankUp(this.rankUp)
-        })
+        this.interface.events.once('create_widget_sensei', () =>
+            this.interface.widgets.getWidget('Sensei')?.rankUp(this.rankUp)
+        )
 
         this.interface.loadWidget('Sensei')
     }

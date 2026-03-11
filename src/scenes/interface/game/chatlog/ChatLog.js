@@ -91,6 +91,7 @@ export default class ChatLog extends BaseContainer {
 
             let container = this.scene.add.image(0, y, 'main', 'chatlog/message')
             container.id = null
+            container.username = null
             container.text = this.scene.add.text(0, y, '', this.textStyle)
             container.text.setOrigin(0.5)
 
@@ -100,7 +101,7 @@ export default class ChatLog extends BaseContainer {
             let component = new Button(container)
             component.spriteName = 'chatlog/message'
             component.activeFrame = false
-            component.callback = () => this.onMessageClick(container.id)
+            component.callback = () => this.onMessageClick(container.id, container.username)
         }
 
         return containers
@@ -109,7 +110,7 @@ export default class ChatLog extends BaseContainer {
     addMessage(id, username, message) {
         if (this.messages.length == this.numContainers) this.messages.pop()
 
-        this.messages.unshift({ id: id, message: `${username}: ${message}` })
+        this.messages.unshift({ id, username, message: `${username}: ${message}` })
         this.updateMessages()
     }
 
@@ -118,6 +119,7 @@ export default class ChatLog extends BaseContainer {
             let container = this.containers[index]
 
             container.id = message.id
+            container.username = message.username
             container.text.text = message.message
         }
 
@@ -131,13 +133,14 @@ export default class ChatLog extends BaseContainer {
 
         for (let container of this.containers) {
             container.id = null
+            container.username = null
             container.text.text = ''
         }
     }
 
-    onMessageClick(id) {
-        if (id) {
-            this.interface.showCard(id)
+    onMessageClick(id, username) {
+        if (id in this.world.room.penguins || this.world.isBuddy(id)) {
+            this.interface.showCard(id, username)
         }
     }
 

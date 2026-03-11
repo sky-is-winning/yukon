@@ -130,6 +130,12 @@ export default class InputPrompt extends BaseContainer {
         this.promptIcon.loadIcon(loadConfig)
     }
 
+    close() {
+        this.promptIcon.reset()
+
+        super.close()
+    }
+
     showAdoptName(id) {
         const data = this.crumbs.pets[id]
         if (!data) return

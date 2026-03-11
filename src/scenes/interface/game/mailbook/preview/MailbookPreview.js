@@ -145,18 +145,21 @@ export default class MailbookPreview extends BaseContainer {
 
     close() {
         this.checkDestroyCurrent()
+        this.id = null
 
         super.close()
     }
 
     onYesClick() {
+        const postcardId = this.id
+
         this.parentContainer.close()
 
         if (this.world.client.coins < this.postcardCost) {
             return this.interface.prompt.showMailError('Failed to send Postcard.\nYou need more coins.')
         }
 
-        this.network.send('send_mail', { recipient: this.parentContainer.recipientId, postcardId: this.id })
+        this.network.send('send_mail', { recipient: this.parentContainer.recipientId, postcardId })
     }
 
     loadPostcard(postcardId) {

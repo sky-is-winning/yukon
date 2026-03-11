@@ -8,7 +8,8 @@
         "superClassName": "RoomScene",
         "preloadMethodName": "_preload",
         "preloadPackFiles": [
-            "yukon/assets/media/rooms/attic/attic-pack.json"
+            "yukon/assets/media/rooms/attic/attic-pack.json",
+            "yukon/assets/media/shared/tables/four/four_tables-pack.json"
         ],
         "createMethodName": "_create",
         "sceneKey": "Attic",
@@ -20,7 +21,6 @@
             "type": "Image",
             "id": "35457aaa-97a7-4ce5-8a8c-50288c3378b3",
             "label": "bg",
-            "components": [],
             "texture": {
                 "key": "attic",
                 "frame": "bg"
@@ -34,7 +34,6 @@
             "type": "Image",
             "id": "5415a75b-9831-4ffa-a621-3222772839b7",
             "label": "arm",
-            "components": [],
             "texture": {
                 "key": "attic",
                 "frame": "arm"
@@ -70,7 +69,6 @@
             "type": "Image",
             "id": "65a936ef-a9a8-486c-977e-31ccc0f17219",
             "label": "box",
-            "components": [],
             "texture": {
                 "key": "attic",
                 "frame": "box"
@@ -89,10 +87,8 @@
             ],
             "label": "table204",
             "scope": "CLASS",
-            "components": [],
             "x": 1140,
-            "y": 814,
-            "nestedPrefabs": []
+            "y": 814
         },
         {
             "prefabId": "d2fdc365-c022-4a72-8cdf-3f339d862cf6",
@@ -103,10 +99,8 @@
             ],
             "label": "table203",
             "scope": "CLASS",
-            "components": [],
             "x": 800,
-            "y": 772,
-            "nestedPrefabs": []
+            "y": 772
         },
         {
             "prefabId": "8163f2e4-12be-4ba3-9eb1-464060e5ecd3",
@@ -117,10 +111,8 @@
             ],
             "label": "table202",
             "scope": "CLASS",
-            "components": [],
             "x": 481,
-            "y": 774,
-            "nestedPrefabs": []
+            "y": 774
         },
         {
             "prefabId": "d2fdc365-c022-4a72-8cdf-3f339d862cf6",
@@ -131,10 +123,8 @@
             ],
             "label": "table201",
             "scope": "CLASS",
-            "components": [],
             "x": 861,
-            "y": 593,
-            "nestedPrefabs": []
+            "y": 593
         },
         {
             "prefabId": "a6e91d83-75ce-421c-94ea-d375188195eb",
@@ -145,18 +135,16 @@
             ],
             "label": "table200",
             "scope": "CLASS",
-            "components": [],
             "x": 601,
-            "y": 633,
-            "nestedPrefabs": []
+            "y": 633
         }
     ],
     "plainObjects": [],
     "meta": {
-        "app": "Phaser Editor 2D - Scene Editor",
-        "url": "https://phasereditor2d.com",
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
-        "version": 3
+        "version": 5
     },
     "lists": [
         {

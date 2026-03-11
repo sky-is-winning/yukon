@@ -1,13 +1,14 @@
-import BaseContainer from '@scenes/base/BaseContainer'
-
-import { Button, DraggableContainer, ShowHint } from '@components/components'
-
-import BuddyItem from './buddy_item/BuddyItem'
-
-
 /* START OF COMPILED CODE */
 
-export default class Buddy extends BaseContainer {
+import BaseWidget from "../../../base/BaseWidget";
+import DraggableContainer from "../../../components/DraggableContainer";
+import Button from "../../../components/Button";
+import BuddyItem from "./buddy_item/BuddyItem";
+import ShowHint from "../../../components/ShowHint";
+/* START-USER-IMPORTS */
+/* END-USER-IMPORTS */
+
+export default class Buddy extends BaseWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 760, y ?? 480);
@@ -132,7 +133,7 @@ export default class Buddy extends BaseContainer {
         // x_button (components)
         const x_buttonButton = new Button(x_button);
         x_buttonButton.spriteName = "blue-button";
-        x_buttonButton.callback = () => { this.visible = false };
+        x_buttonButton.callback = () => this.close();
 
         // down_button (components)
         const down_buttonButton = new Button(down_button);

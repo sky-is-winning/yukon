@@ -47,6 +47,7 @@ export default class Attic extends RoomScene {
     _preload() {
 
         this.load.pack("attic-pack", "assets/media/rooms/attic/attic-pack.json");
+        this.load.pack("four_tables-pack", "assets/media/shared/tables/four/four_tables-pack.json");
     }
 
     /** @returns {void} */

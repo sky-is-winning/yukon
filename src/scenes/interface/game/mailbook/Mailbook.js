@@ -269,6 +269,7 @@ export default class Mailbook extends BaseContainer {
 
     close() {
         this.mailbookPreview.close()
+        this.hidePostcards()
 
         super.close()
     }
@@ -295,8 +296,7 @@ export default class Mailbook extends BaseContainer {
     }
 
     showBuddy() {
-        this.postcards.visible = false
-        this.postcardItems.map(item => item.clearItem())
+        this.hidePostcards()
 
         this.buddy.visible = true
         this.userList.showPage()
@@ -316,6 +316,11 @@ export default class Mailbook extends BaseContainer {
         this.page = 1
 
         this.showPage()
+    }
+
+    hidePostcards() {
+        this.postcards.visible = false
+        this.clearPostcardItems()
     }
 
     showPage() {
@@ -439,6 +444,10 @@ export default class Mailbook extends BaseContainer {
         const second = array.slice(middleIndex, array.length)
 
         return [first, second]
+    }
+
+    clearPostcardItems() {
+        this.postcardItems.map(item => item.clearItem())
     }
 
     /* END-USER-CODE */

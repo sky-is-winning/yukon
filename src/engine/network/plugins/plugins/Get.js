@@ -11,7 +11,7 @@ export default class Get extends Plugin {
     }
 
     getPlayer(args) {
-        this.interface.main.playerCard._showCard(args.penguin)
+        this.interface.main.playerCard.updatePlayer(args.penguin)
     }
 
 }

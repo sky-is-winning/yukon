@@ -2,7 +2,7 @@ const totalQuestions = 8
 
 /* START OF COMPILED CODE */
 
-import BaseContainer from "../../../base/BaseContainer";
+import BaseDynamicWidget from "../../../base/BaseDynamicWidget";
 import Interactive from "../../../components/Interactive";
 import QuizButton from "../button/QuizButton";
 /* START-USER-IMPORTS */
@@ -11,7 +11,7 @@ import MultiChoiceQuiz from '@engine/interface/quiz/MultiChoiceQuiz'
 
 /* END-USER-IMPORTS */
 
-export default class TourQuiz extends BaseContainer {
+export default class TourQuiz extends BaseDynamicWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 0, y ?? 0);
@@ -154,13 +154,15 @@ export default class TourQuiz extends BaseContainer {
 
         questionTitle.text = this.getString('tour_question_title')
 
+        this.setupQuiz()
+
         /* END-USER-CTR-CODE */
     }
 
 
     /* START-USER-CODE */
 
-    show() {
+    setupQuiz() {
         this.info.visible = true
         this.question.visible = false
 
@@ -174,8 +176,6 @@ export default class TourQuiz extends BaseContainer {
             this.quiz = new MultiChoiceQuiz(this.crumbs.tour_quiz, totalQuestions, true)
             this.setStart()
         }
-
-        super.show()
     }
 
     onStartClick() {

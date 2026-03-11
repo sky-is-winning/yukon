@@ -2,8 +2,6 @@ import BaseContainer from '@scenes/base/BaseContainer'
 
 import { Button, Interactive, NineSlice } from '@components/components'
 
-import PackFileLoader from '@engine/loaders/PackFileLoader'
-
 
 /* START OF COMPILED CODE */
 
@@ -95,8 +93,6 @@ export default class LoadingPrompt extends BaseContainer {
 
         /* START-USER-CTR-CODE */
 
-        this.scene = scene
-
         this.tween = scene.tweens.add({
             targets: this.spinner,
             angle: { from: 0, to: 180 },
@@ -105,29 +101,23 @@ export default class LoadingPrompt extends BaseContainer {
             ease: 'Cubic'
         })
 
-        this.packFileLoader = new PackFileLoader(scene)
-
-        this.packFileLoader.on('progress', this.onProgress, this)
-
         /* END-USER-CTR-CODE */
     }
 
 
     /* START-USER-CODE */
 
-    onProgress(progress) {
-        this.bar.visible = progress
-
-        this.progress.scaleX = progress
-    }
-
-    show(text, key, url, callback) {
+    show(text) {
         this.text.text = text
-        this.progress.scaleX = this.packFileLoader.progress
+
+        this.setProgress(0)
 
         super.show()
+    }
 
-        this.packFileLoader.loadPack(key, url, callback)
+    setProgress(progress) {
+        this.bar.visible = progress
+        this.progress.scaleX = progress
     }
 
     showWithoutProgress(text) {

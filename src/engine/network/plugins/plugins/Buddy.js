@@ -72,7 +72,7 @@ export default class Buddy extends Plugin {
 
     getRoomName(args, userId) {
         if (!args.igloo && !args.game) {
-            return this.crumbs.scenes.rooms[args.find].key
+            return this.crumbs.rooms[args.find].key
         }
 
         if (args.game) {

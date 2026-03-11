@@ -1,7 +1,7 @@
-import BaseScene from '@scenes/base/BaseScene'
+import BaseUnloadableScene from '@scenes/base/BaseUnloadableScene'
 
 
-export default class GameScene extends BaseScene {
+export default class GameScene extends BaseUnloadableScene {
 
     constructor(key) {
         super(key)
@@ -17,10 +17,10 @@ export default class GameScene extends BaseScene {
         return this.world.getColor(color)
     }
 
-    init(data) {
-        this.id = data.id
-
+    init({ id }) {
         super.init()
+
+        this.id = id
     }
 
     create() {
@@ -40,7 +40,18 @@ export default class GameScene extends BaseScene {
 
     stop() {
         this.soundManager.stopAllButMusic()
-        this.scene.stop()
+
+        this.scene.remove()
+    }
+
+    onDestroy() {
+        super.onDestroy()
+
+        this.world.interface.unloadWidgets()
+
+        if (this.music) {
+            this.memory.unloadAudio(this.music)
+        }
     }
 
 }

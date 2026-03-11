@@ -1,6 +1,6 @@
 /* START OF COMPILED CODE */
 
-import BaseContainer from "../../../base/BaseContainer";
+import BaseWidget from "../../../base/BaseWidget";
 import DraggableContainer from "../../../components/DraggableContainer";
 import Button from "../../../components/Button";
 import Animation from "../../../components/Animation";
@@ -8,7 +8,7 @@ import Zone from "../../../components/Zone";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class Phone extends BaseContainer {
+export default class Phone extends BaseWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 760, y ?? 480);
@@ -220,9 +220,9 @@ export default class Phone extends BaseContainer {
     }
 
     joinRoom(roomId) {
-        if (!(roomId in this.crumbs.scenes.rooms)) return
+        if (!(roomId in this.crumbs.rooms)) return
 
-        const room = this.crumbs.scenes.rooms[roomId]
+        const room = this.crumbs.rooms[roomId]
 
         if (this.world.room.key !== room.key) {
             this.world.client.sendJoinRoom(roomId, room.key, room.x, room.y)

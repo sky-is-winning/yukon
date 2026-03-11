@@ -1,8 +1,8 @@
 import BaseContainer from '@scenes/base/BaseContainer'
 
-import ClothingLoader from '@engine/loaders/ClothingLoader'
 import PathEngine from './pathfinding/PathEngine'
 import PenguinItems from './PenguinItems'
+import PenguinSpriteFactory from '../../loaders/PenguinSpriteFactory'
 
 import adjustRedemptionItem from './frames/adjustRedemptionItem'
 
@@ -17,7 +17,7 @@ export default class Penguin extends BaseContainer {
         this.room = room
 
         this.items = new PenguinItems(this)
-        this.clothingLoader = new ClothingLoader(this)
+        this.clothingLoader = this.world.clothingLoader
 
         this.bodySprite
         this.penguinSprite
@@ -42,6 +42,8 @@ export default class Penguin extends BaseContainer {
 
         // Function that is called after move completes, used to set a frame after move etc
         this.afterMove
+
+        this.soundCallbacks = new Map()
 
         this.load()
     }
@@ -75,10 +77,6 @@ export default class Penguin extends BaseContainer {
         return this.world.penguinFactory.penguinLoader
     }
 
-    get paperDollLoader() {
-        return this.playerCard.paperDoll.paperDollLoader
-    }
-
     get textures() {
         return this.room.textures
     }
@@ -101,34 +99,97 @@ export default class Penguin extends BaseContainer {
 
     load() {
         this.penguinLoader.loadPenguin(this)
-        this.clothingLoader.loadItems()
+        this.loadItems()
 
         this.room.add.existing(this)
         if (this.room.penguins) this.world.stampEvents.emit('any penguin enterRoom', { room: this.room.id })
     }
 
-    update(item, slot) {
-        this.items.setItem(item, slot)
+    loadItems() {
+        for (const slot in this.equipped) {
+            const item = this.equipped[slot]
+
+            if (item.id > 0) {
+                this.loadItem(item.id, slot)
+            }
+        }
+
+        this.clothingLoader.start()
+    }
+
+    loadItem(itemId, slot) {
+        if (itemId === 0) {
+            this.removeItem(slot)
+            return
+        }
+
+        if (this.equipped[slot].sprite) {
+            this.removeItem(slot)
+        }
+
+        this.clothingLoader.loadItem(itemId, () => this.addItem(slot, itemId))
+    }
+
+    addItem(slot, itemId) {
+        if (!this.active) {
+            return
+        }
+
+        const equipped = this.equipped[slot]
+
+        if (itemId !== equipped.id) {
+            return
+        }
+
+        const key = this.clothingLoader.getKey(itemId)
+
+        if (equipped.sprite) {
+            this.removeItem(slot)
+        }
+
+        // depth + 1 to ensure items are loaded on top of penguin body
+        equipped.sprite = PenguinSpriteFactory.create(this, key, equipped.depth + 1)
+
+        this.sort('depth')
+        this.playFrame(this.frame)
+    }
+
+    removeItem(slot) {
+        const item = this.equipped[slot]
+
+        if (!item || !item.sprite) {
+            return
+        }
+
+        this.removeSoundEvents(item.sprite)
+
+        item.sprite.destroy()
+        item.sprite = null
+
+        this.playFrame(this.frame)
+    }
+
+    update(itemId, slot) {
+        this.items.setItem(itemId, slot)
 
         if (slot == 'color' && this.bodySprite) {
-            this.bodySprite.tint = this.world.getColor(item)
+            this.bodySprite.tint = this.world.getColor(itemId)
         }
 
         // Load item sprite
         if (slot in this.equipped) {
-            this.clothingLoader.loadItem(item, slot)
+            this.loadItem(itemId, slot)
             this.clothingLoader.start()
         }
 
         // Load item paper, only if card is active
         if (this.playerCard.visible && this.playerCard.id == this.id) {
-            this.paperDollLoader.loadItem(item, slot)
-            this.paperDollLoader.start()
+            this.playerCard.paperDoll.loadItem(itemId, slot)
         }
     }
 
     move(x, y) {
-        let path = PathEngine.getPath(this, { x: x, y: y })
+        const path = PathEngine.getPath(this, { x: x, y: y })
 
         if (path) {
             this.addMoveTween(path)
@@ -149,7 +210,7 @@ export default class Penguin extends BaseContainer {
         }
 
         // Get correct frame id
-        let frame = ([25, 26].includes(_frame))
+        const frame = ([25, 26].includes(_frame))
             ? this.getSecretFrame(_frame)
             : _frame
 
@@ -162,25 +223,31 @@ export default class Penguin extends BaseContainer {
     }
 
     createAnims(frame, isSecretFrame) {
-        let penguinTexture = (isSecretFrame)
+        const penguinTexture = (isSecretFrame)
             ? `secret_frames/${frame}`
             : 'penguin'
 
         this.createAnim(`penguin_body_${frame}`, penguinTexture, frame, 'body/')
         this.createAnim(`penguin_${frame}`, penguinTexture, frame, 'penguin/')
 
-        for (let sprite of this.equippedSprites) {
-            this.createAnim(`${sprite.texture.key}_${frame}`, sprite.texture.key, frame, '', true)
+        for (const { id, sprite } of Object.values(this.items.equipped)) {
+            if (!id || !sprite) {
+                continue
+            }
+
+            const anim = this.createAnim(`${sprite.texture.key}_${frame}`, sprite.texture.key, frame, '', true)
+
+            this.checkAttachSound(frame, id, sprite, anim)
         }
     }
 
     createAnim(key, textureKey, frame, prefix = '', checkItem = false) {
         if (this.anims.exists(key)) {
-            return
+            return this.anims.get(key)
         }
 
         if (!this.textures.exists(textureKey)) {
-            return
+            return null
         }
 
         let animation = this.crumbs.penguin[frame]
@@ -189,9 +256,9 @@ export default class Penguin extends BaseContainer {
             animation = this.checkAnimItems(animation, textureKey)
         }
 
-        let frames = this.generateFrames(textureKey, frame, prefix, animation)
+        const frames = this.generateFrames(textureKey, frame, prefix, animation)
 
-        let anim = this.anims.create({
+        const anim = this.anims.create({
             key: key,
             frames: frames,
             frameRate: 24,
@@ -201,13 +268,15 @@ export default class Penguin extends BaseContainer {
         if (animation.chain) {
             anim.chainKeys = this.createChains(key, textureKey, frame, prefix, animation.chain)
         }
+
+        return anim
     }
 
     checkAnimItems(animation, textureKey) {
-        let check = adjustRedemptionItem(textureKey.split('/').pop())
+        const check = adjustRedemptionItem(textureKey.split('/').pop())
 
-        for (let item in animation.items) {
-            let secretCheck = adjustRedemptionItem(item)
+        for (const item in animation.items) {
+            const secretCheck = adjustRedemptionItem(item)
 
             if (check == secretCheck) {
                 return animation.items[item]
@@ -218,14 +287,14 @@ export default class Penguin extends BaseContainer {
     }
 
     generateFrames(textureKey, frame, prefix, animation) {
-        let frames = Phaser.Utils.Array.NumberArray(animation.start || 1, animation.end)
+        const frames = Phaser.Utils.Array.NumberArray(animation.start || 1, animation.end)
 
-        let config = {
+        const config = {
             prefix: `${prefix}${frame}_`,
             frames: frames
         }
 
-        let textureFrames = this.textures.get(textureKey).getFrameNames(false)
+        const textureFrames = this.textures.get(textureKey).getFrameNames(false)
 
         // Filter out null frames
         config.frames = config.frames.filter((i) => {
@@ -236,14 +305,14 @@ export default class Penguin extends BaseContainer {
     }
 
     createChains(key, textureKey, frame, prefix, config) {
-        let chainKeys = []
+        const chainKeys = []
 
         for (let i = 0; i < config.length; i++) {
-            let chain = config[i]
+            const chain = config[i]
 
-            let chainKey = `${key}/chain_${i + 1}`
+            const chainKey = `${key}/chain_${i + 1}`
 
-            frames = this.generateFrames(textureKey, frame, prefix, chain)
+            const frames = this.generateFrames(textureKey, frame, prefix, chain)
 
             this.anims.create({
                 key: chainKey,
@@ -262,8 +331,8 @@ export default class Penguin extends BaseContainer {
         this.playAnim(this.bodySprite, `penguin_body_${frame}`)
         this.playAnim(this.penguinSprite, `penguin_${frame}`)
 
-        for (let sprite of this.equippedSprites) {
-            let key = `${sprite.texture.key}_${frame}`
+        for (const sprite of this.equippedSprites) {
+            const key = `${sprite.texture.key}_${frame}`
 
             this.playAnim(sprite, key)
         }
@@ -280,7 +349,7 @@ export default class Penguin extends BaseContainer {
         // Reset current chain queue
         sprite.chain()
 
-        let anim = this.anims.get(key)
+        const anim = this.anims.get(key)
 
         if (anim.chainKeys) {
             this.playChain(sprite, anim)
@@ -288,9 +357,9 @@ export default class Penguin extends BaseContainer {
     }
 
     playChain(sprite, anim) {
-        let keys = anim.chainKeys
+        const keys = anim.chainKeys
 
-        for (let key of keys) {
+        for (const key of keys) {
             if (this.checkAnim(key)) {
                 sprite.chain(key)
             }
@@ -298,19 +367,19 @@ export default class Penguin extends BaseContainer {
     }
 
     checkAnim(key) {
-        let animation = this.anims.get(key)
+        const animation = this.anims.get(key)
         return animation && animation.frames.length > 0
     }
 
     getSecretFrame(frame) {
-        let equipped = this.items.equippedFlat
-        let frameString = this.getSecretFrameString(frame, equipped)
+        const equipped = this.items.equippedFlat
+        const frameString = this.getSecretFrameString(frame, equipped)
 
         if (this.secretFramesCache[frameString]) {
             return this.secretFramesCache[frameString]
         }
 
-        for (let secret of this.crumbs.secret_frames[frame]) {
+        for (const secret of this.crumbs.secret_frames[frame]) {
             if (this.checkSecretFrames(equipped, secret)) {
 
                 this.secretFramesCache[frameString] = secret.secret_frame
@@ -323,9 +392,9 @@ export default class Penguin extends BaseContainer {
     }
 
     checkSecretFrames(equipped, secret) {
-        for (let item in equipped) {
-            let check = adjustRedemptionItem(equipped[item])
-            let secretCheck = adjustRedemptionItem(secret[item])
+        for (const item in equipped) {
+            const check = adjustRedemptionItem(equipped[item])
+            const secretCheck = adjustRedemptionItem(secret[item])
 
             if (check != secretCheck) {
                 return false
@@ -341,11 +410,74 @@ export default class Penguin extends BaseContainer {
     }
 
     getSecretFrameString(frame, equipped) {
-        let slots = this.items.slots.filter(slot => slot in equipped)
+        const slots = this.items.slots.filter(slot => slot in equipped)
 
-        let items = slots.map(slot => adjustRedemptionItem(equipped[slot]))
+        const items = slots.map(slot => adjustRedemptionItem(equipped[slot]))
 
         return `${frame},${items.toString()}`
+    }
+
+    checkAttachSound(frame, itemId, sprite, anim) {
+        if (!anim) {
+            return
+        }
+
+        // Remove previous events if they exist
+        this.removeSoundEvents(sprite)
+
+        const adjustedId = adjustRedemptionItem(itemId)
+        const soundKey = this.crumbs.sounds.items[adjustedId]
+
+        if (!soundKey) {
+            return
+        }
+
+        const soundConfig = this.crumbs.sounds.itemSounds[soundKey]
+
+        if (soundConfig?.frame === frame) {
+            this.attachSound(sprite, soundKey, soundConfig, anim)
+        }
+    }
+
+    attachSound(sprite, soundKey, soundConfig, targetAnim) {
+        if (!sprite) {
+            return
+        }
+
+        const start = soundConfig.start || 1
+
+        const callback = (anim, { index }) => {
+            if (anim === targetAnim && index === start) {
+                this.playItemSound(soundKey)
+                this.removeSoundEvents(sprite)
+            }
+        }
+
+        this.addSoundEvents(sprite, callback)
+    }
+
+    addSoundEvents(sprite, callback) {
+        sprite.on('animationstart', callback)
+        sprite.on('animationupdate', callback)
+
+        this.soundCallbacks.set(sprite, callback)
+    }
+
+    removeSoundEvents(sprite) {
+        const callback = this.soundCallbacks.get(sprite)
+
+        if (!callback) {
+            return
+        }
+
+        sprite.off('animationstart', callback)
+        sprite.off('animationupdate', callback)
+
+        this.soundCallbacks.delete(sprite)
+    }
+
+    playItemSound(key) {
+        this.soundManager.play(`sounds/items/${key}`)
     }
 
     /*========== Tweening ==========*/

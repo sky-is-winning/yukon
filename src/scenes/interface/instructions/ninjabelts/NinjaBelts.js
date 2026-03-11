@@ -1,18 +1,12 @@
-export const preload = {
-    key: 'ninjabelts-pack',
-    url: 'assets/media/interface/instructions/ninjabelts/ninjabelts-pack.json',
-    loadString: ['loading', 'ninjabelts']
-}
-
 /* START OF COMPILED CODE */
 
-import BaseContainer from "../../../base/BaseContainer";
+import BaseDynamicWidget from "../../../base/BaseDynamicWidget";
 import Interactive from "../../../components/Interactive";
 import Button from "../../../components/Button";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class NinjaBelts extends BaseContainer {
+export default class NinjaBelts extends BaseDynamicWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 760, y ?? 480);

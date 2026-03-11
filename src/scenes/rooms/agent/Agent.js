@@ -454,7 +454,7 @@ export default class Agent extends RoomScene {
     }
 
     onScreenClick(roomId) {
-        const room = this.crumbs.scenes.rooms[roomId]
+        const room = this.crumbs.rooms[roomId]
 
         this.world.client.sendJoinRoom(roomId, room.key)
     }

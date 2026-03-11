@@ -1,6 +1,6 @@
 import BaseLoader from './BaseLoader'
 
-import PenguinSpriteFactory from './PenguinSpriteFactory'
+import ItemSoundLoader from './ItemSoundLoader'
 import SecretFramesLoader from './SecretFramesLoader'
 
 import adjustRedemptionItem from '@engine/world/penguin/frames/adjustRedemptionItem'
@@ -8,105 +8,79 @@ import adjustRedemptionItem from '@engine/world/penguin/frames/adjustRedemptionI
 
 export default class ClothingLoader extends BaseLoader {
 
-    constructor(penguin) {
-        super(penguin.room)
+    constructor(scene) {
+        super(scene)
 
-        this.penguin = penguin
-
-        this.equipped = this.penguin.equipped
+        this.maxParallelDownloads = 10
 
         this.baseURL = '/assets/media/clothing/sprites/'
         this.keyPrefix = 'clothing/sprites/'
 
-        this.framesLoader = new SecretFramesLoader(penguin.room)
+        this.soundLoader = new ItemSoundLoader(scene)
+        this.framesLoader = new SecretFramesLoader(scene)
     }
 
-    loadItems() {
-        for (let slot in this.equipped) {
-            let item = this.equipped[slot]
+    loadItem(itemId, callback) {
+        const key = this.getKey(itemId)
 
-            if (item.id > 0) {
-                this.loadItem(item.id, slot)
-            }
-        }
-
-        this.start()
-    }
-
-    loadItem(item, slot) {
-        if (item == 0) {
-            return this.removeItem(slot)
-        }
-
-        if (this.equipped[slot].sprite) {
-            this.removeItem(slot)
-        }
-
-        let key = this.getKey(item)
-
-        if (this.checkComplete('json', key, () => {
-            this.onFileComplete(item, key, slot)
-        })) {
+        if (this.checkComplete('json', key, () =>
+            this.onFileComplete(itemId, key, callback)
+        )) {
             return
         }
 
-        this.multiatlas(key, `${item}.json`)
+        this.multiatlas(key, `${itemId}.json`)
     }
 
-    onFileComplete(item, key, slot) {
+    onFileComplete(itemId, key, callback) {
         if (!this.textureExists(key)) {
             return
         }
 
-        let check = adjustRedemptionItem(item)
-
-        // Checks secret frames
-        let secretFrames = this.crumbs.itemsToFrames[check]
-
-        if (secretFrames) {
-            return this.loadSecretFrames(secretFrames, slot, item)
-        }
-
-        this.addItem(slot, item)
-    }
-
-    loadSecretFrames(secretFrames, slot, item) {
-        this.framesLoader.loadFrames(item, secretFrames, () => {
-            this.addItem(slot, item)
+        this.loadExtras(itemId, () => {
+            this.memory.register(key)
+            callback()
         })
     }
 
-    addItem(slot, item) {
-        let equipped = this.equipped[slot]
+    loadExtras(itemId, callback) {
+        const adjustedId = adjustRedemptionItem(itemId)
 
-        if (item != equipped.id) {
-            return
+        const secretFrames = this.crumbs.itemsToFrames[adjustedId]
+        const sound = this.crumbs.sounds.items[adjustedId]
+
+        let remaining = 0
+
+        const checkComplete = () => {
+            if (remaining < 1) {
+                callback()
+            }
         }
 
-        let key = this.getKey(item)
-
-        if (equipped.sprite) {
-            this.removeItem(slot)
+        const onExtraComplete = () => {
+            remaining--
+            checkComplete()
         }
 
-        // depth + 1 to ensure items are loaded on top of penguin body
-        equipped.sprite = PenguinSpriteFactory.create(this.penguin, key, equipped.depth + 1)
+        if (secretFrames) {
+            remaining += secretFrames.length
+            this.loadSecretFrames(secretFrames, onExtraComplete)
+        }
 
-        this.penguin.sort('depth')
-        this.penguin.playFrame(this.penguin.frame)
+        if (sound) {
+            remaining++
+            this.loadSound(sound, onExtraComplete)
+        }
+
+        checkComplete()
     }
 
-    removeItem(slot) {
-        let item = this.equipped[slot]
+    loadSecretFrames(secretFrames, callback) {
+        this.framesLoader.loadFrames(secretFrames, callback)
+    }
 
-        if (!item || !item.sprite) {
-            return
-        }
-
-        item.sprite.destroy()
-        item.sprite = null
-
-        this.penguin.playFrame(this.penguin.frame)
+    loadSound(sound, callback) {
+        this.soundLoader.loadSound(sound, callback)
     }
 
 }

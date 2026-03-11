@@ -1,9 +1,3 @@
-export const preload = {
-    key: 'adoptcatalog-pack',
-    url: 'assets/media/interface/catalogs/adopt/adoptcatalog-pack.json',
-    loadString: ['loading', 'adoptcatalog']
-}
-
 /* START OF COMPILED CODE */
 
 import BookContainer from "../../books/BookContainer";

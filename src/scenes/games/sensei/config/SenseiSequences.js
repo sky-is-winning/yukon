@@ -1,166 +1,166 @@
 import * as menus from './SenseiMenus'
 
 
-export function beltAward(widget) {
+export function beltAward(character) {
     return [
         () => {
-            widget.showSpeech(widget.getString('help_award_congratulations'))
+            character.showSpeech(character.getString('help_award_congratulations'))
         },
         () => {
-            widget.showSpeech(widget.getFormatString('help_award_belt_earned', widget.beltString))
-            widget.showBelt()
+            character.showSpeech(character.getFormatString('help_award_belt_earned', character.beltString))
+            character.showBelt()
         },
         () => {
-            widget.leaveGame()
+            character.leaveGame()
         }
     ]
 }
 
-export function maskAward(widget) {
+export function maskAward(character) {
     return [
         () => {
-            widget.showSpeech(widget.getString('help_defeat_sensei_intro'))
+            character.showSpeech(character.getString('help_defeat_sensei_intro'))
         },
         () => {
-            widget.showSpeech(widget.getString('help_defeat_sensei_kowtows'))
+            character.showSpeech(character.getString('help_defeat_sensei_kowtows'))
         },
         () => {
-            widget.showSpeech(widget.getString('help_defeat_sensei_gift'))
-            widget.showMask()
+            character.showSpeech(character.getString('help_defeat_sensei_gift'))
+            character.showMask()
         },
         () => {
-            widget.hideAward()
-            widget.showHideout()
-            widget.showSpeech(widget.getString('help_defeat_sensei_final'))
+            character.hideAward()
+            character.showHideout()
+            character.showSpeech(character.getString('help_defeat_sensei_final'))
         },
         () => {
-            widget.leaveGame()
+            character.leaveGame()
         }
     ]
 }
 
-export function intro(widget) {
+export function intro(character) {
     return [
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_welcome'))
+            character.showSpeech(character.getString('help_firsttime_welcome'))
         },
         () => {
-            widget.startSequence(introCards)
+            character.startSequence(introCards)
         }
     ]
 }
 
-export function introCards(widget) {
+export function introCards(character) {
     return [
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_tobegin'))
-            widget.scene.instructions.showCards()
+            character.showSpeech(character.getString('help_firsttime_tobegin'))
+            character.scene.instructions.showCards()
         },
         () => {
-            widget.network.send('add_starter_deck')
+            character.network.send('add_starter_deck')
 
-            widget.scene.instructions.hideCards()
-            widget.scene.showMenu(menus.instrWhatDoIDo)
+            character.scene.instructions.hideCards()
+            character.scene.showMenu(menus.instrWhatDoIDo)
         }
     ]
 }
 
-export function instrWhatDoIDo(widget) {
+export function instrWhatDoIDo(character) {
     return [
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_improve'))
-            widget.scene.instructions.showCompete()
+            character.showSpeech(character.getString('help_firsttime_improve'))
+            character.scene.instructions.showCompete()
         },
         () => {
-            widget.scene.hideInstructions()
-            widget.showSpeech(widget.getString('help_firsttime_areyouready'))
+            character.scene.hideInstructions()
+            character.showSpeech(character.getString('help_firsttime_areyouready'))
         },
         () => {
-            widget.scene.hideInstructions()
-            widget.scene.showMenu(menus.instrYesPlease)
+            character.scene.hideInstructions()
+            character.scene.showMenu(menus.instrYesPlease)
         }
     ]
 }
 
-export function instrHowToPlay(widget) {
+export function instrHowToPlay(character) {
     return [
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_pickacard'))
-            widget.scene.instructions.showPick()
+            character.showSpeech(character.getString('help_firsttime_pickacard'))
+            character.scene.instructions.showPick()
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_water'))
-            widget.scene.instructions.showWater()
+            character.showSpeech(character.getString('help_firsttime_water'))
+            character.scene.instructions.showWater()
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_snow'))
-            widget.scene.instructions.showSnow()
+            character.showSpeech(character.getString('help_firsttime_snow'))
+            character.scene.instructions.showSnow()
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_fire'))
-            widget.scene.instructions.showFire()
+            character.showSpeech(character.getString('help_firsttime_fire'))
+            character.scene.instructions.showFire()
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_tie'))
-            widget.scene.instructions.showTie()
+            character.showSpeech(character.getString('help_firsttime_tie'))
+            character.scene.instructions.showTie()
         },
         () => {
-            widget.hideSpeech()
-            widget.scene.hideInstructions()
-            widget.scene.showMenu(menus.instrHowToWin)
+            character.hideSpeech()
+            character.scene.hideInstructions()
+            character.scene.showMenu(menus.instrHowToWin)
         }
     ]
 }
 
-export function instrHowToWin(widget) {
+export function instrHowToWin(character) {
     return [
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_howtowin'))
+            character.showSpeech(character.getString('help_firsttime_howtowin'))
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_winsame'))
-            widget.scene.instructions.showWinSame()
+            character.showSpeech(character.getString('help_firsttime_winsame'))
+            character.scene.instructions.showWinSame()
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_windifferent'))
-            widget.scene.instructions.showWinDifferent()
+            character.showSpeech(character.getString('help_firsttime_windifferent'))
+            character.scene.instructions.showWinDifferent()
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_ingamehelp'))
-            widget.scene.instructions.showHelp()
+            character.showSpeech(character.getString('help_firsttime_ingamehelp'))
+            character.scene.instructions.showHelp()
         },
         () => {
-            widget.hideSpeech()
-            widget.scene.hideInstructions()
-            widget.scene.showMenu(menus.instrHowToNinja)
+            character.hideSpeech()
+            character.scene.hideInstructions()
+            character.scene.showMenu(menus.instrHowToNinja)
         }
     ]
 }
 
-export function instrHowToNinja(widget) {
+export function instrHowToNinja(character) {
     return [
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_joking'))
+            character.showSpeech(character.getString('help_firsttime_joking'))
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_gainexp'))
+            character.showSpeech(character.getString('help_firsttime_gainexp'))
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_belts'))
-            widget.scene.instructions.showBelt()
+            character.showSpeech(character.getString('help_firsttime_belts'))
+            character.scene.instructions.showBelt()
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_fightme'))
-            widget.scene.instructions.showBlackBelt()
+            character.showSpeech(character.getString('help_firsttime_fightme'))
+            character.scene.instructions.showBlackBelt()
         },
         () => {
-            widget.showSpeech(widget.getString('help_firsttime_ninja'))
-            widget.scene.instructions.showNinja()
+            character.showSpeech(character.getString('help_firsttime_ninja'))
+            character.scene.instructions.showNinja()
         },
         () => {
-            widget.hideSpeech()
-            widget.scene.hideInstructions()
-            widget.scene.showMenu(menus.instrCountMeIn)
+            character.hideSpeech()
+            character.scene.hideInstructions()
+            character.scene.showMenu(menus.instrCountMeIn)
         }
     ]
 }

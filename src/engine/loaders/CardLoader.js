@@ -28,6 +28,8 @@ export default class CardLoader extends BaseLoader {
             return
         }
 
+        this.memory.register(key)
+
         callback(key, card)
     }
 

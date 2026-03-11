@@ -1,31 +1,16 @@
 export default class BaseScene extends Phaser.Scene {
 
     init() {
+        this.crumbs = this.game.crumbs
+        this.network = this.game.network
+        this.soundManager = this.game.soundManager
+
+        this.interface = this.scene.get('InterfaceController')
+        this.memory = this.scene.get('MemoryManager')
+        this.ruffle = this.scene.get('RuffleController')
+        this.world = this.scene.get('WorldController')
+
         this.input.on('pointerover', () => this.interface.resetCursor(this))
-    }
-
-    get crumbs() {
-        return this.game.crumbs
-    }
-
-    get network() {
-        return this.game.network
-    }
-
-    get soundManager() {
-        return this.game.soundManager
-    }
-
-    get interface() {
-        return this.scene.get('InterfaceController')
-    }
-
-    get world() {
-        return this.scene.get('WorldController')
-    }
-
-    get ruffle() {
-        return this.scene.get('RuffleController')
     }
 
     getString(...args) {
@@ -45,11 +30,11 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     playMusic(key) {
-        this.soundManager.playMusic(key)
+        this.soundManager?.playMusic(key)
     }
 
     stopMusic() {
-        this.soundManager.stopMusic()
+        this.soundManager?.stopMusic()
     }
 
 }

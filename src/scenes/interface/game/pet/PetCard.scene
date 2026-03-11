@@ -7,7 +7,7 @@
         "javaScriptInitFieldsInConstructor": true,
         "exportClass": true,
         "autoImport": true,
-        "superClassName": "BaseContainer",
+        "superClassName": "BaseWidget",
         "preloadMethodName": "",
         "preloadPackFiles": [],
         "createMethodName": "",
@@ -380,8 +380,8 @@
     ],
     "plainObjects": [],
     "meta": {
-        "app": "Phaser Editor 2D - Scene Editor",
-        "url": "https://phasereditor2d.com",
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
         "version": 5
     }

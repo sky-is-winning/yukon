@@ -235,6 +235,7 @@ export default class Mail extends BaseContainer {
 
     close() {
         this.checkDestroyCurrent()
+        this.currentCard = null
 
         super.close()
     }

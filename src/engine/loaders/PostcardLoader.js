@@ -40,6 +40,8 @@ export default class PostcardLoader extends BaseLoader  {
             console.error(error)
         }
 
+        this.memory.register(key)
+
         callback(postcardClass)
     }
 

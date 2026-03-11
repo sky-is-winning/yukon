@@ -1,7 +1,7 @@
-import BaseContainer from '@scenes/base/BaseContainer'
+import BaseDynamicWidget from '@scenes/base/BaseDynamicWidget'
 
 
-export default class BookContainer extends BaseContainer {
+export default class BookContainer extends BaseDynamicWidget {
 
     constructor(key) {
         super(key)
@@ -14,19 +14,10 @@ export default class BookContainer extends BaseContainer {
         this.buttons
 
         this.isBook = true
-    }
 
-    show() {
-        // Reset page
-        this.showPage(0)
-
-        this.setCoins(this.world.client.coins)
-
-        super.show()
-    }
-
-    close() {
-        this.interface.destroyWidget(this)
+        this.scene.events.once('update', () =>
+            this.setCoins(this.world.client.coins)
+        )
     }
 
     showPage(page) {

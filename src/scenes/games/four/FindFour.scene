@@ -5,7 +5,8 @@
         "compilerInsertSpaces": true,
         "javaScriptInitFieldsInConstructor": true,
         "exportClass": true,
-        "superClassName": "BaseContainer",
+        "autoImport": true,
+        "superClassName": "BaseDynamicWidget",
         "preloadMethodName": "",
         "preloadPackFiles": [],
         "createMethodName": "",
@@ -28,7 +29,6 @@
                     "type": "Image",
                     "id": "444f3793-1a41-4386-9e05-e712dbd5f24d",
                     "label": "window",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "window"
@@ -39,7 +39,6 @@
                     "id": "8bd244b6-e19b-4100-ad75-9be7d47ee878",
                     "label": "shadow",
                     "scope": "CLASS",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "shadow"
@@ -50,7 +49,6 @@
                     "type": "Image",
                     "id": "a4d398e9-8934-4ee2-8dd8-cabf33dd4843",
                     "label": "placer6",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "counter_1"
@@ -63,7 +61,6 @@
                     "type": "Image",
                     "id": "9a887e10-d735-4cb7-ac8f-10507a4efc7b",
                     "label": "placer5",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "counter_1"
@@ -76,7 +73,6 @@
                     "type": "Image",
                     "id": "8a5e48dd-707a-49c0-b301-fda55c75b983",
                     "label": "placer4",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "counter_1"
@@ -89,7 +85,6 @@
                     "type": "Image",
                     "id": "0035373a-2fda-426d-bc5f-7a61c65e06ff",
                     "label": "placer3",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "counter_1"
@@ -102,7 +97,6 @@
                     "type": "Image",
                     "id": "ff00a750-fb33-4a35-b7ea-76512e5df075",
                     "label": "placer2",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "counter_1"
@@ -115,7 +109,6 @@
                     "type": "Image",
                     "id": "fbf856f2-46d2-476f-bd44-5fbd5eb5a2a7",
                     "label": "placer1",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "counter_1"
@@ -128,7 +121,6 @@
                     "type": "Image",
                     "id": "ec4e49e5-b9ab-4e46-b8c1-9972b427aa02",
                     "label": "placer0",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "counter_1"
@@ -141,7 +133,6 @@
                     "type": "Image",
                     "id": "ffb54173-b9ac-4fe1-bab7-7a6b435da288",
                     "label": "board",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "board"
@@ -157,10 +148,8 @@
                     ],
                     "label": "player2",
                     "scope": "CLASS",
-                    "components": [],
                     "x": -126,
-                    "y": 232,
-                    "nestedPrefabs": []
+                    "y": 232
                 },
                 {
                     "prefabId": "aa157150-c6e0-4443-8649-1a137743c2ee",
@@ -171,17 +160,14 @@
                     ],
                     "label": "player1",
                     "scope": "CLASS",
-                    "components": [],
                     "x": -126,
-                    "y": 172,
-                    "nestedPrefabs": []
+                    "y": 172
                 },
                 {
                     "type": "Image",
                     "id": "ec828e7e-f8fe-45ce-a6b2-37004b848cde",
                     "label": "hover",
                     "scope": "CLASS",
-                    "components": [],
                     "texture": {
                         "key": "four",
                         "frame": "button/counter_1"
@@ -211,7 +197,6 @@
                     "type": "Image",
                     "id": "7583ca44-3abe-403e-9adb-f44e6d03c299",
                     "label": "blue_x",
-                    "components": [],
                     "texture": {
                         "key": "main",
                         "frame": "blue-x"
@@ -224,10 +209,10 @@
     ],
     "plainObjects": [],
     "meta": {
-        "app": "Phaser Editor 2D - Scene Editor",
-        "url": "https://phasereditor2d.com",
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
-        "version": 3
+        "version": 5
     },
     "lists": [
         {

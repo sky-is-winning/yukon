@@ -31,6 +31,8 @@ export default class IglooPetLoader extends BaseLoader {
             return
         }
 
+        this.memory.register(key)
+
         callback(key)
     }
 

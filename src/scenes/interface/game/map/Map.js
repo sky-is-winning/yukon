@@ -1,19 +1,14 @@
-import BaseContainer from '@scenes/base/BaseContainer'
-
-import { Button, Interactive, ShowHint } from '@components/components'
-
-import IglooMap from './igloo_map/IglooMap'
-
-
-export const preload = {
-    key: 'map-pack',
-    url: 'assets/media/interface/game/map/map-pack.json',
-    loadString: ['loading', 'map']
-}
-
 /* START OF COMPILED CODE */
 
-export default class Map extends BaseContainer {
+import BaseDynamicWidget from "../../../base/BaseDynamicWidget";
+import Interactive from "../../../components/Interactive";
+import Button from "../../../components/Button";
+import ShowHint from "../../../components/ShowHint";
+import IglooMap from "./igloo_map/IglooMap";
+/* START-USER-IMPORTS */
+/* END-USER-IMPORTS */
+
+export default class Map extends BaseDynamicWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 760, y ?? 480);
@@ -248,7 +243,7 @@ export default class Map extends BaseContainer {
         // grey_button (components)
         const grey_buttonButton = new Button(grey_button);
         grey_buttonButton.spriteName = "grey-button";
-        grey_buttonButton.callback = () => { this.visible = false };
+        grey_buttonButton.callback = () => this.close();
 
         this.iglooMap = iglooMap;
 
@@ -260,19 +255,13 @@ export default class Map extends BaseContainer {
     /* START-USER-CODE */
 
     onRoomClick(id) {
-        this.close()
+        const room = this.crumbs.rooms[id]
 
-        let room = this.crumbs.scenes.rooms[id]
-        if (this.world.room.key == room.key) {
+        if (this.world.room.key === room.key) {
             return
         }
 
         this.world.client.sendJoinRoom(id, room.key, room.x, room.y, 80)
-    }
-
-    close() {
-        this.iglooMap.close()
-        super.close()
     }
 
     /* END-USER-CODE */

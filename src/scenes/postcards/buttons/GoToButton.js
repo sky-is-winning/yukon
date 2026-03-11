@@ -34,8 +34,8 @@ export default class GoToButton extends BaseImage {
     }
 
     onClick() {
-        if (this.roomId in this.crumbs.scenes.rooms) {
-            const room = this.crumbs.scenes.rooms[this.roomId]
+        if (this.roomId in this.crumbs.rooms) {
+            const room = this.crumbs.rooms[this.roomId]
 
             if (this.world.room.key !== room.key) {
                 this.world.client.sendJoinRoom(this.roomId, room.key, room.x, room.y)

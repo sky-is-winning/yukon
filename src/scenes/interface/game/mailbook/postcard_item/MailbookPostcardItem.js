@@ -89,6 +89,10 @@ export default class MailbookPostcardItem extends BaseContainer {
 
         this.id = null
         this.subject.text = ''
+
+        if (this.icon) {
+            this.icon.destroy()
+        }
     }
 
     addIcon(key) {

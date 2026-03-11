@@ -16,7 +16,6 @@
             "type": "Container",
             "id": "c0c83dcc-4c40-4b78-a9bf-f81922ca3da1",
             "label": "container_1",
-            "components": [],
             "x": 760,
             "y": 480,
             "list": [
@@ -24,10 +23,9 @@
                     "type": "Image",
                     "id": "c1d253b8-9248-4dc4-a9ad-d4965fdb1615",
                     "label": "table",
-                    "components": [],
                     "texture": {
-                        "key": "lodge",
-                        "frame": "table/table_2"
+                        "key": "four_tables",
+                        "frame": "table_2"
                     },
                     "originX": 0.46107784431137727,
                     "originY": 0.7651515151515151
@@ -42,14 +40,14 @@
                         "MoveTo",
                         "ShowHint"
                     ],
-                    "Button.spriteName": "table/game_2",
+                    "Button.spriteName": "game_2",
                     "Button.activeFrame": false,
                     "MoveTo.x": "this.x",
                     "MoveTo.y": "this.y",
                     "ShowHint.text": "four_hint",
                     "texture": {
-                        "key": "lodge",
-                        "frame": "table/game_2"
+                        "key": "four_tables",
+                        "frame": "game_2"
                     },
                     "x": 2,
                     "y": -53,
@@ -64,10 +62,8 @@
                         "y"
                     ],
                     "label": "done2",
-                    "components": [],
                     "x": 100,
-                    "y": 42,
-                    "nestedPrefabs": []
+                    "y": 42
                 },
                 {
                     "prefabId": "3d402c83-0ef8-4993-bf56-3e076074ec9e",
@@ -77,10 +73,8 @@
                         "y"
                     ],
                     "label": "done1",
-                    "components": [],
                     "x": -30,
-                    "y": 62,
-                    "nestedPrefabs": []
+                    "y": 62
                 },
                 {
                     "prefabId": "3d402c83-0ef8-4993-bf56-3e076074ec9e",
@@ -95,10 +89,8 @@
                     "scope": "CLASS",
                     "sitFrame": 18,
                     "donePoint": "done2",
-                    "components": [],
                     "x": 60,
-                    "y": -40,
-                    "nestedPrefabs": []
+                    "y": -40
                 },
                 {
                     "prefabId": "3d402c83-0ef8-4993-bf56-3e076074ec9e",
@@ -113,19 +105,17 @@
                     "scope": "CLASS",
                     "sitFrame": 22,
                     "donePoint": "done1",
-                    "components": [],
                     "x": -70,
-                    "y": 13,
-                    "nestedPrefabs": []
+                    "y": 13
                 }
             ]
         }
     ],
     "plainObjects": [],
     "meta": {
-        "app": "Phaser Editor 2D - Scene Editor",
-        "url": "https://phasereditor2d.com",
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
-        "version": 3
+        "version": 5
     }
 }

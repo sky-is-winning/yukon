@@ -78,9 +78,7 @@ export default class CoinPrompt extends BaseContainer {
     }
 
     callback() {
-        if (this.ruffle.container.visible) {
-            this.ruffle.close()
-        }
+        this.ruffle.stop()
 
         this.world.client.sendJoinLastRoom()
 

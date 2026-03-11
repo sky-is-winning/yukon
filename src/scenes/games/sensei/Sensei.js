@@ -1,7 +1,7 @@
 /* START OF COMPILED CODE */
 
 import GameScene from "../GameScene";
-import SenseiWidget from "./widget/SenseiWidget";
+import SenseiCharacter from "./character/SenseiCharacter";
 import SenseiMenu from "./menu/SenseiMenu";
 import Button from "../../components/Button";
 import SenseiMatch from "./match/SenseiMatch";
@@ -17,8 +17,8 @@ export default class Sensei extends GameScene {
     constructor() {
         super("Sensei");
 
-        /** @type {SenseiWidget} */
-        this.widget;
+        /** @type {SenseiCharacter} */
+        this.character;
         /** @type {SenseiMenu} */
         this.menu;
         /** @type {SenseiMatch} */
@@ -39,10 +39,10 @@ export default class Sensei extends GameScene {
     /** @returns {void} */
     _create() {
 
-        // widget
-        const widget = new SenseiWidget(this);
-        this.add.existing(widget);
-        widget.visible = true;
+        // character
+        const character = new SenseiCharacter(this);
+        this.add.existing(character);
+        character.visible = true;
 
         // menu
         const menu = new SenseiMenu(this, 1060, 774);
@@ -64,7 +64,7 @@ export default class Sensei extends GameScene {
         xButtonButton.spriteName = "grey-button";
         xButtonButton.callback = () => this.world.client.sendJoinLastRoom();
 
-        this.widget = widget;
+        this.character = character;
         this.menu = menu;
         this.match = match;
 
@@ -81,12 +81,12 @@ export default class Sensei extends GameScene {
     create() {
         super.create()
 
-        this.widget.addBackgroundEvent('pointerover', this.onBackgroundOver, this)
+        this.character.addBackgroundEvent('pointerover', this.onBackgroundOver, this)
 
         this.instructions = new SenseiInstructions(this)
 
-        // Add instructions into widget
-        this.widget.addAt(this.instructions, this.widget.speechIndex)
+        // Add instructions into character
+        this.character.addAt(this.instructions, this.character.speechIndex)
 
         if (!this.userHasDeck) {
             this.startSequence(intro)
@@ -103,16 +103,16 @@ export default class Sensei extends GameScene {
         // Speech displayed during menus other than the start menu should stick
         if (!this.menu.isStartMenuActive) return
 
-        this.widget.hideSpeech()
+        this.character.hideSpeech()
     }
 
     startSequence(sequence) {
         this.menu.close()
-        this.widget.startSequence(sequence)
+        this.character.startSequence(sequence)
     }
 
     showMenu(menu) {
-        this.widget.playWait()
+        this.character.playWait()
         this.menu.show(menu)
     }
 
@@ -131,11 +131,11 @@ export default class Sensei extends GameScene {
     }
 
     showSpeech(text) {
-        this.widget.showSpeech(text)
+        this.character.showSpeech(text)
     }
 
     hideSpeech() {
-        this.widget.hideSpeech()
+        this.character.hideSpeech()
     }
 
     hideInstructions() {

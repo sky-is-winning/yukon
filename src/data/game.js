@@ -1,7 +1,4 @@
 import fonts from './fonts'
-import igloos from './igloos'
-import rooms from './rooms'
-import widgets from './widgets'
 
 import SoundFileFactory from '@engine/sound/SoundFileFactory'
 
@@ -57,14 +54,6 @@ const game = {
 
     crumbs: {
         fonts: fonts,
-
-        scenes: {
-            igloos: igloos,
-            rooms: rooms
-        },
-
-        widgets: widgets,
-
         frameColor: 0x2e3440,
         iglooIdOffset: 2000
     },

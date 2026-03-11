@@ -37,9 +37,6 @@ export default class ClientController {
         // If expecting emote key combo
         this.emoteKeyPressed = false
 
-        this.lastBalloon = Date.now()
-        this.throttleDelay = 100
-
         // Input
         this.keys = this.crumbs.quick_keys.keys
         this.emotes = this.crumbs.quick_keys.emotes
@@ -76,18 +73,6 @@ export default class ClientController {
 
     get input() {
         return this.interface.main.input
-    }
-
-    get isBalloonThrottled() {
-        let time = Date.now()
-
-        if (time - this.lastBalloon < this.throttleDelay) {
-            return true
-        }
-
-        this.lastBalloon = time
-
-        return false
     }
 
     get isModerator() {
@@ -232,7 +217,7 @@ export default class ClientController {
     }
 
     sendEmote(emote) {
-        if (!this.visible || this.isBalloonThrottled) {
+        if (!this.visible) {
             return
         }
 
@@ -242,7 +227,7 @@ export default class ClientController {
     }
 
     sendSafe(safe) {
-        if (!this.visible || this.isBalloonThrottled) {
+        if (!this.visible) {
             return
         }
 
@@ -301,7 +286,7 @@ export default class ClientController {
             return
         }
 
-        const room = this.crumbs.scenes.rooms[this.world.lastRoom]
+        const room = this.crumbs.rooms[this.world.lastRoom]
 
         if (room) {
             this.sendJoinRoom(this.world.lastRoom, room.key, room.x, room.y, 80)
@@ -322,6 +307,14 @@ export default class ClientController {
         this.lockRotation = false
 
         this.network.send('join_igloo', { igloo: id, x: 0, y: 0 })
+    }
+
+    sendJoinGame(id) {
+        if (this.activeSeat) {
+            return this.interface.prompt.showError('Please exit your game before leaving the room')
+        }
+
+        this.network.send('join_room', { room: id, x: 0, y: 0 })
     }
 
     sendJoinTable(id) {

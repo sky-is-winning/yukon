@@ -1,12 +1,6 @@
-export const preload = {
-    key: 'missions-pack',
-    url: 'assets/media/interface/game/missions/missions-pack.json',
-    loadString: ['loading', 'missions']
-}
-
 /* START OF COMPILED CODE */
 
-import BaseContainer from "../../../base/BaseContainer";
+import BaseDynamicWidget from "../../../base/BaseDynamicWidget";
 import Interactive from "../../../components/Interactive";
 import MissionInfo from "./info/MissionInfo";
 import MissionList from "./list/MissionList";
@@ -14,7 +8,7 @@ import Button from "../../../components/Button";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class Missions extends BaseContainer {
+export default class Missions extends BaseDynamicWidget {
 
     constructor(scene, x, y) {
         super(scene, x ?? 0, y ?? 0);
@@ -130,29 +124,20 @@ export default class Missions extends BaseContainer {
 
         frame.setInteractive({ pixelPerfect: true })
 
+        this.addMissions()
+
+        this.scene.events.once('update', () => {
+            this.currentList.updateInput()
+            this.trainingList.updateInput()
+        })
+
         /* END-USER-CTR-CODE */
     }
 
 
     /* START-USER-CODE */
 
-    show() {
-        this.addMissions()
-
-        this.chooseText.visible = true
-        this.info.close()
-
-        this.scene.events.once('update', () => {
-            this.currentList.show()
-            this.trainingList.show()
-        })
-
-        super.show()
-    }
-
     addMissions() {
-        this.clearMissions()
-
         for (const mission of this.crumbs.missions) {
             const completed = this.world.client.inventory.award.includes(mission.award)
 
@@ -160,11 +145,6 @@ export default class Missions extends BaseContainer {
 
             list.addMission(mission)
         }
-    }
-
-    clearMissions() {
-        this.currentList.clearMissions()
-        this.trainingList.clearMissions()
     }
 
     showInfo(mission) {
